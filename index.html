@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>9 things I hate about about animation</title>
+<meta name="author" content="Brian Birtles">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="viewport"
+  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+<link rel="stylesheet" href="css/reveal.css">
+<link rel="stylesheet" href="css/theme/goose.css" id="theme">
+
+<!-- For syntax highlighting -->
+<link rel="stylesheet" href="lib/css/github-gist.css">
+
+<!-- Printing and PDF exports -->
+<script>
+const link = document.createElement('link');
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match(/print-pdf/gi)
+  ? 'css/print/pdf.css'
+  : 'css/print/paper.css';
+document.getElementsByTagName('head')[0].appendChild(link);
+</script>
+
+<style>
+.reveal pre {
+  font-size: 24px;
+  display: block;
+  position: relative;
+  width: 90%;
+  margin: 15px auto;
+  text-align: left;
+  font-family: monospace;
+  line-height: 1.2em;
+  word-wrap: break-word;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3);
+}
+
+.reveal pre code {
+  font-family: "Courier New", monospace;
+  word-wrap: normal;
+  text-align: left;
+  padding: 1em;
+  font-weight: bold;
+}
+
+.reveal pre code .highlight {
+  background-color: var(--pink-9);
+}
+
+/*********************************************
+ * CODE SAMPLE AND LIVE PREVIEW
+ *********************************************/
+.reveal .slides .side-by-side {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.reveal .slides .side-by-side > .target-content {
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+/*********************************************
+ * SORT OF FULL-SCREEN PICTURE, but not cropped
+ *********************************************/
+.reveal .slides > section.fit-picture {
+  padding: 0;
+  margin: 0;
+}
+
+.reveal .fit-picture > img {
+  height: 700px;
+  border: 0;
+  margin: 0;
+}
+</style>
+</head>
+
+<body>
+<div class="reveal">
+<div class="slides">
+
+<section id="title" class="title-slide"
+  data-background="#3c6bd6">
+<h1 style="font-size: 100px; -webkit-text-stroke: 4px #222; color: white">
+  <span style="color: var(--pink); display: block">9 things</span>
+  I hate about animation
+</section>
+
+<section id="about-me" data-transition="fade-out">
+<h2 class="-smaller">A few things about me&hellip;</h2>
+<ul class="grid">
+  <li class="fragment fade-in"><img src="img/koala.svg"></li>
+  <li class="fragment fade-in"><img src="img/tokyo-tower.svg"></li>
+  <li class="fragment fade-in"><figure><img
+      src="img/firefox-logo.svg"><figcaption>2004~2019</figcaption></figure></li>
+  <li class="fragment fade-in"><figure><img
+      src="img/w3c-member.svg"><figcaption class=smaller>SVG WG 2011~<br>
+        CSS WG 2015~</figcaption></figure></li>
+  <li class="fragment fade-in"><figure><a href="https://birchill.co.jp"><img
+      src="img/birchill-logo-attempt-2.svg"></a><figcaption>2019~</figcaption
+    ></figure></li>
+  <li class="fragment fade-in"><img class=shrink src="img/goose-head.svg"></li>
+</ul>
+<style>
+#about-me ul.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(160px, auto);
+  width: 100%;
+  margin: 0;
+}
+#about-me ul.grid li {
+  list-style: none;
+
+  width: 240px;
+  height: 240px;
+  border-radius: 120px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+#about-me ul.grid li.fragment.current-fragment {
+  background: var(--blue-10);
+}
+#about-me ul.grid li > img {
+  width: 200px;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+}
+#about-me ul.grid li > img.shrink {
+  width: 150px;
+}
+#about-me ul.grid li > figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: center;
+}
+#about-me ul.grid li > figure > a {
+  /*
+   * I simply ran out of time to work out what on earth flex box is doing here.
+   * CSS is the worst.
+   */
+  display: contents;
+}
+#about-me ul.grid li > figure > * {
+  /* If I use flex: 1, Chrome does something awful */
+  flex: 0 1 auto;
+}
+#about-me ul.grid li > figure img {
+  border: none;
+  margin: 0;
+  width: 140px;
+  box-shadow: none;
+  background: transparent;
+}
+#about-me ul.grid li > figure > figcaption {
+  font-size: 25px;
+  margin-top: 15px;
+}
+#about-me ul.grid li > figure > figcaption.smaller {
+  font-size: 20px;
+}
+</style>
+</section>
+
+</div> <!-- end slides -->
+</div> <!-- end reveal -->
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+Reveal.initialize({
+  dependencies: [
+    { src: 'plugin/notes/notes.js', async: true },
+    {
+      src: 'plugin/highlight/highlight.js',
+      async: true,
+      callback: function() {
+        hljs.initHighlightingOnLoad();
+      },
+    },
+  ],
+  history: true,
+});
+</script>
+</body>
+</html>
