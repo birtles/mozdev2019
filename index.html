@@ -126,7 +126,6 @@ document.getElementsByTagName('head')[0].appendChild(link);
   <li class="fragment fade-in"><figure><a href="https://birchill.co.jp"><img
       src="img/birchill-logo-attempt-2.svg"></a><figcaption>2019~</figcaption
     ></figure></li>
-  <li class="fragment fade-in"><img class=shrink src="img/goose-head.svg"></li>
 </ul>
 <style>
 #about-me ul.grid {
@@ -205,9 +204,6 @@ document.getElementsByTagName('head')[0].appendChild(link);
   <li>Slow
   <li>Frustrating
 </ul>
-</section>
-<!-- TODO: Add an animation of a goose that drags away the last bullet point.
--->
 <style>
 #animations-suck h2 {
   color: var(--red-7);
@@ -218,83 +214,85 @@ document.getElementsByTagName('head')[0].appendChild(link);
   color: white;
 }
 </style>
+</section>
+<!-- TODO: Add an animation of a goose that drags away the last bullet point.
+-->
 
 <section id="no-frames-for-you">
   <h2 class="-smaller">#1: It's hard to do frame-based animation</h2>
 </section>
 
 <section id="ga" data-background="var(--blue-5)" style="width: 100%; height: 100%">
-  <svg width="500" viewBox="0 0 100 100" style="position: absolute; left: 0; bottom: 0">
-    <path id="goose-feathers" fill="#fff" d="M11.8 28C-5.9 47.3 16 73.6 19.6 79.7s6.4 10.6 7 15.2c.6 4.6.8 8.9.8 8.9l55.8.2s2-8.5-1.8-14.9c-2-3.5-4.1-9.5-14.8-16.1s-17.4-9.7-21.9-12.3-7.8-8-5.3-11.5 5.6-3.6 8.1-3 12.8.5 15.5-10 1.6-15.1-1.5-18.4C51.7 7.2 29.4 8.7 11.8 28z"/>
-    <path id="goose-lower-beak" class="beak" fill="#d1722e" d="M58.8 41.3c-2.6 1-3.8.6-3.9 2.2.8 1.4 3.2 2.4 4.4 3 1.2.6 3.8 1.1 5.8 2.2s7.7 4.4 10.1 5.5c2.4 1.1 4.4 1.7 5.8 2 1.5.3 5.7.4 6.9.2s3.3.2 4.2-.2c.9-.5 2.1-.7 2.6-2.2.5-1.5.6-3 0-3.5s-9.3-4.9-12.3-6.3c-3-1.4-8.6-4.3-11.7-5.2-1.8-.5-5-1.6-7.9-2.3-1.6 2.2-2.9 4.2-4 4.6z"/>
-    <path id="goose-upper-beak" fill="#ff8b38" d="M64.8 26.3c-1.5 0-3.7.4-5 2.7-2 3.6-1 7.1-1.7 8.9-.7 1.8-1.7 3-2.9 4.7 1.9.5 2.4.4 4.2 1.2 4.2 1.8 11 6.1 14.7 7.3 3.7 1.1 7.6 3.3 12.3 3.2s9-1.9 9.3-3c.3-1.1-.2-2.6-2-4.2-2.5-2.1-3.3-1.3-5.3-2.5a282 282 0 01-23.6-18.3z"/>
-    <circle id="goose-eye" cx="40.5" cy="26" r="2.9"/>
-  </svg>
-  <svg class="frames" viewBox="0 -50 312 350">
-    <g class="framestrip">
-      <g transform="translate(300)"> <!-- Frame 1 -->
-        <g id="ga-frame-1">
-          <path
-            d="M75.48 100.11C75.48 100.11 75.74 100.03 80.48 95.61 85.22 91.19 91.61 84.60 94.48 82.11 97.35 79.62 101.88 76.21 103.48 75.11 105.08 74.01 105.39 73.76 108.48 72.11 111.57 70.45 117.08 68.17 117.98 67.61 118.89 67.04 119.51 66.32 120.48 65.61 121.45 64.90 123.48 63.61 123.48 63.61"></path>
-          <path
-            d="M89.48 128.11C89.48 128.11 103.14 128.28 110.48 128.11 117.82 127.94 129.13 127.44 132.48 127.11 135.84 126.78 136.58 126.81 142.48 125.61 148.38 124.41 156.47 122.06 159.98 121.11 163.49 120.15 165.87 119.01 170.48 118.11 175.09 117.21 184.48 116.61 184.48 116.61"></path>
-          <path
-            d="M89.48 165.11C89.48 165.11 91.41 166.80 94.48 167.61 97.55 168.42 101.30 167.87 103.98 168.11 106.66 168.35 106.81 168.45 111.98 169.11 117.15 169.76 123.48 170.60 127.48 171.11 131.48 171.62 138.81 172.48 139.48 172.61 140.16 172.73 141.07 172.88 141.48 173.11 141.89 173.34 139.74 172.04 142.48 174.11 145.22 176.17 150.34 178.55 151.48 179.11 152.62 179.67 154.98 180.61 154.98 180.61"></path>
-        </g>
-      </g>
-      <g transform="translate(600)"> <!-- Frame 2 -->
-        <g id="ga-frame-2">
-          <path
-            d="M76.48 99.61C76.48 99.61 78.59 100.13 80.98 99.11 83.38 98.09 83.92 97.06 86.98 94.11 90.04 91.16 92.70 87.20 95.48 84.61 98.26 82.02 102.18 79.32 104.48 77.61 106.78 75.89 109.25 73.95 111.48 72.61 113.72 71.26 117.15 69.78 118.48 69.11 119.81 68.44 120.35 68.42 122.48 67.11 124.61 65.79 127.50 63.30 128.48 62.61 129.46 61.91 129.28 61.63 131.48 60.61 133.68 59.59 138.48 58.61 138.48 58.61"></path>
-          <path
-            d="M91.48 128.11C91.48 128.11 93.32 127.78 97.48 127.61 101.64 127.44 104.43 128.03 109.98 127.61 115.53 127.19 121.15 125.93 126.48 125.11 131.82 124.29 138.82 123.14 142.48 122.61 146.14 122.07 147.17 121.70 153.48 121.11 159.79 120.51 170.30 120.33 172.48 120.11 174.66 119.88 177.15 119.25 178.98 119.11 180.81 118.97 183.48 119.11 184.48 119.11 185.48 119.11 185.65 119.11 187.48 119.11 189.31 119.11 192.98 119.11 192.98 119.11"></path>
-          <path
-            d="M92.48 165.11C92.48 165.11 102.13 166.87 105.48 167.61 108.84 168.35 109.44 168.43 115.48 170.11 121.53 171.79 131.49 175.06 133.48 175.61 135.47 176.16 138.15 176.78 139.48 177.11 140.81 177.44 139.52 176.76 143.48 178.11 147.44 179.45 153.17 182.39 154.98 183.11 156.79 183.83 159.82 184.91 160.48 185.11 161.14 185.31 161.43 185.22 162.48 185.61 163.53 186.00 164.51 186.88 165.48 187.11 166.45 187.34 167.24 186.85 168.48 187.11 169.72 187.36 171.98 188.61 171.98 188.61"></path>
-        </g>
-      </g>
-      <g transform="translate(900)"> <!-- Frame 3 -->
-        <g id="ga-frame-3">
-          <path
-            d="M78.48 94.11C78.48 94.11 80.97 92.26 82.48 91.11 83.99 89.95 84.54 89.37 86.98 87.61 89.42 85.85 89.35 85.50 94.48 82.61 99.61 79.72 109.47 75.60 110.48 75.11 111.49 74.62 112.87 74.60 113.48 73.61 114.09 72.62 112.95 71.55 113.48 70.11 114.01 68.67 114.44 68.01 116.48 66.61 118.52 65.20 122.33 64.48 123.48 64.11 124.64 63.74 125.00 64.00 126.98 63.11 128.96 62.22 131.51 60.16 132.48 59.61 133.45 59.06 134.15 58.78 135.48 58.11 136.81 57.44 139.48 56.11 139.48 56.11"></path>
-          <path
-            d="M90.48 129.61C90.48 129.61 100.48 128.43 102.98 128.11 105.48 127.79 103.16 127.93 110.48 127.11 117.80 126.29 127.15 125.60 132.48 125.11 137.81 124.62 146.15 123.72 148.48 123.61 150.81 123.50 148.81 123.61 155.48 123.61 162.15 123.61 173.60 123.86 175.48 123.61 177.36 123.36 179.33 122.50 180.98 122.11 182.63 121.72 184.49 121.26 185.98 121.11 187.47 120.96 188.65 121.11 190.48 121.11 192.31 121.11 195.98 121.11 195.98 121.11"></path>
-          <path
-            d="M87.48 167.61C87.48 167.61 88.02 167.42 92.48 169.11 96.94 170.80 100.28 173.19 105.48 175.11 110.68 177.03 119.70 178.84 121.48 179.61 123.27 180.38 122.59 180.56 126.48 182.61 130.37 184.66 134.12 186.73 138.48 188.11 142.84 189.49 148.79 189.89 151.98 190.61 155.18 191.32 160.82 193.02 161.48 193.11 162.14 193.19 162.24 192.85 163.48 193.11 164.72 193.36 166.12 194.17 166.98 194.61 167.85 195.05 169.48 196.11 169.48 196.11"></path>
-        </g>
-      </g>
-      <g transform="translate(1200)"> <!-- Frame 4 -->
-        <g id="ga-frame-4">
-          <path
-            d="M77.48 100.11C77.48 100.11 81.52 97.69 84.48 96.11 87.44 94.53 91.26 92.85 93.48 91.61 95.70 90.37 97.31 89.57 99.98 87.61 102.65 85.65 105.00 82.76 107.48 81.11 109.96 79.45 114.58 77.68 115.48 77.11 116.38 76.53 110.69 80.04 117.98 75.11 125.28 70.18 139.63 62.91 140.98 62.11 142.33 61.30 144.98 59.61 144.98 59.61"></path>
-          <path
-            d="M92.98 127.61C92.98 127.61 92.40 128.08 99.48 126.61 106.57 125.14 114.87 122.25 120.48 121.11 126.09 119.96 133.82 118.88 137.48 118.61 141.14 118.34 147.65 118.61 148.48 118.61 149.31 118.61 146.15 118.61 150.98 118.61 155.81 118.61 161.97 118.44 165.48 118.61 168.99 118.78 174.79 119.38 175.98 119.61 177.17 119.83 176.18 120.15 179.48 120.61 182.78 121.07 187.81 120.61 189.48 120.61 191.15 120.61 194.48 120.61 194.48 120.61"></path>
-          <path
-            d="M89.48 164.11C89.48 164.11 84.72 162.42 94.48 164.11 104.25 165.80 118.53 172.91 122.48 174.11 126.43 175.30 133.52 176.63 134.48 177.11 135.44 177.58 134.78 177.70 136.98 179.11 139.18 180.51 143.08 182.03 143.98 182.61 144.88 183.18 143.39 182.90 146.48 184.61 149.57 186.32 154.83 187.57 156.48 188.11 158.14 188.65 159.13 188.84 161.48 189.61 163.83 190.38 167.50 191.94 168.48 192.11 169.47 192.28 170.64 192.02 171.48 192.11 172.33 192.19 173.98 192.61 173.98 192.61"></path>
-        </g>
-      </g>
-      <g transform="translate(1500)"> <!-- Frame 5 -->
-        <g id="ga-frame-5">
-          <path
-            d="M77.98 94.11C77.98 94.11 77.47 94.70 80.48 94.11 83.49 93.51 86.08 91.97 88.98 90.61 91.88 89.25 91.56 89.45 97.48 86.11 103.41 82.77 110.11 78.20 114.98 75.61 119.85 73.02 128.49 69.29 129.98 68.61 131.47 67.93 132.85 67.58 134.48 66.61 136.11 65.63 136.33 64.65 138.98 63.11 141.63 61.57 146.46 60.07 147.48 59.61 148.50 59.15 150.48 58.11 150.48 58.11"></path>
-          <path
-            d="M93.98 124.11C93.98 124.11 93.04 124.45 96.48 125.11 99.92 125.77 101.97 125.28 106.98 125.11 111.99 124.94 118.14 124.40 121.98 124.11 125.82 123.81 132.15 123.17 133.48 123.11 134.81 123.05 135.15 123.11 137.48 123.11 139.81 123.11 142.48 123.11 144.48 123.11 146.48 123.11 140.94 123.61 150.48 123.11 160.02 122.61 177.81 120.25 178.98 120.11 180.15 119.96 179.65 119.98 182.48 119.61 185.31 119.24 189.82 118.68 190.98 118.61 192.15 118.54 194.48 118.61 194.48 118.61"></path>
-          <path
-            d="M87.98 166.11C87.98 166.11 88.71 166.71 95.98 168.11 103.25 169.51 114.42 170.36 117.98 171.11 121.54 171.86 125.90 173.14 128.48 174.11 131.07 175.07 132.99 176.25 135.98 177.61 138.97 178.97 141.24 179.76 144.98 181.61 148.73 183.46 153.96 186.17 155.98 187.61 158.00 189.05 157.94 190.13 161.48 192.61 165.03 195.08 172.98 198.61 172.98 198.61"></path>
-        </g>
-      </g>
-      <g transform="translate(1800)"> <!-- Frame 6 -->
-        <g id="ga-frame-6">
-          <path
-            d="M99.48 84.11C99.48 84.11 103.78 82.21 105.98 81.11 108.18 80.01 110.79 78.57 112.48 77.61 114.17 76.65 114.84 76.15 117.48 74.61 120.13 73.07 122.70 71.54 125.48 70.11 128.26 68.67 132.04 66.80 133.98 66.11 135.92 65.42 138.14 65.09 139.98 64.61 141.82 64.13 142.50 63.85 145.48 63.11 148.46 62.37 154.48 61.11 154.48 61.11"></path>
-          <path
-            d="M117.48 121.11C117.48 121.11 119.65 121.11 125.98 121.11 132.31 121.11 142.65 121.11 144.98 121.11 147.31 121.11 146.15 121.11 151.98 121.11 157.81 121.11 168.81 121.11 169.48 121.11 170.15 121.11 167.81 121.11 171.48 121.11 175.15 121.11 180.15 121.11 182.48 121.11 184.81 121.11 187.15 121.11 189.48 121.11 191.81 121.11 195.81 121.11 196.48 121.11 197.15 121.11 198.48 121.11 198.48 121.11"></path>
-          <path
-            d="M115.48 171.11C115.48 171.11 114.36 170.37 119.48 172.61 124.60 174.84 130.29 178.51 134.48 180.11 138.68 181.70 146.78 183.34 147.48 183.61 148.18 183.87 147.81 183.78 149.48 184.61 151.15 185.44 152.87 186.56 154.48 187.11 156.09 187.66 157.72 187.50 159.48 188.11 161.24 188.71 163.25 189.87 164.48 190.61 165.71 191.35 165.72 191.66 167.98 193.11 170.24 194.56 174.98 197.11 174.98 197.11"></path>
-        </g>
+<svg width="500" viewBox="0 0 100 100" style="position: absolute; left: 0; bottom: 0">
+  <path id="goose-feathers" fill="#fff" d="M11.8 28C-5.9 47.3 16 73.6 19.6 79.7s6.4 10.6 7 15.2c.6 4.6.8 8.9.8 8.9l55.8.2s2-8.5-1.8-14.9c-2-3.5-4.1-9.5-14.8-16.1s-17.4-9.7-21.9-12.3-7.8-8-5.3-11.5 5.6-3.6 8.1-3 12.8.5 15.5-10 1.6-15.1-1.5-18.4C51.7 7.2 29.4 8.7 11.8 28z"/>
+  <path id="goose-lower-beak" class="beak" fill="#d1722e" d="M58.8 41.3c-2.6 1-3.8.6-3.9 2.2.8 1.4 3.2 2.4 4.4 3 1.2.6 3.8 1.1 5.8 2.2s7.7 4.4 10.1 5.5c2.4 1.1 4.4 1.7 5.8 2 1.5.3 5.7.4 6.9.2s3.3.2 4.2-.2c.9-.5 2.1-.7 2.6-2.2.5-1.5.6-3 0-3.5s-9.3-4.9-12.3-6.3c-3-1.4-8.6-4.3-11.7-5.2-1.8-.5-5-1.6-7.9-2.3-1.6 2.2-2.9 4.2-4 4.6z"/>
+  <path id="goose-upper-beak" fill="#ff8b38" d="M64.8 26.3c-1.5 0-3.7.4-5 2.7-2 3.6-1 7.1-1.7 8.9-.7 1.8-1.7 3-2.9 4.7 1.9.5 2.4.4 4.2 1.2 4.2 1.8 11 6.1 14.7 7.3 3.7 1.1 7.6 3.3 12.3 3.2s9-1.9 9.3-3c.3-1.1-.2-2.6-2-4.2-2.5-2.1-3.3-1.3-5.3-2.5a282 282 0 01-23.6-18.3z"/>
+  <circle id="goose-eye" cx="40.5" cy="26" r="2.9"/>
+</svg>
+<svg class="frames" viewBox="0 -50 312 350">
+  <g class="framestrip">
+    <g transform="translate(300)"> <!-- Frame 1 -->
+      <g id="ga-frame-1">
+        <path
+          d="M75.48 100.11C75.48 100.11 75.74 100.03 80.48 95.61 85.22 91.19 91.61 84.60 94.48 82.11 97.35 79.62 101.88 76.21 103.48 75.11 105.08 74.01 105.39 73.76 108.48 72.11 111.57 70.45 117.08 68.17 117.98 67.61 118.89 67.04 119.51 66.32 120.48 65.61 121.45 64.90 123.48 63.61 123.48 63.61"></path>
+        <path
+          d="M89.48 128.11C89.48 128.11 103.14 128.28 110.48 128.11 117.82 127.94 129.13 127.44 132.48 127.11 135.84 126.78 136.58 126.81 142.48 125.61 148.38 124.41 156.47 122.06 159.98 121.11 163.49 120.15 165.87 119.01 170.48 118.11 175.09 117.21 184.48 116.61 184.48 116.61"></path>
+        <path
+          d="M89.48 165.11C89.48 165.11 91.41 166.80 94.48 167.61 97.55 168.42 101.30 167.87 103.98 168.11 106.66 168.35 106.81 168.45 111.98 169.11 117.15 169.76 123.48 170.60 127.48 171.11 131.48 171.62 138.81 172.48 139.48 172.61 140.16 172.73 141.07 172.88 141.48 173.11 141.89 173.34 139.74 172.04 142.48 174.11 145.22 176.17 150.34 178.55 151.48 179.11 152.62 179.67 154.98 180.61 154.98 180.61"></path>
       </g>
     </g>
-  </svg>
-</section>
+    <g transform="translate(600)"> <!-- Frame 2 -->
+      <g id="ga-frame-2">
+        <path
+          d="M76.48 99.61C76.48 99.61 78.59 100.13 80.98 99.11 83.38 98.09 83.92 97.06 86.98 94.11 90.04 91.16 92.70 87.20 95.48 84.61 98.26 82.02 102.18 79.32 104.48 77.61 106.78 75.89 109.25 73.95 111.48 72.61 113.72 71.26 117.15 69.78 118.48 69.11 119.81 68.44 120.35 68.42 122.48 67.11 124.61 65.79 127.50 63.30 128.48 62.61 129.46 61.91 129.28 61.63 131.48 60.61 133.68 59.59 138.48 58.61 138.48 58.61"></path>
+        <path
+          d="M91.48 128.11C91.48 128.11 93.32 127.78 97.48 127.61 101.64 127.44 104.43 128.03 109.98 127.61 115.53 127.19 121.15 125.93 126.48 125.11 131.82 124.29 138.82 123.14 142.48 122.61 146.14 122.07 147.17 121.70 153.48 121.11 159.79 120.51 170.30 120.33 172.48 120.11 174.66 119.88 177.15 119.25 178.98 119.11 180.81 118.97 183.48 119.11 184.48 119.11 185.48 119.11 185.65 119.11 187.48 119.11 189.31 119.11 192.98 119.11 192.98 119.11"></path>
+        <path
+          d="M92.48 165.11C92.48 165.11 102.13 166.87 105.48 167.61 108.84 168.35 109.44 168.43 115.48 170.11 121.53 171.79 131.49 175.06 133.48 175.61 135.47 176.16 138.15 176.78 139.48 177.11 140.81 177.44 139.52 176.76 143.48 178.11 147.44 179.45 153.17 182.39 154.98 183.11 156.79 183.83 159.82 184.91 160.48 185.11 161.14 185.31 161.43 185.22 162.48 185.61 163.53 186.00 164.51 186.88 165.48 187.11 166.45 187.34 167.24 186.85 168.48 187.11 169.72 187.36 171.98 188.61 171.98 188.61"></path>
+      </g>
+    </g>
+    <g transform="translate(900)"> <!-- Frame 3 -->
+      <g id="ga-frame-3">
+        <path
+          d="M78.48 94.11C78.48 94.11 80.97 92.26 82.48 91.11 83.99 89.95 84.54 89.37 86.98 87.61 89.42 85.85 89.35 85.50 94.48 82.61 99.61 79.72 109.47 75.60 110.48 75.11 111.49 74.62 112.87 74.60 113.48 73.61 114.09 72.62 112.95 71.55 113.48 70.11 114.01 68.67 114.44 68.01 116.48 66.61 118.52 65.20 122.33 64.48 123.48 64.11 124.64 63.74 125.00 64.00 126.98 63.11 128.96 62.22 131.51 60.16 132.48 59.61 133.45 59.06 134.15 58.78 135.48 58.11 136.81 57.44 139.48 56.11 139.48 56.11"></path>
+        <path
+          d="M90.48 129.61C90.48 129.61 100.48 128.43 102.98 128.11 105.48 127.79 103.16 127.93 110.48 127.11 117.80 126.29 127.15 125.60 132.48 125.11 137.81 124.62 146.15 123.72 148.48 123.61 150.81 123.50 148.81 123.61 155.48 123.61 162.15 123.61 173.60 123.86 175.48 123.61 177.36 123.36 179.33 122.50 180.98 122.11 182.63 121.72 184.49 121.26 185.98 121.11 187.47 120.96 188.65 121.11 190.48 121.11 192.31 121.11 195.98 121.11 195.98 121.11"></path>
+        <path
+          d="M87.48 167.61C87.48 167.61 88.02 167.42 92.48 169.11 96.94 170.80 100.28 173.19 105.48 175.11 110.68 177.03 119.70 178.84 121.48 179.61 123.27 180.38 122.59 180.56 126.48 182.61 130.37 184.66 134.12 186.73 138.48 188.11 142.84 189.49 148.79 189.89 151.98 190.61 155.18 191.32 160.82 193.02 161.48 193.11 162.14 193.19 162.24 192.85 163.48 193.11 164.72 193.36 166.12 194.17 166.98 194.61 167.85 195.05 169.48 196.11 169.48 196.11"></path>
+      </g>
+    </g>
+    <g transform="translate(1200)"> <!-- Frame 4 -->
+      <g id="ga-frame-4">
+        <path
+          d="M77.48 100.11C77.48 100.11 81.52 97.69 84.48 96.11 87.44 94.53 91.26 92.85 93.48 91.61 95.70 90.37 97.31 89.57 99.98 87.61 102.65 85.65 105.00 82.76 107.48 81.11 109.96 79.45 114.58 77.68 115.48 77.11 116.38 76.53 110.69 80.04 117.98 75.11 125.28 70.18 139.63 62.91 140.98 62.11 142.33 61.30 144.98 59.61 144.98 59.61"></path>
+        <path
+          d="M92.98 127.61C92.98 127.61 92.40 128.08 99.48 126.61 106.57 125.14 114.87 122.25 120.48 121.11 126.09 119.96 133.82 118.88 137.48 118.61 141.14 118.34 147.65 118.61 148.48 118.61 149.31 118.61 146.15 118.61 150.98 118.61 155.81 118.61 161.97 118.44 165.48 118.61 168.99 118.78 174.79 119.38 175.98 119.61 177.17 119.83 176.18 120.15 179.48 120.61 182.78 121.07 187.81 120.61 189.48 120.61 191.15 120.61 194.48 120.61 194.48 120.61"></path>
+        <path
+          d="M89.48 164.11C89.48 164.11 84.72 162.42 94.48 164.11 104.25 165.80 118.53 172.91 122.48 174.11 126.43 175.30 133.52 176.63 134.48 177.11 135.44 177.58 134.78 177.70 136.98 179.11 139.18 180.51 143.08 182.03 143.98 182.61 144.88 183.18 143.39 182.90 146.48 184.61 149.57 186.32 154.83 187.57 156.48 188.11 158.14 188.65 159.13 188.84 161.48 189.61 163.83 190.38 167.50 191.94 168.48 192.11 169.47 192.28 170.64 192.02 171.48 192.11 172.33 192.19 173.98 192.61 173.98 192.61"></path>
+      </g>
+    </g>
+    <g transform="translate(1500)"> <!-- Frame 5 -->
+      <g id="ga-frame-5">
+        <path
+          d="M77.98 94.11C77.98 94.11 77.47 94.70 80.48 94.11 83.49 93.51 86.08 91.97 88.98 90.61 91.88 89.25 91.56 89.45 97.48 86.11 103.41 82.77 110.11 78.20 114.98 75.61 119.85 73.02 128.49 69.29 129.98 68.61 131.47 67.93 132.85 67.58 134.48 66.61 136.11 65.63 136.33 64.65 138.98 63.11 141.63 61.57 146.46 60.07 147.48 59.61 148.50 59.15 150.48 58.11 150.48 58.11"></path>
+        <path
+          d="M93.98 124.11C93.98 124.11 93.04 124.45 96.48 125.11 99.92 125.77 101.97 125.28 106.98 125.11 111.99 124.94 118.14 124.40 121.98 124.11 125.82 123.81 132.15 123.17 133.48 123.11 134.81 123.05 135.15 123.11 137.48 123.11 139.81 123.11 142.48 123.11 144.48 123.11 146.48 123.11 140.94 123.61 150.48 123.11 160.02 122.61 177.81 120.25 178.98 120.11 180.15 119.96 179.65 119.98 182.48 119.61 185.31 119.24 189.82 118.68 190.98 118.61 192.15 118.54 194.48 118.61 194.48 118.61"></path>
+        <path
+          d="M87.98 166.11C87.98 166.11 88.71 166.71 95.98 168.11 103.25 169.51 114.42 170.36 117.98 171.11 121.54 171.86 125.90 173.14 128.48 174.11 131.07 175.07 132.99 176.25 135.98 177.61 138.97 178.97 141.24 179.76 144.98 181.61 148.73 183.46 153.96 186.17 155.98 187.61 158.00 189.05 157.94 190.13 161.48 192.61 165.03 195.08 172.98 198.61 172.98 198.61"></path>
+      </g>
+    </g>
+    <g transform="translate(1800)"> <!-- Frame 6 -->
+      <g id="ga-frame-6">
+        <path
+          d="M99.48 84.11C99.48 84.11 103.78 82.21 105.98 81.11 108.18 80.01 110.79 78.57 112.48 77.61 114.17 76.65 114.84 76.15 117.48 74.61 120.13 73.07 122.70 71.54 125.48 70.11 128.26 68.67 132.04 66.80 133.98 66.11 135.92 65.42 138.14 65.09 139.98 64.61 141.82 64.13 142.50 63.85 145.48 63.11 148.46 62.37 154.48 61.11 154.48 61.11"></path>
+        <path
+          d="M117.48 121.11C117.48 121.11 119.65 121.11 125.98 121.11 132.31 121.11 142.65 121.11 144.98 121.11 147.31 121.11 146.15 121.11 151.98 121.11 157.81 121.11 168.81 121.11 169.48 121.11 170.15 121.11 167.81 121.11 171.48 121.11 175.15 121.11 180.15 121.11 182.48 121.11 184.81 121.11 187.15 121.11 189.48 121.11 191.81 121.11 195.81 121.11 196.48 121.11 197.15 121.11 198.48 121.11 198.48 121.11"></path>
+        <path
+          d="M115.48 171.11C115.48 171.11 114.36 170.37 119.48 172.61 124.60 174.84 130.29 178.51 134.48 180.11 138.68 181.70 146.78 183.34 147.48 183.61 148.18 183.87 147.81 183.78 149.48 184.61 151.15 185.44 152.87 186.56 154.48 187.11 156.09 187.66 157.72 187.50 159.48 188.11 161.24 188.71 163.25 189.87 164.48 190.61 165.71 191.35 165.72 191.66 167.98 193.11 170.24 194.56 174.98 197.11 174.98 197.11"></path>
+      </g>
+    </g>
+  </g>
+</svg>
 <style>
 #ga .beak {
   animation: ga-beak 0.75s alternate steps(1) infinite forwards;
@@ -325,147 +323,147 @@ document.getElementsByTagName('head')[0].appendChild(link);
   to { transform: translate(-2100px); }
 }
 </style>
+</section>
 
 <section id="a-simple-filmstrip">
-  <svg width="0" height="0" viewBox="0 0 100 100">
-    <symbol id=static-goose-close viewBox="0 0 100 100">
-      <use href="#goose-feathers"/>
-      <!-- We duplicate the path so it doesn't get animated in Chrome.
-        We could work around this by wrapping the beak and animating the wrapper
-        only but that still wouldn't fix the other Chrome issue described below
-        so we just duplicate it for now. -->
-      <path
-        fill="#d1722e" d="M58.8 41.3c-2.6 1-3.8.6-3.9 2.2.8 1.4 3.2 2.4 4.4 3 1.2.6 3.8 1.1 5.8 2.2s7.7 4.4 10.1 5.5c2.4 1.1 4.4 1.7 5.8 2 1.5.3 5.7.4 6.9.2s3.3.2 4.2-.2c.9-.5 2.1-.7 2.6-2.2.5-1.5.6-3 0-3.5s-9.3-4.9-12.3-6.3c-3-1.4-8.6-4.3-11.7-5.2-1.8-.5-5-1.6-7.9-2.3-1.6 2.2-2.9 4.2-4 4.6z"/>
-      <use href="#goose-upper-beak"/>
-      <use href="#goose-eye"/>
-    </symbol>
-    <symbol id=static-goose-open viewBox="0 0 100 100">
-      <use href="#goose-feathers"/>
-      <!-- We have to duplicate the path here because Chrome will otherwise
-        apply the `transform` but not the `transform-origin` or `transform-box`
-        but... unless we touch the element in DevTools, at which point it starts
-        working correctly. Yep, <use> in Chrome is just completely broken. -->
-      <path
-        style="transform-origin: 5% 40%;
-               transform-box: fill-box;
-               transform: rotate(15deg)"
-        fill="#d1722e" d="M58.8 41.3c-2.6 1-3.8.6-3.9 2.2.8 1.4 3.2 2.4 4.4 3 1.2.6 3.8 1.1 5.8 2.2s7.7 4.4 10.1 5.5c2.4 1.1 4.4 1.7 5.8 2 1.5.3 5.7.4 6.9.2s3.3.2 4.2-.2c.9-.5 2.1-.7 2.6-2.2.5-1.5.6-3 0-3.5s-9.3-4.9-12.3-6.3c-3-1.4-8.6-4.3-11.7-5.2-1.8-.5-5-1.6-7.9-2.3-1.6 2.2-2.9 4.2-4 4.6z"/>
-      <use href="#goose-upper-beak"/>
-      <use href="#goose-eye"/>
-    </symbol>
-  </svg>
-  <div class=filmstrip>
-    <div class=background>
-      <hr class=dots>
-      <div class=cell>
-        <svg id="frame-1" viewBox="0 0 200 130">
-          <use href="#static-goose-close"
-            transform="translate(-5,40) scale(0.7)"/>
-          <text fill="white" font-weight="bold" font-size="60"
-            text-anchor="middle" opacity="0.3"
-            transform="translate(100,50)">1</text>
-        </svg>
-      </div
-      ><div class=cell>
-        <svg id="frame-2" viewBox="0 0 200 130">
-          <use href="#static-goose-open"
-            transform="translate(-5,40) scale(0.7)"/>
-          <use href="#ga-frame-1"
-            transform="translate(105,30) scale(0.4) rotate(15)"
-            stroke="white"
-            stroke-width="5"
-            stroke-linecap="round"
-            fill="none"/>
-          <text fill="white" font-weight="bold" font-size="60"
-            text-anchor="middle" opacity="0.3"
-            transform="translate(100,50)">2</text>
-        </svg>
-      </div
-      ><div class=cell>
-        <svg id="frame-3" viewBox="0 0 200 130">
-          <use href="#static-goose-open"
-            transform="translate(-5,40) scale(0.7)"/>
-          <use href="#ga-frame-2"
-            transform="translate(105,30) scale(0.4) rotate(15)"
-            stroke="white"
-            stroke-width="5"
-            stroke-linecap="round"
-            fill="none"/>
-          <text fill="white" font-weight="bold" font-size="60"
-            text-anchor="middle" opacity="0.3"
-            transform="translate(100,50)">3</text>
-        </svg>
-      </div
-      ><div class=cell>
-        <svg id="frame-4" viewBox="0 0 200 130">
-          <use href="#static-goose-open"
-            transform="translate(-5,40) scale(0.7)"/>
-          <use href="#ga-frame-3"
-            transform="translate(105,30) scale(0.4) rotate(15)"
-            stroke="white"
-            stroke-width="5"
-            stroke-linecap="round"
-            fill="none"/>
-          <text fill="white" font-weight="bold" font-size="60"
-            text-anchor="middle" opacity="0.3"
-            transform="translate(100,50)">4</text>
-        </svg>
-      </div>
-      <hr class=dots>
+<svg width="0" height="0" viewBox="0 0 100 100">
+  <symbol id=static-goose-close viewBox="0 0 100 100">
+    <use href="#goose-feathers"/>
+    <!-- We duplicate the path so it doesn't get animated in Chrome.
+      We could work around this by wrapping the beak and animating the wrapper
+      only but that still wouldn't fix the other Chrome issue described below
+      so we just duplicate it for now. -->
+    <path
+      fill="#d1722e" d="M58.8 41.3c-2.6 1-3.8.6-3.9 2.2.8 1.4 3.2 2.4 4.4 3 1.2.6 3.8 1.1 5.8 2.2s7.7 4.4 10.1 5.5c2.4 1.1 4.4 1.7 5.8 2 1.5.3 5.7.4 6.9.2s3.3.2 4.2-.2c.9-.5 2.1-.7 2.6-2.2.5-1.5.6-3 0-3.5s-9.3-4.9-12.3-6.3c-3-1.4-8.6-4.3-11.7-5.2-1.8-.5-5-1.6-7.9-2.3-1.6 2.2-2.9 4.2-4 4.6z"/>
+    <use href="#goose-upper-beak"/>
+    <use href="#goose-eye"/>
+  </symbol>
+  <symbol id=static-goose-open viewBox="0 0 100 100">
+    <use href="#goose-feathers"/>
+    <!-- We have to duplicate the path here because Chrome will otherwise
+      apply the `transform` but not the `transform-origin` or `transform-box`
+      but... unless we touch the element in DevTools, at which point it starts
+      working correctly. Yep, <use> in Chrome is just completely broken. -->
+    <path
+      style="transform-origin: 5% 40%;
+              transform-box: fill-box;
+              transform: rotate(15deg)"
+      fill="#d1722e" d="M58.8 41.3c-2.6 1-3.8.6-3.9 2.2.8 1.4 3.2 2.4 4.4 3 1.2.6 3.8 1.1 5.8 2.2s7.7 4.4 10.1 5.5c2.4 1.1 4.4 1.7 5.8 2 1.5.3 5.7.4 6.9.2s3.3.2 4.2-.2c.9-.5 2.1-.7 2.6-2.2.5-1.5.6-3 0-3.5s-9.3-4.9-12.3-6.3c-3-1.4-8.6-4.3-11.7-5.2-1.8-.5-5-1.6-7.9-2.3-1.6 2.2-2.9 4.2-4 4.6z"/>
+    <use href="#goose-upper-beak"/>
+    <use href="#goose-eye"/>
+  </symbol>
+</svg>
+<div class=filmstrip>
+  <div class=background>
+    <hr class=dots>
+    <div class=cell>
+      <svg id="frame-1" viewBox="0 0 200 130">
+        <use href="#static-goose-close"
+          transform="translate(-5,40) scale(0.7)"/>
+        <text fill="white" font-weight="bold" font-size="60"
+          text-anchor="middle" opacity="0.3"
+          transform="translate(100,50)">1</text>
+      </svg>
+    </div
+    ><div class=cell>
+      <svg id="frame-2" viewBox="0 0 200 130">
+        <use href="#static-goose-open"
+          transform="translate(-5,40) scale(0.7)"/>
+        <use href="#ga-frame-1"
+          transform="translate(105,30) scale(0.4) rotate(15)"
+          stroke="white"
+          stroke-width="5"
+          stroke-linecap="round"
+          fill="none"/>
+        <text fill="white" font-weight="bold" font-size="60"
+          text-anchor="middle" opacity="0.3"
+          transform="translate(100,50)">2</text>
+      </svg>
+    </div
+    ><div class=cell>
+      <svg id="frame-3" viewBox="0 0 200 130">
+        <use href="#static-goose-open"
+          transform="translate(-5,40) scale(0.7)"/>
+        <use href="#ga-frame-2"
+          transform="translate(105,30) scale(0.4) rotate(15)"
+          stroke="white"
+          stroke-width="5"
+          stroke-linecap="round"
+          fill="none"/>
+        <text fill="white" font-weight="bold" font-size="60"
+          text-anchor="middle" opacity="0.3"
+          transform="translate(100,50)">3</text>
+      </svg>
+    </div
+    ><div class=cell>
+      <svg id="frame-4" viewBox="0 0 200 130">
+        <use href="#static-goose-open"
+          transform="translate(-5,40) scale(0.7)"/>
+        <use href="#ga-frame-3"
+          transform="translate(105,30) scale(0.4) rotate(15)"
+          stroke="white"
+          stroke-width="5"
+          stroke-linecap="round"
+          fill="none"/>
+        <text fill="white" font-weight="bold" font-size="60"
+          text-anchor="middle" opacity="0.3"
+          transform="translate(100,50)">4</text>
+      </svg>
     </div>
+    <hr class=dots>
   </div>
-  <div class=filmstrip>
-    <div class=background>
-      <hr class=dots>
-      <div class=cell>
-        <svg id="frame-5" viewBox="0 0 200 130">
-          <use href="#static-goose-open"
-            transform="translate(-5,40) scale(0.7)"/>
-          <use href="#ga-frame-4"
-            transform="translate(105,30) scale(0.4) rotate(15)"
-            stroke="white"
-            stroke-width="5"
-            stroke-linecap="round"
-            fill="none"/>
-          <text fill="white" font-weight="bold" font-size="60"
-            text-anchor="middle" opacity="0.3"
-            transform="translate(100,50)">5</text>
-        </svg>
-      </div
-      ><div class=cell>
-        <svg id="frame-6" viewBox="0 0 200 130">
-          <use href="#static-goose-open"
-            transform="translate(-5,40) scale(0.7)"/>
-          <use href="#ga-frame-5"
-            transform="translate(105,30) scale(0.4) rotate(15)"
-            stroke="white"
-            stroke-width="5"
-            stroke-linecap="round"
-            fill="none"/>
-          <text fill="white" font-weight="bold" font-size="60"
-            text-anchor="middle" opacity="0.3"
-            transform="translate(100,50)">6</text>
-        </svg>
-      </div
-      ><div class=cell>
-        <svg id="frame-7" viewBox="0 0 200 130">
-          <use href="#static-goose-open"
-            transform="translate(-5,40) scale(0.7)"/>
-          <use href="#ga-frame-6"
-            transform="translate(105,30) scale(0.4) rotate(15)"
-            stroke="white"
-            stroke-width="5"
-            stroke-linecap="round"
-            fill="none"/>
-          <text fill="white" font-weight="bold" font-size="60"
-            text-anchor="middle" opacity="0.3"
-            transform="translate(100,50)">7</text>
-        </svg>
-      </div>
-      <hr class=dots>
+</div>
+<div class=filmstrip>
+  <div class=background>
+    <hr class=dots>
+    <div class=cell>
+      <svg id="frame-5" viewBox="0 0 200 130">
+        <use href="#static-goose-open"
+          transform="translate(-5,40) scale(0.7)"/>
+        <use href="#ga-frame-4"
+          transform="translate(105,30) scale(0.4) rotate(15)"
+          stroke="white"
+          stroke-width="5"
+          stroke-linecap="round"
+          fill="none"/>
+        <text fill="white" font-weight="bold" font-size="60"
+          text-anchor="middle" opacity="0.3"
+          transform="translate(100,50)">5</text>
+      </svg>
+    </div
+    ><div class=cell>
+      <svg id="frame-6" viewBox="0 0 200 130">
+        <use href="#static-goose-open"
+          transform="translate(-5,40) scale(0.7)"/>
+        <use href="#ga-frame-5"
+          transform="translate(105,30) scale(0.4) rotate(15)"
+          stroke="white"
+          stroke-width="5"
+          stroke-linecap="round"
+          fill="none"/>
+        <text fill="white" font-weight="bold" font-size="60"
+          text-anchor="middle" opacity="0.3"
+          transform="translate(100,50)">6</text>
+      </svg>
+    </div
+    ><div class=cell>
+      <svg id="frame-7" viewBox="0 0 200 130">
+        <use href="#static-goose-open"
+          transform="translate(-5,40) scale(0.7)"/>
+        <use href="#ga-frame-6"
+          transform="translate(105,30) scale(0.4) rotate(15)"
+          stroke="white"
+          stroke-width="5"
+          stroke-linecap="round"
+          fill="none"/>
+        <text fill="white" font-weight="bold" font-size="60"
+          text-anchor="middle" opacity="0.3"
+          transform="translate(100,50)">7</text>
+      </svg>
     </div>
+    <hr class=dots>
   </div>
-</section>
+</div>
 <style>
 #a-simple-filmstrip .filmstrip {
   padding: 0.1px;
@@ -493,47 +491,47 @@ document.getElementsByTagName('head')[0].appendChild(link);
   margin-right: 10px;
 }
 </style>
+</section>
 
 <section id="a-simple-attempt" data-transition="fade">
-  <div class=filmstrip>
-    <svg viewBox="0 0 840 78" width="840"><use href="#fullstrip"></svg>
-  </div>
-  <pre class="fragment"><code class="hljs css" data-trim data-noescape>
+<div class=filmstrip>
+  <svg viewBox="0 0 840 78" width="840"><use href="#fullstrip"></svg>
+</div>
+<pre class="fragment"><code class="hljs css" data-trim data-noescape>
 .filmstrip {
   animation: slide 1s infinite <span class="highlight">steps(7)</span>;
 }
 @keyframes slide {
   to { transform: translate(-700px); }
 }
-  </code></pre>
-  <div class="preview tv-filmstrip-preview fragment">
-    <div class=mask>
-      <svg class=animated-strip viewBox="0 0 840 78">
-        <symbol id="fullstrip" viewBox="0 0 840 78">
-          <rect width="840" height="78" style="fill: var(--blue-5)"/>
-          <use href="#frame-1" width="120"/>
-          <use href="#frame-2" width="120" x="120"/>
-          <use href="#frame-3" width="120" x="240"/>
-          <use href="#frame-4" width="120" x="360"/>
-          <use href="#frame-5" width="120" x="480"/>
-          <use href="#frame-6" width="120" x="600"/>
-          <use href="#frame-7" width="120" x="720"/>
-        </symbol>
-        <use href="#fullstrip">
-      </svg>
-    </div>
-    <div class=tv-overlay>
-      <svg id=tv-overlay class=tv viewBox="0 0 48 48">
-        <path d="M45 9.5H28.1l3.8-3.8c.4-.4.4-1 0-1.4s-1-.4-1.4 0l-5.3
-        5.3H25l-6.7-6.7c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l5.3 5.3H3a3 3 0 00-3
-        3V36a3 3 0 003 3h3.1v1.6h3.4V39h28.9v1.6h3.4V39H45a3 3 0 003-3V12.5a3
-        3 0 00-3-3zm-6.7 25.4H4V13.5h34.3v26.4z" fill="var(--neutral-1)"/>
-        <circle cx="43.1" cy="17.4" r="2.6" fill="var(--neutral-4)"/>
-        <circle cx="43.1" cy="25.4" r="2.6" fill="var(--neutral-4)"/>
-      </svg>
-    </div>
+</code></pre>
+<div class="preview tv-filmstrip-preview fragment">
+  <div class=mask>
+    <svg class=animated-strip viewBox="0 0 840 78">
+      <symbol id="fullstrip" viewBox="0 0 840 78">
+        <rect width="840" height="78" style="fill: var(--blue-5)"/>
+        <use href="#frame-1" width="120"/>
+        <use href="#frame-2" width="120" x="120"/>
+        <use href="#frame-3" width="120" x="240"/>
+        <use href="#frame-4" width="120" x="360"/>
+        <use href="#frame-5" width="120" x="480"/>
+        <use href="#frame-6" width="120" x="600"/>
+        <use href="#frame-7" width="120" x="720"/>
+      </symbol>
+      <use href="#fullstrip">
+    </svg>
   </div>
-</section>
+  <div class=tv-overlay>
+    <svg id=tv-overlay class=tv viewBox="0 0 48 48">
+      <path d="M45 9.5H28.1l3.8-3.8c.4-.4.4-1 0-1.4s-1-.4-1.4 0l-5.3
+      5.3H25l-6.7-6.7c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l5.3 5.3H3a3 3 0 00-3
+      3V36a3 3 0 003 3h3.1v1.6h3.4V39h28.9v1.6h3.4V39H45a3 3 0 003-3V12.5a3
+      3 0 00-3-3zm-6.7 25.4H4V13.5h34.3v26.4z" fill="var(--neutral-1)"/>
+      <circle cx="43.1" cy="17.4" r="2.6" fill="var(--neutral-4)"/>
+      <circle cx="43.1" cy="25.4" r="2.6" fill="var(--neutral-4)"/>
+    </svg>
+  </div>
+</div>
 <style>
 #a-simple-attempt code {
   margin-top: 50px;
@@ -568,9 +566,10 @@ document.getElementsByTagName('head')[0].appendChild(link);
   width: 248px;
 }
 </style>
+</section>
 
 <section id="a-simple-attempt-explained" data-transition="fade">
-  <pre><code class="hljs css" data-trim data-noescape>
+<pre><code class="hljs css" data-trim data-noescape>
 .filmstrip {
   /* steps(7) = 7 "changes" including the last one */
   animation: slide 1s infinite <span class="highlight">steps(7)</span>;
@@ -578,19 +577,18 @@ document.getElementsByTagName('head')[0].appendChild(link);
 @keyframes slide {
   to { transform: translate(-700px); }
 }
-  </code></pre>
-  <div class=timing-graph>
-    <svg width="840" height="100" viewBox="-1 -1 702 72"
-      preserveAspectRatio="none">
-      <path class="area"
-        d="M0 70 h100v-10h100v-10h100v-10
-           h100v-10h100v-10h100v-10 h100v-10 v70z"/>
-      <path class="line"
-        d="M0 70 h100v-10h100v-10h100v-10
-           h100v-10h100v-10h100v-10 h100v-10"/>
-    </svg>
-  </div>
-</section>
+</code></pre>
+<div class=timing-graph>
+  <svg width="840" height="100" viewBox="-1 -1 702 72"
+    preserveAspectRatio="none">
+    <path class="area"
+      d="M0 70 h100v-10h100v-10h100v-10
+          h100v-10h100v-10h100v-10 h100v-10 v70z"/>
+    <path class="line"
+      d="M0 70 h100v-10h100v-10h100v-10
+          h100v-10h100v-10h100v-10 h100v-10"/>
+  </svg>
+</div>
 <style>
 /* Re-usable parts */
 .reveal .timing-graph .area {
@@ -602,27 +600,27 @@ document.getElementsByTagName('head')[0].appendChild(link);
   stroke-width: 2px;
 }
 </style>
+</section>
 
 <section id="a-second-attempt" data-transition="fade">
-  <pre><code class="hljs css" data-trim data-noescape>
+<pre><code class="hljs css" data-trim data-noescape>
 .filmstrip {
   animation: slide 1s infinite <span class="highlight">steps(6)</span>;
 }
 @keyframes slide {
   to { transform: translate(-700px); }
 }
-  </code></pre>
-  <div class="preview tv-filmstrip-preview">
-    <div class=mask>
-      <svg class=animated-strip viewBox="0 0 840 78">
-        <use href="#fullstrip"/>
-      </svg>
-    </div>
-    <div class=tv-overlay>
-      <svg class=tv viewBox="0 0 48 48"><use href="#tv-overlay"/></svg>
-    </div>
+</code></pre>
+<div class="preview tv-filmstrip-preview">
+  <div class=mask>
+    <svg class=animated-strip viewBox="0 0 840 78">
+      <use href="#fullstrip"/>
+    </svg>
   </div>
-</section>
+  <div class=tv-overlay>
+    <svg class=tv viewBox="0 0 48 48"><use href="#tv-overlay"/></svg>
+  </div>
+</div>
 <style>
 #a-second-attempt .preview {
   margin-top: 80px;
@@ -631,9 +629,10 @@ document.getElementsByTagName('head')[0].appendChild(link);
   animation: keyframe-slide 3s infinite steps(6);
 }
 </style>
+</section>
 
 <section id="a-second-attempt-explained" data-transition="fade">
-  <pre><code class="hljs css" data-trim data-noescape>
+<pre><code class="hljs css" data-trim data-noescape>
 .filmstrip {
   /* steps(6) = steps(6, end) */
   animation: slide 1s infinite <span class="highlight">steps(6)</span>;
@@ -641,51 +640,50 @@ document.getElementsByTagName('head')[0].appendChild(link);
 @keyframes slide {
   to { transform: translate(-700px); }
 }
-  </code></pre>
-  <div class=timing-graph>
-    <svg width="840" height="150" viewBox="-1 -1 602 72"
-      preserveAspectRatio="none">
-      <path class="area"
-        d="M0 70 h100v-10h100v-10h100v-10
-           h100v-10h100v-10h100v-10 v70z"/>
-      <path class="line"
-        d="M0 70 h100v-10h100v-10h100v-10
-           h100v-10h100v-10h100v-10"/>
-    </svg>
-  </div>
+</code></pre>
+<div class=timing-graph>
+  <svg width="840" height="150" viewBox="-1 -1 602 72"
+    preserveAspectRatio="none">
+    <path class="area"
+      d="M0 70 h100v-10h100v-10h100v-10
+          h100v-10h100v-10h100v-10 v70z"/>
+    <path class="line"
+      d="M0 70 h100v-10h100v-10h100v-10
+          h100v-10h100v-10h100v-10"/>
+  </svg>
+</div>
 </section>
 
 <section id="a-third-attempt" data-transition="fade">
-  <pre><code class="hljs css" data-trim data-noescape>
+<pre><code class="hljs css" data-trim data-noescape>
 .filmstrip {
   animation: slide 1s infinite <span class="highlight">steps(6, start)</span>;
 }
 @keyframes slide {
   to { transform: translate(-700px); }
 }
-  </code></pre>
-  <div class="preview tv-filmstrip-preview">
-    <div class=mask>
-      <svg class=animated-strip viewBox="0 0 840 78">
-        <use href="#fullstrip"/>
-      </svg>
-    </div>
-    <div class=tv-overlay>
-      <svg class=tv viewBox="0 0 48 48"><use href="#tv-overlay"/></svg>
-    </div>
-  </div>
-  <div class=timing-graph>
-    <svg width="840" height="150" viewBox="-1 -1 602 72"
-      preserveAspectRatio="none">
-      <path class="area"
-        d="M0 70 v-10h100v-10h100v-10h100v-10
-           h100v-10h100v-10h100 v70z"/>
-      <path class="line"
-        d="M0 70 v-10h100v-10h100v-10h100v-10
-           h100v-10h100v-10h100"/>
+</code></pre>
+<div class="preview tv-filmstrip-preview">
+  <div class=mask>
+    <svg class=animated-strip viewBox="0 0 840 78">
+      <use href="#fullstrip"/>
     </svg>
   </div>
-</section>
+  <div class=tv-overlay>
+    <svg class=tv viewBox="0 0 48 48"><use href="#tv-overlay"/></svg>
+  </div>
+</div>
+<div class=timing-graph>
+  <svg width="840" height="150" viewBox="-1 -1 602 72"
+    preserveAspectRatio="none">
+    <path class="area"
+      d="M0 70 v-10h100v-10h100v-10h100v-10
+          h100v-10h100v-10h100 v70z"/>
+    <path class="line"
+      d="M0 70 v-10h100v-10h100v-10h100v-10
+          h100v-10h100v-10h100"/>
+  </svg>
+</div>
 <style>
 #a-third-attempt .preview {
   margin-top: 80px;
@@ -694,11 +692,13 @@ document.getElementsByTagName('head')[0].appendChild(link);
   animation: keyframe-slide 3s infinite steps(6, start);
 }
 </style>
+</section>
 
 <!-- TODO: Add an exasperated goose slide here -->
 
 <section id="a-solution" data-transition="fade">
-  <pre><code class="hljs css" data-trim data-noescape>
+<!-- TODO: Do something pretter for the "New!" highlight -->
+<pre><code class="hljs css" data-trim data-noescape>
 .filmstrip {
   /* New! jump-none! */
   animation: slide 1s infinite <span class="highlight">steps(7, jump-none)</span>;
@@ -706,29 +706,28 @@ document.getElementsByTagName('head')[0].appendChild(link);
 @keyframes slide {
   to { transform: translate(-700px); }
 }
-  </code></pre>
-  <div class="preview tv-filmstrip-preview">
-    <div class=mask>
-      <svg class=animated-strip viewBox="0 0 840 78">
-        <use href="#fullstrip"/>
-      </svg>
-    </div>
-    <div class=tv-overlay>
-      <svg class=tv viewBox="0 0 48 48"><use href="#tv-overlay"/></svg>
-    </div>
-  </div>
-  <div class=timing-graph>
-    <svg width="840" height="150" viewBox="-1 -1 702 72"
-      preserveAspectRatio="none">
-      <path class="area"
-        d="M0 70 h100v-10h100v-10h100v-10h100v-10
-           h100v-10h100v-10h100 v70z"/>
-      <path class="line"
-        d="M0 70 h100v-10h100v-10h100v-10h100v-10
-           h100v-10h100v-10h100"/>
+</code></pre>
+<div class="preview tv-filmstrip-preview">
+  <div class=mask>
+    <svg class=animated-strip viewBox="0 0 840 78">
+      <use href="#fullstrip"/>
     </svg>
   </div>
-</section>
+  <div class=tv-overlay>
+    <svg class=tv viewBox="0 0 48 48"><use href="#tv-overlay"/></svg>
+  </div>
+</div>
+<div class=timing-graph>
+  <svg width="840" height="150" viewBox="-1 -1 702 72"
+    preserveAspectRatio="none">
+    <path class="area"
+      d="M0 70 h100v-10h100v-10h100v-10h100v-10
+          h100v-10h100v-10h100 v70z"/>
+    <path class="line"
+      d="M0 70 h100v-10h100v-10h100v-10h100v-10
+          h100v-10h100v-10h100"/>
+  </svg>
+</div>
 <style>
 #a-solution .preview {
   margin-top: 80px;
@@ -740,6 +739,9 @@ document.getElementsByTagName('head')[0].appendChild(link);
   margin-top: 50px;
 }
 </style>
+</section>
+
+<!-- TODO: Add a slide with the finished result again -->
 
 <section id="mac-daddy-mac" data-transition="fade">
 <h2 class="-smaller"><code>jump-none</code>, <code>jump-both</code></h2>
