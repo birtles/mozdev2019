@@ -572,7 +572,7 @@ document.getElementsByTagName('head')[0].appendChild(link);
 <section id="a-simple-attempt-explained" data-transition="fade">
   <pre><code class="hljs css" data-trim data-noescape>
 .filmstrip {
-  /* steps(7) = 7 "changes" */
+  /* steps(7) = 7 "changes" including the last one */
   animation: slide 1s infinite <span class="highlight">steps(7)</span>;
 }
 @keyframes slide {
@@ -740,6 +740,48 @@ document.getElementsByTagName('head')[0].appendChild(link);
   margin-top: 50px;
 }
 </style>
+
+<section id="mac-daddy-mac" data-transition="fade">
+<h2 class="-smaller"><code>jump-none</code>, <code>jump-both</code></h2>
+<ul class="logo-list">
+  <li><img class="little-logo" src="img/firefox-logo.svg"><span>65+</span>
+  <li><img class="little-logo" src="img/chrome-logo.svg"><span>77+</span>
+  <li><img class="little-logo" src="img/safari-logo.svg"><span class=batsu>x</span>
+  <li><img class="little-logo" src="img/edge-logo.svg"><span class=batsu>x</span>
+</ul>
+<style>
+#mac-daddy-mac .logo-list {
+  margin-top: 50px;
+}
+
+/* Re-useable parts */
+.reveal .logo-list {
+  line-height: 1.5;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+.reveal .logo-list li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 1em;
+}
+.reveal .logo-list .little-logo {
+  width: 1.4em;
+  height: 1.4em;
+  margin: 0;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  vertical-align: text-bottom;
+}
+.reveal .logo-list .batsu {
+  color: hsl(354, 85%, 44%);
+  font-weight: bold;
+}
+</style>
+</section>
 
 </div> <!-- end slides -->
 </div> <!-- end reveal -->
