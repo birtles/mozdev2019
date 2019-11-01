@@ -49,7 +49,7 @@ document.getElementsByTagName('head')[0].appendChild(link);
 }
 
 .reveal pre code .highlight {
-  background-color: var(--pink-9);
+  background-color: var(--red-9);
 }
 
 /*********************************************
@@ -358,30 +358,57 @@ document.getElementsByTagName('head')[0].appendChild(link);
     <div class=background>
       <hr class=dots>
       <div class=cell>
-        <svg>
-          <use href="#static-goose-close" class="goose"/>
-          <text class="number">1</text>
+        <svg id="frame-1" viewBox="0 0 200 130">
+          <use href="#static-goose-close"
+            transform="translate(-5,40) scale(0.7)"/>
+          <text fill="white" font-weight="bold" font-size="60"
+            text-anchor="middle" opacity="0.3"
+            transform="translate(100,50)">1</text>
         </svg>
       </div
       ><div class=cell>
-        <svg>
-          <use href="#static-goose-open" class="goose"/>
-          <use href="#ga-frame-1" class="ga"/>
-          <text class="number">2</text>
+        <svg id="frame-2" viewBox="0 0 200 130">
+          <use href="#static-goose-open"
+            transform="translate(-5,40) scale(0.7)"/>
+          <use href="#ga-frame-1"
+            transform="translate(105,30) scale(0.4) rotate(15)"
+            stroke="white"
+            stroke-width="5"
+            stroke-linecap="round"
+            fill="none"/>
+          <text fill="white" font-weight="bold" font-size="60"
+            text-anchor="middle" opacity="0.3"
+            transform="translate(100,50)">2</text>
         </svg>
       </div
       ><div class=cell>
-        <svg>
-          <use href="#static-goose-open" class="goose"/>
-          <use href="#ga-frame-2" class="ga"/>
-          <text class="number">3</text>
+        <svg id="frame-3" viewBox="0 0 200 130">
+          <use href="#static-goose-open"
+            transform="translate(-5,40) scale(0.7)"/>
+          <use href="#ga-frame-2"
+            transform="translate(105,30) scale(0.4) rotate(15)"
+            stroke="white"
+            stroke-width="5"
+            stroke-linecap="round"
+            fill="none"/>
+          <text fill="white" font-weight="bold" font-size="60"
+            text-anchor="middle" opacity="0.3"
+            transform="translate(100,50)">3</text>
         </svg>
       </div
       ><div class=cell>
-        <svg>
-          <use href="#static-goose-open" class="goose"/>
-          <use href="#ga-frame-3" class="ga"/>
-          <text class="number">4</text>
+        <svg id="frame-4" viewBox="0 0 200 130">
+          <use href="#static-goose-open"
+            transform="translate(-5,40) scale(0.7)"/>
+          <use href="#ga-frame-3"
+            transform="translate(105,30) scale(0.4) rotate(15)"
+            stroke="white"
+            stroke-width="5"
+            stroke-linecap="round"
+            fill="none"/>
+          <text fill="white" font-weight="bold" font-size="60"
+            text-anchor="middle" opacity="0.3"
+            transform="translate(100,50)">4</text>
         </svg>
       </div>
       <hr class=dots>
@@ -391,24 +418,48 @@ document.getElementsByTagName('head')[0].appendChild(link);
     <div class=background>
       <hr class=dots>
       <div class=cell>
-        <svg>
-          <use href="#static-goose-open" class="goose"/>
-          <use href="#ga-frame-4" class="ga"/>
-          <text class="number">5</text>
+        <svg id="frame-5" viewBox="0 0 200 130">
+          <use href="#static-goose-open"
+            transform="translate(-5,40) scale(0.7)"/>
+          <use href="#ga-frame-4"
+            transform="translate(105,30) scale(0.4) rotate(15)"
+            stroke="white"
+            stroke-width="5"
+            stroke-linecap="round"
+            fill="none"/>
+          <text fill="white" font-weight="bold" font-size="60"
+            text-anchor="middle" opacity="0.3"
+            transform="translate(100,50)">5</text>
         </svg>
       </div
       ><div class=cell>
-        <svg>
-          <use href="#static-goose-open" class="goose"/>
-          <use href="#ga-frame-5" class="ga"/>
-          <text class="number">6</text>
+        <svg id="frame-6" viewBox="0 0 200 130">
+          <use href="#static-goose-open"
+            transform="translate(-5,40) scale(0.7)"/>
+          <use href="#ga-frame-5"
+            transform="translate(105,30) scale(0.4) rotate(15)"
+            stroke="white"
+            stroke-width="5"
+            stroke-linecap="round"
+            fill="none"/>
+          <text fill="white" font-weight="bold" font-size="60"
+            text-anchor="middle" opacity="0.3"
+            transform="translate(100,50)">6</text>
         </svg>
       </div
       ><div class=cell>
-        <svg>
-          <use href="#static-goose-open" class="goose"/>
-          <use href="#ga-frame-6" class="ga"/>
-          <text class="number">7</text>
+        <svg id="frame-7" viewBox="0 0 200 130">
+          <use href="#static-goose-open"
+            transform="translate(-5,40) scale(0.7)"/>
+          <use href="#ga-frame-6"
+            transform="translate(105,30) scale(0.4) rotate(15)"
+            stroke="white"
+            stroke-width="5"
+            stroke-linecap="round"
+            fill="none"/>
+          <text fill="white" font-weight="bold" font-size="60"
+            text-anchor="middle" opacity="0.3"
+            transform="translate(100,50)">7</text>
         </svg>
       </div>
       <hr class=dots>
@@ -416,11 +467,6 @@ document.getElementsByTagName('head')[0].appendChild(link);
   </div>
 </section>
 <style>
-#a-simple-filmstrip .yer {
-  transform-box: fill-box;
-  transform-origin: 5% 40%;
-  transform: rotate(15deg);
-}
 #a-simple-filmstrip .filmstrip {
   padding: 0.1px;
   line-height: 0;
@@ -446,23 +492,252 @@ document.getElementsByTagName('head')[0].appendChild(link);
   margin-left: 10px;
   margin-right: 10px;
 }
-#a-simple-filmstrip .filmstrip .cell svg .goose {
-  transform: translate(-25px, 40px) scale(0.6);
+</style>
+
+<section id="a-simple-attempt" data-transition="fade">
+  <div class=filmstrip>
+    <svg viewBox="0 0 840 78" width="840"><use href="#fullstrip"></svg>
+  </div>
+  <pre class="fragment"><code class="hljs css" data-trim data-noescape>
+.filmstrip {
+  animation: slide 1s infinite <span class="highlight">steps(7)</span>;
 }
-#a-simple-filmstrip .filmstrip .cell svg .ga {
-  transform: translate(105px, 30px) scale(0.4) rotate(15deg);
-  stroke: white;
-  stroke-width: 5px;
-  stroke-linecap: round;
+@keyframes slide {
+  to { transform: translate(-700px); }
+}
+  </code></pre>
+  <div class="preview tv-filmstrip-preview fragment">
+    <div class=mask>
+      <svg class=animated-strip viewBox="0 0 840 78">
+        <symbol id="fullstrip" viewBox="0 0 840 78">
+          <rect width="840" height="78" style="fill: var(--blue-5)"/>
+          <use href="#frame-1" width="120"/>
+          <use href="#frame-2" width="120" x="120"/>
+          <use href="#frame-3" width="120" x="240"/>
+          <use href="#frame-4" width="120" x="360"/>
+          <use href="#frame-5" width="120" x="480"/>
+          <use href="#frame-6" width="120" x="600"/>
+          <use href="#frame-7" width="120" x="720"/>
+        </symbol>
+        <use href="#fullstrip">
+      </svg>
+    </div>
+    <div class=tv-overlay>
+      <svg id=tv-overlay class=tv viewBox="0 0 48 48">
+        <path d="M45 9.5H28.1l3.8-3.8c.4-.4.4-1 0-1.4s-1-.4-1.4 0l-5.3
+        5.3H25l-6.7-6.7c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l5.3 5.3H3a3 3 0 00-3
+        3V36a3 3 0 003 3h3.1v1.6h3.4V39h28.9v1.6h3.4V39H45a3 3 0 003-3V12.5a3
+        3 0 00-3-3zm-6.7 25.4H4V13.5h34.3v26.4z" fill="var(--neutral-1)"/>
+        <circle cx="43.1" cy="17.4" r="2.6" fill="var(--neutral-4)"/>
+        <circle cx="43.1" cy="25.4" r="2.6" fill="var(--neutral-4)"/>
+      </svg>
+    </div>
+  </div>
+</section>
+<style>
+#a-simple-attempt code {
+  margin-top: 50px;
+}
+#a-simple-attempt .preview {
+  margin-top: 80px;
+}
+#a-simple-attempt .preview .animated-strip {
+  animation: keyframe-slide 3s infinite steps(7);
+}
+@keyframes keyframe-slide {
+  from { transform: translate(540px); }
+  to { transform: translate(-540px); }
+}
+
+/* Re-usable parts */
+.reveal .tv-filmstrip-preview {
+  position: relative;
+  width: 1260px;
+  margin-left: -150px;
+}
+.reveal .tv-filmstrip-preview .mask {
+  -webkit-mask: linear-gradient(to right, transparent, rgba(0,0,0,0.3) 42%, white 43%, white 60%, rgba(0,0,0,0.3) 61%, transparent);
+  mask: linear-gradient(to right, transparent, rgba(0,0,0,0.3) 42%, white 43%, white 57%, rgba(0,0,0,0.3) 58%, transparent);
+}
+.reveal .tv-filmstrip-preview .tv-overlay {
+  position: absolute;
+  left: 521px;
+  top: -67px;
+}
+.reveal .tv-filmstrip-preview .tv-overlay .tv {
+  width: 248px;
+}
+</style>
+
+<section id="a-simple-attempt-explained" data-transition="fade">
+  <pre><code class="hljs css" data-trim data-noescape>
+.filmstrip {
+  /* steps(7) = 7 "changes" */
+  animation: slide 1s infinite <span class="highlight">steps(7)</span>;
+}
+@keyframes slide {
+  to { transform: translate(-700px); }
+}
+  </code></pre>
+  <div class=timing-graph>
+    <svg width="840" height="100" viewBox="-1 -1 702 72"
+      preserveAspectRatio="none">
+      <path class="area"
+        d="M0 70 h100v-10h100v-10h100v-10
+           h100v-10h100v-10h100v-10 h100v-10 v70z"/>
+      <path class="line"
+        d="M0 70 h100v-10h100v-10h100v-10
+           h100v-10h100v-10h100v-10 h100v-10"/>
+    </svg>
+  </div>
+</section>
+<style>
+/* Re-usable parts */
+.reveal .timing-graph .area {
+  fill: var(--red-9);
+}
+.reveal .timing-graph .line {
   fill: none;
+  stroke: var(--red-6);
+  stroke-width: 2px;
 }
-#a-simple-filmstrip .filmstrip .cell svg .number {
-  fill: white;
-  font-weight: bold;
-  font-size: 60px;
-  text-anchor: middle;
-  opacity: 0.3;
-  transform: translate(100px, 50px);
+</style>
+
+<section id="a-second-attempt" data-transition="fade">
+  <pre><code class="hljs css" data-trim data-noescape>
+.filmstrip {
+  animation: slide 1s infinite <span class="highlight">steps(6)</span>;
+}
+@keyframes slide {
+  to { transform: translate(-700px); }
+}
+  </code></pre>
+  <div class="preview tv-filmstrip-preview">
+    <div class=mask>
+      <svg class=animated-strip viewBox="0 0 840 78">
+        <use href="#fullstrip"/>
+      </svg>
+    </div>
+    <div class=tv-overlay>
+      <svg class=tv viewBox="0 0 48 48"><use href="#tv-overlay"/></svg>
+    </div>
+  </div>
+</section>
+<style>
+#a-second-attempt .preview {
+  margin-top: 80px;
+}
+#a-second-attempt .preview .animated-strip {
+  animation: keyframe-slide 3s infinite steps(6);
+}
+</style>
+
+<section id="a-second-attempt-explained" data-transition="fade">
+  <pre><code class="hljs css" data-trim data-noescape>
+.filmstrip {
+  /* steps(6) = steps(6, end) */
+  animation: slide 1s infinite <span class="highlight">steps(6)</span>;
+}
+@keyframes slide {
+  to { transform: translate(-700px); }
+}
+  </code></pre>
+  <div class=timing-graph>
+    <svg width="840" height="150" viewBox="-1 -1 602 72"
+      preserveAspectRatio="none">
+      <path class="area"
+        d="M0 70 h100v-10h100v-10h100v-10
+           h100v-10h100v-10h100v-10 v70z"/>
+      <path class="line"
+        d="M0 70 h100v-10h100v-10h100v-10
+           h100v-10h100v-10h100v-10"/>
+    </svg>
+  </div>
+</section>
+
+<section id="a-third-attempt" data-transition="fade">
+  <pre><code class="hljs css" data-trim data-noescape>
+.filmstrip {
+  animation: slide 1s infinite <span class="highlight">steps(6, start)</span>;
+}
+@keyframes slide {
+  to { transform: translate(-700px); }
+}
+  </code></pre>
+  <div class="preview tv-filmstrip-preview">
+    <div class=mask>
+      <svg class=animated-strip viewBox="0 0 840 78">
+        <use href="#fullstrip"/>
+      </svg>
+    </div>
+    <div class=tv-overlay>
+      <svg class=tv viewBox="0 0 48 48"><use href="#tv-overlay"/></svg>
+    </div>
+  </div>
+  <div class=timing-graph>
+    <svg width="840" height="150" viewBox="-1 -1 602 72"
+      preserveAspectRatio="none">
+      <path class="area"
+        d="M0 70 v-10h100v-10h100v-10h100v-10
+           h100v-10h100v-10h100 v70z"/>
+      <path class="line"
+        d="M0 70 v-10h100v-10h100v-10h100v-10
+           h100v-10h100v-10h100"/>
+    </svg>
+  </div>
+</section>
+<style>
+#a-third-attempt .preview {
+  margin-top: 80px;
+}
+#a-third-attempt .preview .animated-strip {
+  animation: keyframe-slide 3s infinite steps(6, start);
+}
+</style>
+
+<!-- TODO: Add an exasperated goose slide here -->
+
+<section id="a-solution" data-transition="fade">
+  <pre><code class="hljs css" data-trim data-noescape>
+.filmstrip {
+  /* New! jump-none! */
+  animation: slide 1s infinite <span class="highlight">steps(7, jump-none)</span>;
+}
+@keyframes slide {
+  to { transform: translate(-700px); }
+}
+  </code></pre>
+  <div class="preview tv-filmstrip-preview">
+    <div class=mask>
+      <svg class=animated-strip viewBox="0 0 840 78">
+        <use href="#fullstrip"/>
+      </svg>
+    </div>
+    <div class=tv-overlay>
+      <svg class=tv viewBox="0 0 48 48"><use href="#tv-overlay"/></svg>
+    </div>
+  </div>
+  <div class=timing-graph>
+    <svg width="840" height="150" viewBox="-1 -1 702 72"
+      preserveAspectRatio="none">
+      <path class="area"
+        d="M0 70 h100v-10h100v-10h100v-10h100v-10
+           h100v-10h100v-10h100 v70z"/>
+      <path class="line"
+        d="M0 70 h100v-10h100v-10h100v-10h100v-10
+           h100v-10h100v-10h100"/>
+    </svg>
+  </div>
+</section>
+<style>
+#a-solution .preview {
+  margin-top: 80px;
+}
+#a-solution .preview .animated-strip {
+  animation: keyframe-slide 3s infinite steps(7, jump-none);
+}
+#a-solution .graph {
+  margin-top: 50px;
 }
 </style>
 
