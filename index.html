@@ -814,15 +814,92 @@ document.getElementsByTagName('head')[0].appendChild(link);
   <h2 class="-smaller">#2: Transitions are buggy</h2>
 </section>
 
-<!-- Sometimes they don't run:
-  https://bugzilla.mozilla.org/show_bug.cgi?id=683696
-  https://bugzilla.mozilla.org/show_bug.cgi?id=1206913
-  https://bugzilla.mozilla.org/show_bug.cgi?id=1118361
--->
-<!-- Sometimes they get canceled:
-  https://bugzilla.mozilla.org/show_bug.cgi?id=1075333
-  https://bugzilla.mozilla.org/show_bug.cgi?id=1059650
--->
+<section id="lots-of-bugs" data-transition="fade">
+<div class="container fragment">
+  <img src="img/bug683696.png" width="800" height="254">
+  <img src="img/bug1206913.png" width="800" height="204">
+  <img src="img/bug1118361.png" width="800" height="192">
+  <img src="img/bug1075333.png" width="800" height="187">
+  <img src="img/bug1059650.png" width="800" height="192">
+  <div class=labels>
+    <span>1. Sometimes transitions don't run</span>
+    <span>2. Sometimes transitions don't finish</span>
+  </div>
+</div>
+<style>
+#lots-of-bugs img {
+  border-width: 0;
+  box-shadow: none;
+}
+#lots-of-bugs img:nth-child(1) {
+  margin-left: -20px;
+  transition-delay: 0.5s, 0s;
+}
+#lots-of-bugs img:nth-child(2) {
+  margin-top: -180px;
+  margin-left: 60px;
+  transition-delay: 1.5s, 0s;
+}
+#lots-of-bugs img:nth-child(3) {
+  margin-top: -120px;
+  margin-left: -70px;
+  transition-delay: 2.5s, 0s;
+}
+#lots-of-bugs img:nth-child(4) {
+  margin-top: -120px;
+  margin-left: 40px;
+  transition-delay: 3.3s, 0s;
+}
+#lots-of-bugs img:nth-child(5) {
+  margin-top: -110px;
+  margin-left: -40px;
+  transition-delay: 3.8s, 0s;
+}
+#lots-of-bugs img {
+  opacity: 0;
+  transition: opacity 0.7s, transform 0.5s;
+}
+#lots-of-bugs.present img {
+  opacity: 1;
+}
+#lots-of-bugs.future img {
+  transition-property: none;
+}
+#lots-of-bugs .container {
+  visibility: visible;
+  opacity: 1;
+}
+#lots-of-bugs .container .labels {
+  opacity: 0;
+  transition: opacity 0.5s;
+  display: flex;
+}
+#lots-of-bugs .container .labels span {
+  color: var(--red-5);
+  margin-top: -200px;
+  font-weight: 500;
+}
+#lots-of-bugs .container.visible img:nth-child(1) {
+  transform: scale(0.5) translate(-450px);
+}
+#lots-of-bugs .container.visible img:nth-child(2) {
+  transform: scale(0.5) translate(-460px);
+}
+#lots-of-bugs .container.visible img:nth-child(3) {
+  transform: scale(0.5) translate(-450px, -50px);
+}
+#lots-of-bugs .container.visible img:nth-child(4) {
+  transform: scale(0.5) translate(450px, -500px);
+}
+#lots-of-bugs .container.visible img:nth-child(5) {
+  transform: scale(0.5) translate(480px, -550px);
+}
+#lots-of-bugs .container.visible .labels {
+  opacity: 1;
+  transition-delay: 0.4s;
+}
+</style>
+</section>
 
 <!-- FWIW: The CSS animation easing bug is here:
   https://bugzilla.mozilla.org/show_bug.cgi?id=1072819#c17 -->
