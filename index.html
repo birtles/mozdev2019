@@ -901,6 +901,54 @@ document.getElementsByTagName('head')[0].appendChild(link);
 </style>
 </section>
 
+<section id="lots-of-events" data-transition="fade">
+<h2>New events!</h2>
+<ul>
+  <li><code>transitionrun</code>
+    <p class=explanation>&rarr; a transition was created 🆕
+    <p class=explanation>&rarr; ok to wait for <code>transitionend</code> 🙆‍♂️</p>
+  <li class=fragment><code>transitioncancel</code>
+    <p class=explanation>&rarr; element vanished 🗑️
+    <span style="font-size: smaller">(dropped, re-&ldquo;rendered&rdquo;,
+      <code>display:none</code> etc.)</span></p>
+    <p class=explanation>&rarr; don't wait for <code>transitionend</code> ❌</p>
+  <li class=fragment><code>transitionstart</code>
+    <span class=explanation>(to match <code>animationstart</code>)</span>
+  <li class=fragment><code>animationcancel</code>
+    <span class=explanation>(as with <code>transitioncancel</code>)</span>
+</ul>
+<style>
+#lots-of-events code {
+  color: var(--red-5);
+  font-weight: 600;
+  background: var(--red-10);
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+#lots-of-events .explanation {
+  font-size: 30px;
+}
+</style>
+</section>
+
+<section id="hows-your-event-game" data-transition="fade">
+<h2 class="-smaller"><code>transitioncancel</code> and friends</h2>
+<ul class="logo-list">
+  <li><img class="little-logo" src="img/firefox-logo.svg"><span>53+</span>
+  <li><img class="little-logo" src="img/chrome-logo.svg"><span>74+</span>
+  <li><img class="little-logo" src="img/safari-logo.svg">Tech Preview
+  <li><img class="little-logo" src="img/edge-logo.svg"><span class=batsu>x</span>
+</ul>
+<style>
+#hows-your-event-game .logo-list {
+  margin-top: 50px;
+}
+</style>
+</section>
+<!-- TODO: Check Safari status for the above. -->
+<!-- TODO: Add Edgium icon for the above and check status -->
+
 <!-- FWIW: The CSS animation easing bug is here:
   https://bugzilla.mozilla.org/show_bug.cgi?id=1072819#c17 -->
 
