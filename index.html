@@ -967,7 +967,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const container = document.querySelector('#geese-are-made-of-stars .hoshis');
   const numStars = 25;
 
-  // Taken from https://mozanime.github.io/taketori/scene-mayreturn/index.html
+  // Based on https://mozanime.github.io/taketori/scene-mayreturn/index.html
   for (let i = 0; i < numStars; i++) {
     const hoshi = document.createElement('div');
     hoshi.classList.add('hoshi');
@@ -1031,24 +1031,45 @@ window.addEventListener('DOMContentLoaded', () => {
 </section>
 
 <section id="me-likem-lists">
+  <iframe src="demos/list-animation-1.html" width="960" height="700"></iframe>
 </section>
 
 <section id="keyframes-from-js">
+<h2 class="-smaller">CSS animations from JS</h2>
+<pre><code class="hljs js" data-trim data-noescape>
+const <span class="highlight fragment">uniqueKeyframesName = generateUuid()</span>;
+document.<span class="highlight fragment">styleSheets[0]</span>.insertRule(
+  <span class="highlight fragment">`@keyframes ${uniqueKeyframesName} {
+    from { transform: scale(0) }
+    95% { transform: scale(${fullSize}) }
+    to { transform: scale(0) }
+  }`</span>
+);
+hoshi.style.animation =
+  `${uniqueKeyframesName} ${duration}ms ` +
+  `${delay}ms infinite`;
+
+<span class="highlight fragment">// Don't forget to clean up</span>
+</code></pre>
+<style>
+#keyframes-from-js .fragment.highlight {
+  opacity: 1;
+  visibility: visible;
+  background-color: transparent;
+}
+#keyframes-from-js .fragment.highlight.current-fragment {
+  background-color: var(--red-9);
+}
+</style>
 </section>
 
-<section id="transitions-from-js">
-</section>
+<!-- TODO: A slide linking to all the difficulties with transitions -->
 
 <section id="random-web-animations">
-</section>
-
-<section id="web-animations-lists">
+<!-- TODO: Equivalent code for Web Animations -->
 </section>
 
 <section id="web-animations-are-finished">
-</section>
-
-<section id="web-animations-lists">
 </section>
 
 <section id="safari-will-be-any-day-now">
@@ -1065,6 +1086,9 @@ window.addEventListener('DOMContentLoaded', () => {
 }
 </style>
 </section>
+
+<!-- TODO: Go back and make sure this far works in Chrome (and reasonably in
+  Edge) -->
 
 <!-- FWIW: The CSS animation easing bug is here:
   https://bugzilla.mozilla.org/show_bug.cgi?id=1072819#c17 -->
