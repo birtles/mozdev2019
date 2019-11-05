@@ -333,7 +333,7 @@ document.getElementsByTagName('head')[0].appendChild(link);
       We could work around this by wrapping the beak and animating the wrapper
       only but that still wouldn't fix the other Chrome issue described below
       so we just duplicate it for now. -->
-    <path
+    <path id="goose-lower-beak-closed"
       fill="#d1722e" d="M58.8 41.3c-2.6 1-3.8.6-3.9 2.2.8 1.4 3.2 2.4 4.4 3 1.2.6 3.8 1.1 5.8 2.2s7.7 4.4 10.1 5.5c2.4 1.1 4.4 1.7 5.8 2 1.5.3 5.7.4 6.9.2s3.3.2 4.2-.2c.9-.5 2.1-.7 2.6-2.2.5-1.5.6-3 0-3.5s-9.3-4.9-12.3-6.3c-3-1.4-8.6-4.3-11.7-5.2-1.8-.5-5-1.6-7.9-2.3-1.6 2.2-2.9 4.2-4 4.6z"/>
     <use href="#goose-upper-beak"/>
     <use href="#goose-eye"/>
@@ -771,10 +771,10 @@ document.getElementsByTagName('head')[0].appendChild(link);
 <section id="mac-daddy-mac" data-transition="fade">
 <h2 class="-smaller"><code>jump-none</code>, <code>jump-both</code></h2>
 <ul class="logo-list">
-  <li><img class="little-logo" src="img/firefox-logo.svg"><span>65+</span>
-  <li><img class="little-logo" src="img/chrome-logo.svg"><span>77+</span>
-  <li><img class="little-logo" src="img/safari-logo.svg"><span class=batsu>x</span>
-  <li><img class="little-logo" src="img/edge-logo.svg"><span class=batsu>x</span>
+  <li><img class="logo" src="img/firefox-logo.svg"><span>65+</span>
+  <li><img class="logo" src="img/chrome-logo.svg"><span>77+</span>
+  <li><img class="logo" src="img/safari-logo.svg"><span class=batsu>x</span>
+  <li><img class="logo" src="img/edge-logo.svg"><span class=batsu>x</span>
 </ul>
 <style>
 #mac-daddy-mac .logo-list {
@@ -794,9 +794,9 @@ document.getElementsByTagName('head')[0].appendChild(link);
   align-items: center;
   margin-right: 1em;
 }
-.reveal .logo-list .little-logo {
-  width: 1.4em;
-  height: 1.4em;
+.reveal .logo-list .logo {
+  width: 3em;
+  height: 3em;
   margin: 0;
   border: none;
   box-shadow: none;
@@ -935,10 +935,10 @@ document.getElementsByTagName('head')[0].appendChild(link);
 <section id="hows-your-event-game" data-transition="fade">
 <h2 class="-smaller"><code>transitioncancel</code> and friends</h2>
 <ul class="logo-list">
-  <li><img class="little-logo" src="img/firefox-logo.svg"><span>53+</span>
-  <li><img class="little-logo" src="img/chrome-logo.svg"><span>74+</span>
-  <li><img class="little-logo" src="img/safari-logo.svg">Tech Preview
-  <li><img class="little-logo" src="img/edge-logo.svg"><span class=batsu>x</span>
+  <li><img class="logo" src="img/firefox-logo.svg"><span>53+</span>
+  <li><img class="logo" src="img/chrome-logo.svg"><span>74+</span>
+  <li><img class="logo" src="img/safari-logo.svg">Tech Preview
+  <li><img class="logo" src="img/edge-logo.svg"><span class=batsu>x</span>
 </ul>
 <style>
 #hows-your-event-game .logo-list {
@@ -948,6 +948,123 @@ document.getElementsByTagName('head')[0].appendChild(link);
 </section>
 <!-- TODO: Check Safari status for the above. -->
 <!-- TODO: Add Edgium icon for the above and check status -->
+
+<section id="i-like-js">
+  <h2 class="-smaller">#3: I ❤️ JS</h2>
+</section>
+
+<section id="geese-are-made-of-stars"
+  data-background="var(--blue-2)" style="width: 100%; height: 100%">
+<div class=hoshis></div>
+<svg width="300" viewBox="0 0 100 100" style="position: absolute; left: 100px; bottom: 0">
+  <use href="#goose-feathers"/>
+  <use href="#goose-lower-beak-closed"/>
+  <use href="#goose-upper-beak"/>
+  <circle id="goose-eye" cx="40.5" cy="26" r="2.9"/>
+</svg>
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+  const container = document.querySelector('#geese-are-made-of-stars .hoshis');
+  const numStars = 25;
+
+  // Taken from https://mozanime.github.io/taketori/scene-mayreturn/index.html
+  for (let i = 0; i < numStars; i++) {
+    const hoshi = document.createElement('div');
+    hoshi.classList.add('hoshi');
+    const left = Math.floor(Math.random() * 960);
+    const top = Math.floor(Math.random() * 700);
+    container.appendChild(hoshi);
+
+    const duration = 2000 + Math.floor(Math.random() * 1000);
+    const delay = Math.floor(Math.random() * 2000);
+    const fullSize = 0.6 + Math.random() * 0.6;
+
+    let easing = 'linear';
+    switch (Math.floor(Math.random() * 4)) {
+      case 0: {
+        easing = 'ease-in';
+        break;
+      }
+      case 1: {
+        easing = 'ease-out';
+        break;
+      }
+      case 2: {
+        easing = 'ease-in-out';
+        break;
+      }
+    }
+    hoshi.animate(
+      {
+        transform: [
+          `translate(${left}px, ${top}px) scale(0)`,
+          `translate(${left}px, ${top}px) scale(${fullSize})`,
+          `translate(${left}px, ${top}px) scale(0)`,
+        ],
+        offset: [ 0, 0.95, 1 ]
+      },
+      { easing, duration, delay, iterations: Infinity }
+    );
+  }
+});
+</script>
+<style>
+#geese-are-made-of-stars {
+  position: relative;
+}
+#geese-are-made-of-stars .hoshis {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 960px;
+  height: 700px;
+}
+#geese-are-made-of-stars .hoshi {
+  position: absolute;
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23fcf200' d='M20.1 2.1L25.9 14l13 1.8-9.4 9.2 2.2 13L20.1 32 8.4 38l2.3-13-9.5-9.2 13-1.8L20.2 2z'/%3E%3C/svg%3E");
+  background-size: cover;
+  width: 20px;
+  height: 20px;
+  transform: scale(0);
+}
+</style>
+</section>
+
+<section id="me-likem-lists">
+</section>
+
+<section id="keyframes-from-js">
+</section>
+
+<section id="transitions-from-js">
+</section>
+
+<section id="random-web-animations">
+</section>
+
+<section id="web-animations-lists">
+</section>
+
+<section id="web-animations-are-finished">
+</section>
+
+<section id="web-animations-lists">
+</section>
+
+<section id="safari-will-be-any-day-now">
+<h2 class="-smaller"><code>Element.animate</code></h2>
+<ul class="logo-list">
+  <li><img class="logo" src="img/firefox-logo.svg"><span>48+</span>
+  <li><img class="logo" src="img/chrome-logo.svg"><span>36+</span>
+  <li><img class="logo" src="img/safari-logo.svg">Tech Preview
+  <li><img class="logo" src="img/edge-logo.svg"><span class=batsu>x</span>
+</ul>
+<style>
+#safari-will-be-any-day-now .logo-list {
+  margin-top: 50px;
+}
+</style>
+</section>
 
 <!-- FWIW: The CSS animation easing bug is here:
   https://bugzilla.mozilla.org/show_bug.cgi?id=1072819#c17 -->
