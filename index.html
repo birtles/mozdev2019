@@ -221,8 +221,8 @@ document.getElementsByTagName('head')[0].appendChild(link);
   <h2>#1: It's hard to do frame-based animation</h2>
 </section>
 
-<section id="ga" data-background="var(--blue-5)" style="width: 100%; height: 100%">
-<svg width="500" viewBox="0 0 100 100" style="position: absolute; left: 0; bottom: 0">
+<section id="ga" data-background="var(--blue-5)">
+<svg width="500" viewBox="0 0 100 100" class="goose">
   <path id="goose-feathers" fill="#fff" d="M11.8 28C-5.9 47.3 16 73.6 19.6 79.7s6.4 10.6 7 15.2c.6 4.6.8 8.9.8 8.9l55.8.2s2-8.5-1.8-14.9c-2-3.5-4.1-9.5-14.8-16.1s-17.4-9.7-21.9-12.3-7.8-8-5.3-11.5 5.6-3.6 8.1-3 12.8.5 15.5-10 1.6-15.1-1.5-18.4C51.7 7.2 29.4 8.7 11.8 28z"/>
   <path id="goose-lower-beak" class="beak" fill="#d1722e" d="M58.8 41.3c-2.6 1-3.8.6-3.9 2.2.8 1.4 3.2 2.4 4.4 3 1.2.6 3.8 1.1 5.8 2.2s7.7 4.4 10.1 5.5c2.4 1.1 4.4 1.7 5.8 2 1.5.3 5.7.4 6.9.2s3.3.2 4.2-.2c.9-.5 2.1-.7 2.6-2.2.5-1.5.6-3 0-3.5s-9.3-4.9-12.3-6.3c-3-1.4-8.6-4.3-11.7-5.2-1.8-.5-5-1.6-7.9-2.3-1.6 2.2-2.9 4.2-4 4.6z"/>
   <path id="goose-upper-beak" fill="#ff8b38" d="M64.8 26.3c-1.5 0-3.7.4-5 2.7-2 3.6-1 7.1-1.7 8.9-.7 1.8-1.7 3-2.9 4.7 1.9.5 2.4.4 4.2 1.2 4.2 1.8 11 6.1 14.7 7.3 3.7 1.1 7.6 3.3 12.3 3.2s9-1.9 9.3-3c.3-1.1-.2-2.6-2-4.2-2.5-2.1-3.3-1.3-5.3-2.5a282 282 0 01-23.6-18.3z"/>
@@ -293,6 +293,15 @@ document.getElementsByTagName('head')[0].appendChild(link);
   </g>
 </svg>
 <style>
+#ga {
+  width: 100%;
+  height: 100%;
+}
+#ga .goose {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
 #ga .beak {
   animation: ga-beak 0.75s alternate steps(1) infinite forwards;
   transform-origin: 5% 40%;
@@ -971,7 +980,7 @@ document.getElementsByTagName('head')[0].appendChild(link);
   <use href="#goose-feathers"/>
   <use href="#goose-lower-beak-closed"/>
   <use href="#goose-upper-beak"/>
-  <circle id="goose-eye" cx="40.5" cy="26" r="2.9"/>
+  <use href="#goose-eye"/>
 </svg>
 <script>
 window.addEventListener('DOMContentLoaded', () => {
@@ -1170,11 +1179,380 @@ star.animate(
 </style>
 </section>
 
-<!-- TODO: Go back and make sure this far works in Chrome (and reasonably in
-  Edge) -->
+<section id="easing-peasing">
+  <h2>#4: Easing the <em>whole</em> animation is hard</h2>
+</section>
 
+<section id="try-easing-this" data-background="var(--blue-5)">
+<svg viewBox="0 0 140 100" class="goose">
+  <defs>
+    <linearGradient id="try-easing-this-body-grad" x1="41.1" x2="41.1" y1="56.7" y2="78.6" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#b5b5b5"/>
+    </linearGradient>
+  </defs>
+  <path d="M39.9 77.9v11.2l8.6 6.1 12.6-9.4H44.9l-.1-7.9z" fill="#ff8b38" class="feet"/>
+  <g class="body">
+    <g class="head">
+      <path d="M82.8 4h9c2.2 0 2.5 2.8 1 3.6l-10 4.8V4z" fill="#ff8b38" class="beak"/>
+      <path d="M63.7 45V13.6c0-6 4.6-9.6 9.5-9.6H83v8.3c0 3.7-2.3 5-3.6
+      5.9-1.3.9-3.5 1.6-3.5 4.9v22.2c0 2.1-.4 4.2-.4 4.2l-11.8-4.7z"
+        fill="white" class="neck"/>
+      <circle cx="76.6" cy="9.6" r="1.5" class="eye"/>
+    </g>
+    <path fill="url(#try-easing-this-body-grad)" d="M6.3 48.3c1.9 14.5 16.1 32.5
+    38.5 30.2s30.6-18.8 31-31.7c-.9-5.4-6.9-8.6-10.6-7.4-3.7 1.2-8.5 9-8.5
+    9l-50.4-.1z" class="torso"/>
+    <path d="M63.8 40H56a29 29 0 00-21.6 9L17.1 66.1c-1.3 1.4-.3 2.8 1.3
+    2.8h21.4c4.6 0 9-2.3 11.4-4.9l12.7-12.4c4.7-4.7 3.8-10.6.1-11.6"
+    fill="white" class="wing"/>
+  </g>
+</svg>
+<style>
+#try-easing-this {
+  width: 100%;
+  height: 100%;
+}
+#try-easing-this .goose {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 800px;
+}
+#try-easing-this .body {
+  transform-origin: 42px 53px;
+  animation: easing-rotate-body 2s infinite;
+}
+@keyframes easing-rotate-body {
+  10% { transform: none }
+  60% { transform: rotate(40deg) }
+  65% { transform: rotate(40deg) }
+}
+#try-easing-this .head {
+  transform-origin: 72px 45px;
+  animation: easing-drop-head 2s infinite;
+}
+@keyframes easing-drop-head {
+  60% { transform: rotate(45deg) }
+}
+</style>
+</section>
+
+<section id="easing-is-not-easy-after-all" data-background="var(--blue-5)">
+<svg viewBox="0 0 140 100" class="goose">
+  <path d="M39.9 77.9v11.2l8.6 6.1 12.6-9.4H44.9l-.1-7.9z" fill="#ff8b38" class="feet"/>
+  <g class="body">
+    <g class="head">
+      <path d="M82.8 4h9c2.2 0 2.5 2.8 1 3.6l-10 4.8V4z" fill="#ff8b38" class="beak"/>
+      <path d="M63.7 45V13.6c0-6 4.6-9.6 9.5-9.6H83v8.3c0 3.7-2.3 5-3.6
+      5.9-1.3.9-3.5 1.6-3.5 4.9v22.2c0 2.1-.4 4.2-.4 4.2l-11.8-4.7z"
+        fill="white" class="neck"/>
+      <circle cx="76.6" cy="9.6" r="1.5" class="eye"/>
+    </g>
+    <path fill="url(#try-easing-this-body-grad)" d="M6.3 48.3c1.9 14.5 16.1 32.5
+    38.5 30.2s30.6-18.8 31-31.7c-.9-5.4-6.9-8.6-10.6-7.4-3.7 1.2-8.5 9-8.5
+    9l-50.4-.1z" class="torso"/>
+    <path d="M63.8 40H56a29 29 0 00-21.6 9L17.1 66.1c-1.3 1.4-.3 2.8 1.3
+    2.8h21.4c4.6 0 9-2.3 11.4-4.9l12.7-12.4c4.7-4.7 3.8-10.6.1-11.6"
+    fill="white" class="wing"/>
+  </g>
+</svg>
+<pre class=code-overlay><code class="hljs css" data-trim data-noescape>
+.body, .head {
+  animation-timing-function: steps(4);
+}
+</code></pre>
+<style>
+#easing-is-not-easy-after-all {
+  width: 100%;
+  height: 100%;
+}
+#easing-is-not-easy-after-all .goose {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 600px;
+}
+#easing-is-not-easy-after-all .body {
+  transform-origin: 42px 53px;
+  animation: easing-rotate-body 2s infinite;
+}
+#easing-is-not-easy-after-all .head {
+  transform-origin: 72px 45px;
+  animation: easing-drop-head 2s infinite;
+}
+#easing-is-not-easy-after-all .body,
+#easing-is-not-easy-after-all .head {
+  animation-timing-function: steps(4);
+}
+#easing-is-not-easy-after-all .code-overlay {
+  margin-top: 50px;
+  background: var(--neutral-9);
+  box-shadow: 5px 8px 5px var(--blue-2);
+}
+#easing-is-not-easy-after-all .code-overlay,
+#easing-is-not-easy-after-all .code-overlay code {
+  border-radius: 20px;
+}
+</style>
+</section>
+
+<!-- TODO: Exasperated goose slide -->
+
+<section id="easing-explained">
+<img src="img/easing-explained-by-devtools.png" class=main-screenshot>
+<img src="img/easing-explained-rotate-body.png" class=sub-screenshot>
+<style>
+#easing-explained .main-screenshot,
+#easing-explained .sub-screenshot {
+  width: 550px;
+}
+</style>
+</section>
+
+<section id="easing-explained-with-code" data-transition="fade">
+<div class="side-by-side">
+  <pre><code class="css" data-trim data-noescape>
+.head {
+<span class=highlight>  animation-timing-function: steps(4);</span>
+}
+@keyframes drop-head {
+  60% { transform: rotate(45deg) }
+}
+  </code></pre>
+  <pre><code class="css" data-trim data-noescape>
+@keyframes drop-head {
+  0% {
+    transform: none;
+<span class=highlight>    animation-timing-function: steps(4);</span>
+  }
+  50% {
+    transform: rotate(45deg);
+<span class=highlight>    animation-timing-function: steps(4);</span>
+  }
+  100% { transform: none; }
+}
+  </code></pre>
+</div>
+<style>
+#easing-explained-with-code pre code {
+  line-height: 20px;
+  font-size: 14px;
+}
+</style>
+</section>
+
+<section id="easing-by-video">
+<video data-autoplay muted>
+  <source src="video/unlock-animation-stutter.mp4" type="video/mp4">
+</video>
+<style>
+#easing-by-video video {
+  border: 4px solid var(--neutral-1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+</style>
 <!-- FWIW: The CSS animation easing bug is here:
   https://bugzilla.mozilla.org/show_bug.cgi?id=1072819#c17 -->
+</section>
+
+<section id="sloooow-mo">
+<video data-autoplay muted loop>
+  <source src="video/unlock-animation-slow-motion.mp4" type="video/mp4">
+</video>
+<style>
+#sloooow-mo video {
+  border: 4px solid var(--neutral-1);
+  height: 600px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+</style>
+</section>
+
+<section id="css-animations-easing-bug-in-devtools" data-transition="fade">
+  <img src="img/easing-bug-firefox-devtools.png">
+</section>
+
+<section id="nailed-it" data-background="var(--blue-5)">
+<svg viewBox="0 0 140 100" class="goose">
+  <defs>
+    <linearGradient id="nailed-it-body-grad" x1="41.1" x2="41.1" y1="56.7" y2="78.6" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#b5b5b5"/>
+    </linearGradient>
+  </defs>
+  <path d="M39.9 77.9v11.2l8.6 6.1 12.6-9.4H44.9l-.1-7.9z" fill="#ff8b38" class="feet"/>
+  <g class="body">
+    <g class="head">
+      <path d="M82.8 4h9c2.2 0 2.5 2.8 1 3.6l-10 4.8V4z" fill="#ff8b38" class="beak"/>
+      <path d="M63.7 45V13.6c0-6 4.6-9.6 9.5-9.6H83v8.3c0 3.7-2.3 5-3.6
+      5.9-1.3.9-3.5 1.6-3.5 4.9v22.2c0 2.1-.4 4.2-.4 4.2l-11.8-4.7z"
+        fill="white" class="neck"/>
+      <circle cx="76.6" cy="9.6" r="1.5" class="eye"/>
+    </g>
+    <path fill="url(#nailed-it-body-grad)" d="M6.3 48.3c1.9 14.5 16.1 32.5
+    38.5 30.2s30.6-18.8 31-31.7c-.9-5.4-6.9-8.6-10.6-7.4-3.7 1.2-8.5 9-8.5
+    9l-50.4-.1z" class="torso"/>
+    <path d="M63.8 40H56a29 29 0 00-21.6 9L17.1 66.1c-1.3 1.4-.3 2.8 1.3
+    2.8h21.4c4.6 0 9-2.3 11.4-4.9l12.7-12.4c4.7-4.7 3.8-10.6.1-11.6"
+    fill="white" class="wing"/>
+  </g>
+</svg>
+<pre class=code-overlay><code class="hljs js" data-trim data-noescape>
+head.animate(
+  {
+    // Implicit 0%/100% keyframes are not yet
+    // shipping in Chrome/Firefox
+    transform: ['none', 'rotate(60deg)', 'none'],
+    offset: [0, 0.6, 1],
+  },
+  {
+    duration: 2000,
+    iterations: Infinite,
+    <span class=highlight>easing: 'steps(4)'</span>
+  }
+);
+</code></pre>
+<style>
+#nailed-it {
+  width: 100%;
+  height: 100%;
+}
+#nailed-it .goose {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 400px;
+}
+#nailed-it .body {
+  transform-origin: 42px 53px;
+}
+#nailed-it .head {
+  transform-origin: 72px 45px;
+}
+#nailed-it .code-overlay {
+  margin-top: 50px;
+  background: var(--neutral-9);
+  box-shadow: 5px 8px 5px var(--blue-2);
+}
+#nailed-it .code-overlay,
+#nailed-it .code-overlay code {
+  border-radius: 20px;
+  font-size: 20px;
+}
+#nailed-it .code-overlay code {
+  padding-left: 2em;
+  padding-right: 2em;
+}
+</style>
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+  const body = document.querySelector('#nailed-it .body');
+  const head = document.querySelector('#nailed-it .head');
+
+  head.animate({
+    //
+    // This should be just:
+    //
+    //   transform: 'rotate(45deg)',
+    //   offset: 0.6,
+    //
+    // but partial keyframes are not being shipped everywhere yet.
+    //
+    transform: ['none', 'rotate(45deg)', 'none'],
+    offset: [0, 0.6, 1],
+  }, { duration: 2000, iterations: Infinity, easing: 'steps(4)' });
+  body.animate({
+    transform: ['none', 'none', 'rotate(40deg)', 'rotate(40deg)', 'none'],
+    offset: [0, 0.1, 0.6, 0.65, 1],
+  }, { duration: 2000, iterations: Infinity, easing: 'steps(4)' });
+});
+</script>
+</section>
+
+<section id="nailed-it-twice" data-background="var(--blue-5)">
+<svg viewBox="0 0 140 100" class="goose">
+  <path d="M39.9 77.9v11.2l8.6 6.1 12.6-9.4H44.9l-.1-7.9z" fill="#ff8b38" class="feet"/>
+  <g class="body">
+    <g class="head">
+      <path d="M82.8 4h9c2.2 0 2.5 2.8 1 3.6l-10 4.8V4z" fill="#ff8b38" class="beak"/>
+      <path d="M63.7 45V13.6c0-6 4.6-9.6 9.5-9.6H83v8.3c0 3.7-2.3 5-3.6
+      5.9-1.3.9-3.5 1.6-3.5 4.9v22.2c0 2.1-.4 4.2-.4 4.2l-11.8-4.7z"
+        fill="white" class="neck"/>
+      <circle cx="76.6" cy="9.6" r="1.5" class="eye"/>
+    </g>
+    <path fill="url(#nailed-it-body-grad)" d="M6.3 48.3c1.9 14.5 16.1 32.5
+    38.5 30.2s30.6-18.8 31-31.7c-.9-5.4-6.9-8.6-10.6-7.4-3.7 1.2-8.5 9-8.5
+    9l-50.4-.1z" class="torso"/>
+    <path d="M63.8 40H56a29 29 0 00-21.6 9L17.1 66.1c-1.3 1.4-.3 2.8 1.3
+    2.8h21.4c4.6 0 9-2.3 11.4-4.9l12.7-12.4c4.7-4.7 3.8-10.6.1-11.6"
+    fill="white" class="wing"/>
+  </g>
+</svg>
+<pre class=code-overlay><code class="hljs js" data-trim data-noescape>
+head.animate(
+  {
+    transform: ['none', 'rotate(60deg)', 'none'],
+    offset: [0, 0.6, 1],
+    <span class=highlight>easing: 'ease-in',</span>
+  },
+  {
+    duration: 2000,
+    iterations: Infinite,
+    <span class=highlight>easing: 'steps(4)'</span>
+  }
+);
+</code></pre>
+<style>
+#nailed-it-twice {
+  width: 100%;
+  height: 100%;
+}
+#nailed-it-twice .goose {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 400px;
+}
+#nailed-it-twice .body {
+  transform-origin: 42px 53px;
+}
+#nailed-it-twice .head {
+  transform-origin: 72px 45px;
+}
+#nailed-it-twice .code-overlay {
+  margin-top: 50px;
+  background: var(--neutral-9);
+  box-shadow: 5px 8px 5px var(--blue-2);
+}
+#nailed-it-twice .code-overlay,
+#nailed-it-twice .code-overlay code {
+  border-radius: 20px;
+  font-size: 20px;
+}
+#nailed-it-twice .code-overlay code {
+  padding-left: 2em;
+  padding-right: 2em;
+}
+</style>
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+  const body = document.querySelector('#nailed-it-twice .body');
+  const head = document.querySelector('#nailed-it-twice .head');
+
+  head.animate({
+    transform: ['none', 'rotate(45deg)', 'none'],
+    offset: [0, 0.6, 1],
+    easing: 'ease-in',
+  }, { duration: 2000, iterations: Infinity, easing: 'steps(5)' });
+  body.animate({
+    transform: ['none', 'none', 'rotate(40deg)', 'rotate(40deg)', 'none'],
+    offset: [0, 0.1, 0.6, 0.65, 1],
+    easing: 'ease-in',
+  }, { duration: 2000, iterations: Infinity, easing: 'steps(5)' });
+});
+</script>
+</section>
 
 </div> <!-- end slides -->
 </div> <!-- end reveal -->
