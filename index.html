@@ -774,6 +774,7 @@ document.getElementsByTagName('head')[0].appendChild(link);
   <li><img class="logo" src="img/chrome-logo.svg"><span>77+</span>
   <li><img class="logo" src="img/safari-logo.svg"><span class=batsu>x</span>
   <li><img class="logo" src="img/edge-logo.svg"><span class=batsu>x</span>
+  <li><img class="logo" src="img/edgium.png"><span class=maru>〇</span>
 </ul>
 <style>
 #mac-daddy-mac .logo-list {
@@ -785,18 +786,25 @@ document.getElementsByTagName('head')[0].appendChild(link);
   line-height: 1.5;
   list-style: none;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
 }
 .reveal .logo-list li {
+  flex-basis: 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: 1em;
+  text-align: center;
+  font-size: 35px;
+  line-height: 1;
 }
 .reveal .logo-list .logo {
-  width: 3em;
-  height: 3em;
+  width: 100px;
+  /* I have no idea how this works but it stops the Edgium logo from being
+     squashed vertically. */
+  max-width: 100px;
+  height: 100px;
   margin: 0;
+  margin-bottom: 0.5em;
   border: none;
   box-shadow: none;
   background: transparent;
@@ -804,6 +812,10 @@ document.getElementsByTagName('head')[0].appendChild(link);
 }
 .reveal .logo-list .batsu {
   color: hsl(354, 85%, 44%);
+  font-weight: bold;
+}
+.reveal .logo-list .maru {
+  color: var(--green);
   font-weight: bold;
 }
 </style>
@@ -938,6 +950,7 @@ document.getElementsByTagName('head')[0].appendChild(link);
   <li><img class="logo" src="img/chrome-logo.svg"><span>74+</span>
   <li><img class="logo" src="img/safari-logo.svg">Tech Preview
   <li><img class="logo" src="img/edge-logo.svg"><span class=batsu>x</span>
+  <li><img class="logo" src="img/edgium.png"><span class=maru>〇</span>
 </ul>
 <style>
 #hows-your-event-game .logo-list {
@@ -1133,6 +1146,12 @@ star.animate(
 
 <span class=highlight>starAnimation.finished</span>.then(() => { ... });
 </code></pre>
+<style>
+#web-animations-are-finished pre {
+  /* To avoid scrollbars on Edgium */
+  font-size: 23px;
+}
+</style>
 </section>
 
 <section id="safari-will-be-any-day-now">
@@ -1142,6 +1161,7 @@ star.animate(
   <li><img class="logo" src="img/chrome-logo.svg"><span>36+</span>
   <li><img class="logo" src="img/safari-logo.svg">Tech Preview
   <li><img class="logo" src="img/edge-logo.svg"><span class=batsu>x</span>
+  <li><img class="logo" src="img/edgium.png"><span class=maru>〇</span>
 </ul>
 <style>
 #safari-will-be-any-day-now .logo-list {
