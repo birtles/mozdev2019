@@ -113,8 +113,8 @@ document.getElementsByTagName('head')[0].appendChild(link);
 }
 </style>
 
-<section id="about-me" data-transition="fade-out">
-<h2 class="-smaller">A few things about me&hellip;</h2>
+<section id="about-me">
+<h2>A few things about me&hellip;</h2>
 <ul class="grid">
   <li class="fragment fade-in"><img src="img/koala.svg"></li>
   <li class="fragment fade-in"><img src="img/tokyo-tower.svg"></li>
@@ -195,9 +195,8 @@ document.getElementsByTagName('head')[0].appendChild(link);
 </style>
 </section>
 
-<section id="animations-suck" data-transition="fade-out"
-  data-background="var(--blue-5)">
-<h2 class="-smaller">Animations are&hellip;</h2>
+<section id="animations-suck" data-background="var(--blue-5)">
+<h2>Animations are&hellip;</h2>
 <ul>
   <li>Hard
   <li>Buggy
@@ -219,7 +218,7 @@ document.getElementsByTagName('head')[0].appendChild(link);
 -->
 
 <section id="no-frames-for-you">
-  <h2 class="-smaller">#1: It's hard to do frame-based animation</h2>
+  <h2>#1: It's hard to do frame-based animation</h2>
 </section>
 
 <section id="ga" data-background="var(--blue-5)" style="width: 100%; height: 100%">
@@ -493,7 +492,7 @@ document.getElementsByTagName('head')[0].appendChild(link);
 </style>
 </section>
 
-<section id="a-simple-attempt" data-transition="fade">
+<section id="a-simple-attempt">
 <div class=filmstrip>
   <svg viewBox="0 0 840 78" width="840"><use href="#fullstrip"></svg>
 </div>
@@ -568,7 +567,7 @@ document.getElementsByTagName('head')[0].appendChild(link);
 </style>
 </section>
 
-<section id="a-simple-attempt-explained" data-transition="fade">
+<section id="a-simple-attempt-explained">
 <pre><code class="hljs css" data-trim data-noescape>
 .filmstrip {
   /* steps(7) = 7 "changes" including the last one */
@@ -602,7 +601,7 @@ document.getElementsByTagName('head')[0].appendChild(link);
 </style>
 </section>
 
-<section id="a-second-attempt" data-transition="fade">
+<section id="a-second-attempt">
 <pre><code class="hljs css" data-trim data-noescape>
 .filmstrip {
   animation: slide 1s infinite <span class="highlight">steps(6)</span>;
@@ -631,7 +630,7 @@ document.getElementsByTagName('head')[0].appendChild(link);
 </style>
 </section>
 
-<section id="a-second-attempt-explained" data-transition="fade">
+<section id="a-second-attempt-explained">
 <pre><code class="hljs css" data-trim data-noescape>
 .filmstrip {
   /* steps(6) = steps(6, end) */
@@ -654,7 +653,7 @@ document.getElementsByTagName('head')[0].appendChild(link);
 </div>
 </section>
 
-<section id="a-third-attempt" data-transition="fade">
+<section id="a-third-attempt">
 <pre><code class="hljs css" data-trim data-noescape>
 .filmstrip {
   animation: slide 1s infinite <span class="highlight">steps(6, start)</span>;
@@ -696,7 +695,7 @@ document.getElementsByTagName('head')[0].appendChild(link);
 
 <!-- TODO: Add an exasperated goose slide here -->
 
-<section id="a-solution" data-transition="fade">
+<section id="a-solution">
 <!-- TODO: Do something pretter for the "New!" highlight -->
 <pre><code class="hljs css" data-trim data-noescape>
 .filmstrip {
@@ -743,7 +742,7 @@ document.getElementsByTagName('head')[0].appendChild(link);
 
 <!-- TODO: Add a slide with the finished result again -->
 
-<section id="i-made-a-diagram" class="fit-picture" data-transition="fade">
+<section id="i-made-a-diagram" class="fit-picture">
   <img src="img/easing-functions.svg">
 <p>
 <a href="https://drafts.csswg.org/css-easing/#funcdef-step-easing-function-steps" target="_new">CSS Easing Functions</a>
@@ -768,8 +767,8 @@ document.getElementsByTagName('head')[0].appendChild(link);
 </style>
 </section>
 
-<section id="mac-daddy-mac" data-transition="fade">
-<h2 class="-smaller"><code>jump-none</code>, <code>jump-both</code></h2>
+<section id="mac-daddy-mac">
+<h2><code>jump-none</code>, <code>jump-both</code></h2>
 <ul class="logo-list">
   <li><img class="logo" src="img/firefox-logo.svg"><span>65+</span>
   <li><img class="logo" src="img/chrome-logo.svg"><span>77+</span>
@@ -811,10 +810,10 @@ document.getElementsByTagName('head')[0].appendChild(link);
 </section>
 
 <section id="transitions-suck">
-  <h2 class="-smaller">#2: Transitions are buggy</h2>
+  <h2>#2: Transitions are buggy</h2>
 </section>
 
-<section id="lots-of-bugs" data-transition="fade">
+<section id="lots-of-bugs">
 <div class="container fragment">
   <img src="img/bug683696.png" width="800" height="254">
   <img src="img/bug1206913.png" width="800" height="204">
@@ -901,7 +900,7 @@ document.getElementsByTagName('head')[0].appendChild(link);
 </style>
 </section>
 
-<section id="lots-of-events" data-transition="fade">
+<section id="lots-of-events">
 <h2>New events!</h2>
 <ul>
   <li><code>transitionrun</code>
@@ -932,8 +931,8 @@ document.getElementsByTagName('head')[0].appendChild(link);
 </style>
 </section>
 
-<section id="hows-your-event-game" data-transition="fade">
-<h2 class="-smaller"><code>transitioncancel</code> and friends</h2>
+<section id="hows-your-event-game">
+<h2><code>transitioncancel</code> and friends</h2>
 <ul class="logo-list">
   <li><img class="logo" src="img/firefox-logo.svg"><span>53+</span>
   <li><img class="logo" src="img/chrome-logo.svg"><span>74+</span>
@@ -950,13 +949,12 @@ document.getElementsByTagName('head')[0].appendChild(link);
 <!-- TODO: Add Edgium icon for the above and check status -->
 
 <section id="i-like-js">
-  <h2 class="-smaller">#3: I ❤️ JS</h2>
+  <h2>#3: I ❤️ JS</h2>
 </section>
 
-<section id="geese-are-made-of-stars"
-  data-background="var(--blue-2)" style="width: 100%; height: 100%">
+<section id="geese-are-made-of-stars" data-background="var(--blue-2)">
 <div class=hoshis></div>
-<svg width="300" viewBox="0 0 100 100" style="position: absolute; left: 100px; bottom: 0">
+<svg width="300" viewBox="0 0 100 100" class="goose">
   <use href="#goose-feathers"/>
   <use href="#goose-lower-beak-closed"/>
   <use href="#goose-upper-beak"/>
@@ -1011,6 +1009,8 @@ window.addEventListener('DOMContentLoaded', () => {
 <style>
 #geese-are-made-of-stars {
   position: relative;
+  width: 100%;
+  height: 100%;
 }
 #geese-are-made-of-stars .hoshis {
   position: absolute;
@@ -1027,15 +1027,16 @@ window.addEventListener('DOMContentLoaded', () => {
   height: 20px;
   transform: scale(0);
 }
+#geese-are-made-of-stars .goose {
+  position: absolute;
+  left: 100px;
+  bottom: 0;
+}
 </style>
 </section>
 
-<section id="me-likem-lists">
-  <iframe src="demos/list-animation-1.html" width="960" height="700"></iframe>
-</section>
-
 <section id="keyframes-from-js">
-<h2 class="-smaller">CSS animations from JS</h2>
+<h2>CSS animations from JS</h2>
 <pre><code class="hljs js" data-trim data-noescape>
 const <span class="highlight fragment">uniqueKeyframesName = generateUuid()</span>;
 document.<span class="highlight fragment">styleSheets[0]</span>.insertRule(
@@ -1045,11 +1046,11 @@ document.<span class="highlight fragment">styleSheets[0]</span>.insertRule(
     to { transform: scale(0) }
   }`</span>
 );
-hoshi.style.animation =
+star.style.animation =
   `${uniqueKeyframesName} ${duration}ms ` +
   `${delay}ms infinite`;
 
-<span class="highlight fragment">// Don't forget to clean up</span>
+<span class="highlight fragment">// Don't forget to clean up!</span>
 </code></pre>
 <style>
 #keyframes-from-js .fragment.highlight {
@@ -1063,17 +1064,79 @@ hoshi.style.animation =
 </style>
 </section>
 
-<!-- TODO: A slide linking to all the difficulties with transitions -->
+<section id="transitions-from-js">
+<h2>CSS transitions from JS</h2>
+<ul>
+  <li><code>transitionrun</code>, <code>transitioncancel</code> etc.
+  <li>Triggering transitions from JS is <em>hard</em>&hellip;
+</ul>
+<div>
+  <figure>
+    <a
+      href="https://birtles.github.io/cssconf2019/#/css-transitions-title"
+      target="_blank"><img src="img/transition-firing-presentation.png" width="400"></a>
+    <figcaption>
+      <a href="https://birtles.github.io/cssconf2019/#/css-transitions-title" target="_blank">https://birtles.github.io/cssconf2019/</a>
+    </figcaption>
+  </figure>
+</div>
+<style>
+#transitions-from-js code {
+  color: var(--red-5);
+  font-weight: 600;
+  background: var(--red-10);
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+#transitions-from-js ul {
+  font-size: 30px;
+}
+#transitions-from-js figure img {
+  margin-bottom: 5px;
+}
+#transitions-from-js figcaption {
+  font-size: 20px;
+}
+</style>
+</section>
 
 <section id="random-web-animations">
-<!-- TODO: Equivalent code for Web Animations -->
+<h2>&hellip;using <code>Element.animate()</code></h2>
+<pre><code class="hljs js" data-trim data-noescape>
+star.animate(
+  [
+    { transform: 'scale(0)' },
+    { transform: `scale(${fullSize})`, offset: 0.95 },
+    { transform: 'scale(0)' },
+  ],
+  { easing, duration, delay, iterations: Infinity }
+);
+</code></pre>
 </section>
 
 <section id="web-animations-are-finished">
+<h2>&hellip;using <code>Element.animate()</code></h2>
+<pre><code class="hljs js" data-trim data-noescape>
+<span class=highlight>const starAnimation =</span> star.animate(
+  [
+    { transform: 'scale(0)' },
+    { transform: `scale(${fullSize})`, offset: 0.95 },
+    { transform: 'scale(0)' },
+  ],
+  { easing, duration, delay, iterations: Infinity }
+);
+
+// starAnimation.reverse();
+// starAnimation.cancel();
+// starAnimation.updatePlaybackRate(0.5);
+
+<span class=highlight>starAnimation.finished</span>.then(() => { ... });
+</code></pre>
 </section>
 
 <section id="safari-will-be-any-day-now">
-<h2 class="-smaller"><code>Element.animate</code></h2>
+<h2><code>Element.animate</code></h2>
 <ul class="logo-list">
   <li><img class="logo" src="img/firefox-logo.svg"><span>48+</span>
   <li><img class="logo" src="img/chrome-logo.svg"><span>36+</span>
@@ -1112,6 +1175,7 @@ Reveal.initialize({
     },
   ],
   history: true,
+  transition: 'fade',
 });
 </script>
 </body>
