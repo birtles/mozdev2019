@@ -1180,7 +1180,13 @@ star.animate(
 </section>
 
 <section id="easing-peasing">
-  <h2>#4: Easing the <em>whole</em> animation is hard</h2>
+<h2>#4: Easing the <em>whole</em> animation is hard</h2>
+<style>
+#easing-peasing h2 em {
+  color: var(--blue-5);
+  text-shadow: 1px 2px 2px var(--blue-9);
+}
+</style>
 </section>
 
 <section id="try-easing-this" data-background="var(--blue-5)">
@@ -1552,6 +1558,16 @@ window.addEventListener('DOMContentLoaded', () => {
   }, { duration: 2000, iterations: Infinity, easing: 'steps(5)' });
 });
 </script>
+</section>
+
+<section id="this-is-going-too-far">
+<h2>#5: You can't define animations by <em>speed</em> instead of time</h2>
+<style>
+#this-is-going-too-far h2 em {
+  color: var(--blue-5);
+  text-shadow: 1px 2px 2px var(--blue-9);
+}
+</style>
 </section>
 
 </div> <!-- end slides -->
