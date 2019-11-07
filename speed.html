@@ -122,6 +122,9 @@ document.addEventListener('transitionrun', evt => {
   }
 
   const keyframes = transformTransition.effect.getKeyframes();
+
+  // 2019-11-07: This is broken in Chrome Canary because it seems to return
+  // keyframes without any properties for transitions.
   const start = keyframes[0].transform;
   const end = keyframes[1].transform;
 
@@ -199,7 +202,7 @@ function getScaleFromTransform(transform) {
   return parseFloat(matches[1]);
 }
 
-// TODO: Get it to work in Chrome and Safari
+// TODO: Get it to work in Safari
 // TODO: Attribute background
 // <a href="https://www.freepik.com/free-photos-vectors/design">Design vector created by pikisuperstar - www.freepik.com</a>
 // TODO: Integrate into presentation
