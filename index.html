@@ -985,7 +985,7 @@ document.getElementsByTagName('head')[0].appendChild(link);
   <use href="#goose-eye"/>
 </svg>
 <script>
-window.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
   const container = document.querySelector('#geese-are-made-of-stars .hoshis');
   const numStars = 25;
 
@@ -1454,7 +1454,7 @@ head.animate(
 }
 </style>
 <script>
-window.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
   const body = document.querySelector('#nailed-it .body');
   const head = document.querySelector('#nailed-it .head');
 
@@ -1544,7 +1544,7 @@ head.animate(
 }
 </style>
 <script>
-window.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
   const body = document.querySelector('#nailed-it-twice .body');
   const head = document.querySelector('#nailed-it-twice .head');
 
@@ -1924,6 +1924,619 @@ function getScaleFromTransform(transform) {
 <!-- TODO: The kerning on the monospace font used on Windows for the heading
   here is terrible. Provide a suitable Web font for monospace (and remove the
   unused fonts from both the repo and the CSS) -->
+
+<section id="no-midpoints-for-you">
+<h2>#6: You can't define transitions with midpoints</h2>
+</section>
+
+<section id=colors-gone-wrong>
+<div class="color-transition fragment">
+  <div class=red>
+    <div class=sample></div><span class=label>rgb(255, 0, 0)</span>
+  </div>
+  <div class=arrow>→</div>
+  <div class=midpoint>
+    <div class="sample hide"></div>
+    <div class="sample reveal"></div>
+    <span class="label hide">rgb(?, ?, ?)</span>
+    <span class="label reveal">rgb(128, 64, 0)</span>
+  </div>
+  <div class=arrow>→</div>
+  <div class=green>
+    <div class=sample></div><span class=label>rgb(0, 128, 0)</span>
+  </div>
+</div>
+<div class="transition-demo fragment">
+  <div class=sample></div>
+  <div class=label>😧</div>
+</div>
+<style>
+#colors-gone-wrong .color-transition.fragment {
+  opacity: 1;
+  visibility: visible;
+}
+#colors-gone-wrong .color-transition .midpoint .sample.reveal {
+  background-color: rgb(128, 64, 0);
+}
+#colors-gone-wrong .color-transition .reveal,
+#colors-gone-wrong .color-transition .hide {
+  transition: opacity 0.5s;
+}
+#colors-gone-wrong .color-transition .sample.reveal {
+  opacity: 0;
+  margin-top: -110px;
+}
+#colors-gone-wrong .color-transition .label.reveal {
+  opacity: 0;
+  margin-top: -40px;
+}
+#colors-gone-wrong .color-transition.visible .reveal {
+  opacity: 1;
+}
+#colors-gone-wrong .color-transition.visible .hide {
+  opacity: 0;
+}
+#colors-gone-wrong .transition-demo {
+  margin-top: 50px;
+}
+#colors-gone-wrong .transition-demo .sample {
+  animation-name: colors-gone-wrong;
+}
+@keyframes colors-gone-wrong {
+  from { background-color: rgb(255, 0, 0); }
+  10% { background-color: rgb(255, 0, 0); }
+  90% { background-color: rgb(0, 128, 0); }
+  to { background-color: rgb(0, 128, 0); }
+}
+
+/* Re-usable parts */
+.reveal .color-transition {
+  display: flex;
+  justify-content: center;
+}
+.reveal .color-transition .sample {
+  width: 100px;
+  height: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 5px solid var(--neutral-1);
+  border-radius: 100px;
+}
+.reveal .color-transition .red .sample {
+  background-color: rgb(255, 0, 0);
+}
+.reveal .color-transition .green .sample {
+  background-color: rgb(0, 128, 0);
+}
+.reveal .color-transition .label {
+  display: block;
+  margin-top: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+.reveal .color-transition .arrow {
+  font-size: 80px;
+  font-weight: bold;
+}
+
+.reveal .transition-demo .sample {
+  width: 150px;
+  height: 150px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 10px solid var(--neutral-1);
+  border-radius: 200px;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+.reveal .transition-demo .label {
+  margin-top: 20px;
+  font-size: 40px;
+  text-align: center;
+}
+</style>
+</section>
+
+<section id=colors-with-yellow>
+<div class=color-transition>
+  <div class=red>
+    <div class=sample></div><span class=label>rgb(255, 0, 0)</span>
+  </div>
+  <div class=arrow>→</div>
+  <div class=yellow>
+    <div class=sample></div><span class=label>rgb(255, 255, 0)</span>
+  </div>
+  <div class=arrow>→</div>
+  <div class=green>
+    <div class=sample></div><span class=label>rgb(0, 128, 0)</span>
+  </div>
+</div>
+<div class="transition-demo fragment">
+  <div class=sample></div>
+  <div class=label>🤔</div>
+</div>
+<style>
+#colors-with-yellow .color-transition .yellow .sample {
+  background-color: rgb(255, 255, 0);
+}
+#colors-with-yellow .transition-demo {
+  margin-top: 50px;
+}
+#colors-with-yellow .transition-demo .sample {
+  animation-name: colors-with-yellow;
+}
+
+@keyframes colors-with-yellow {
+  from { background-color: rgb(255, 0, 0); }
+  10% { background-color: rgb(255, 0, 0); }
+  50% { background-color: rgb(255, 255, 0); }
+  90% { background-color: rgb(0, 128, 0); }
+  to { background-color: rgb(0, 128, 0); }
+}
+</style>
+</section>
+
+<section id=colors-with-hsl>
+<div class=color-transition>
+  <div class=red>
+    <div class=sample></div><span class=label>hsl(0, 100%, 50%)</span>
+  </div>
+  <div class=arrow>→</div>
+  <div class=hslmidpoint>
+    <div class=sample></div><span class=label>hsl(60, 100%, 37.5%)</span>
+  </div>
+  <div class=arrow>→</div>
+  <div class=green>
+    <div class=sample></div><span class=label>hsl(120, 100%, 25%)</span>
+  </div>
+</div>
+<div class="transition-demo fragment">
+  <div class=sample></div>
+  <div class=label>👍</div>
+</div>
+<style>
+#colors-with-hsl .color-transition .hslmidpoint .sample {
+  background-color: hsl(60, 100%, 37.5%);
+}
+#colors-with-hsl .color-transition .label {
+  font-size: 25px;
+}
+#colors-with-hsl .transition-demo {
+  margin-top: 50px;
+}
+#colors-with-hsl .transition-demo .sample {
+  animation-name: colors-with-hsl;
+}
+
+@keyframes colors-with-hsl {
+  from { background-color: hsl(0, 100%, 50%); }
+  10% { background-color: hsl(0, 100%, 50%); }
+  30% { background-color: hsl(30, 100%, 43.75%); }
+  50% { background-color: hsl(60, 100%, 37.5%); }
+  70% { background-color: hsl(90, 100%, 31.25%); }
+  90% { background-color: hsl(120, 100%, 25%); }
+  to { background-color: hsl(120, 100%, 25%); }
+}
+</style>
+</section>
+
+<section id=design-a-duck>
+<div class=goose-container>
+  <svg viewBox="0 0 100 100" class="goose">
+    <defs>
+      <linearGradient id="color-goose-grad" x1="41.1" x2="41.1"
+        y1="56.7" y2="78.6" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+        <stop offset="1" stop-color="#000" stop-opacity="0.29"/>
+      </linearGradient>
+    </defs>
+    <path d="M39.9 77.9v11.2l8.6 6.1 12.6-9.4H44.9l-.1-7.9z"
+      fill="var(--secondary-color)" id="feet"/>
+    <g id="head">
+      <path d="M82.8 4h9c2.2 0 2.5 2.8 1 3.6l-10 4.8V4z"
+        fill="var(--secondary-color)" id="beak"/>
+      <path d="M63.7 39.8V13.6c0-6 4.6-9.6 9.5-9.6H83v8.3
+        c0 3.7-2.3 5-3.6 5.9-1.3.9-3.5 1.6-3.5 4.9v22.2
+        c0 2.1-.4 4.2-.4 4.2l-11.8-9.7z"
+        fill="var(--primary-color)" id="neck"/>
+      <circle cx="76.6" cy="9.6" r="1.5" id="eye" fill="var(--neutral-1)"/>
+    </g>
+    <path fill="var(--primary-color)"
+      d="M6.3 48.3c1.9 14.5 16.1 32.5 38.5 30.2s30.6-18.8 31-31.7
+      c-.9-5.4-6.9-8.6-10.6-7.4-3.7 1.2-8.5 9-8.5 9l-50.4-.1z" id="body"/>
+    <path fill="url(#color-goose-grad)"
+      d="M6.3 48.3c1.9 14.5 16.1 32.5 38.5 30.2s30.6-18.8 31-31.7
+      c-.9-5.4-6.9-8.6-10.6-7.4-3.7 1.2-8.5 9-8.5 9l-50.4-.1z"
+      id="body-shading"/>
+    <path
+      d="M63.8 40H56a29 29 0 00-21.6 9L17.1 66.1c-1.3 1.4-.3 2.8 1.3 2.8
+      h21.4c4.6 0 9-2.3 11.4-4.9l12.7-12.4c4.7-4.7 3.8-10.6.1-11.6"
+      fill="var(--neutral-1)" fill-opacity="0.2" id="wing-shadow"
+      transform="translate(0.5 0.5)" filter="blur(0.5px)"/>
+    <path
+      d="M63.8 40H56a29 29 0 00-21.6 9L17.1 66.1c-1.3 1.4-.3 2.8 1.3 2.8
+      h21.4c4.6 0 9-2.3 11.4-4.9l12.7-12.4c4.7-4.7 3.8-10.6.1-11.6"
+      fill="var(--primary-color)" id="wing"/>
+  </svg>
+</div>
+<div class=color-controls>
+  <div class=color-selector data-group=primary>
+    <span class=label>Color #1:</span>
+    <button class="swatch -selected"></button>
+    <button class=swatch></button>
+    <button class=swatch></button>
+    <button class=swatch></button>
+    <button class=swatch></button>
+  </div>
+  <div class=color-selector data-group=secondary>
+    <span class=label>Color #2:</span>
+    <button class=swatch></button>
+    <button class="swatch -selected"></button>
+    <button class=swatch></button>
+    <button class=swatch></button>
+    <button class=swatch></button>
+  </div>
+</div>
+<style>
+#design-a-duck .goose-container,
+#design-a-duck-fixed .goose-container {
+  --primary-color: white;
+  --secondary-color: #ff8b38;
+}
+#design-a-duck .goose-container .goose,
+#design-a-duck-fixed .goose-container .goose {
+  width: 400px;
+}
+#design-a-duck .goose-container #wing,
+#design-a-duck .goose-container #body,
+#design-a-duck .goose-container #neck,
+#design-a-duck .goose-container #beak,
+#design-a-duck .goose-container #feet,
+#design-a-duck-fixed .goose-container #wing,
+#design-a-duck-fixed .goose-container #body,
+#design-a-duck-fixed .goose-container #neck,
+#design-a-duck-fixed .goose-container #beak,
+#design-a-duck-fixed .goose-container #feet {
+  transition: fill 1s linear;
+}
+#design-a-duck .color-selector,
+#design-a-duck-fixed .color-selector {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#design-a-duck .color-selector .label,
+#design-a-duck, .color-selector .label {
+  font-size: 32px;
+  margin-right: 20px;
+}
+#design-a-duck .color-selector .swatch,
+#design-a-duck-fixed .color-selector .swatch {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 50px;
+  height: 50px;
+  border: 3px solid var(--neutral-1);
+  border-radius: 100px;
+  margin-left: 5px;
+  margin-right: 5px;
+  cursor: pointer;
+  outline: none;
+}
+#design-a-duck .color-selector .swatch.-selected,
+#design-a-duck-fixed .color-selector .swatch.-selected {
+  box-shadow: 0 0 0 6px var(--red-8);
+}
+#design-a-duck .color-selector .swatch:nth-of-type(1),
+#design-a-duck-fixed .color-selector .swatch:nth-of-type(1) {
+  background-color: white;
+}
+#design-a-duck .color-selector .swatch:nth-of-type(2),
+#design-a-duck-fixed .color-selector .swatch:nth-of-type(2) {
+  background-color: #ff8b38;
+}
+#design-a-duck .color-selector .swatch:nth-of-type(3),
+#design-a-duck-fixed .color-selector .swatch:nth-of-type(3) {
+  background-color: purple;
+}
+#design-a-duck .color-selector .swatch:nth-of-type(4),
+#design-a-duck-fixed .color-selector .swatch:nth-of-type(4) {
+  background-color: rgb(0, 128, 0);
+}
+#design-a-duck .color-selector .swatch:nth-of-type(5),
+#design-a-duck-fixed .color-selector .swatch:nth-of-type(5) {
+  background-color: rgb(255, 0, 0);
+}
+</style>
+<script>
+function setupGooseColoring(containerId) {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupStuffs);
+  } else {
+    setupStuffs();
+  }
+
+  function setupStuffs() {
+    const container = document.querySelector(
+      `#${containerId} .goose-container`
+    );
+    const buttons = document.querySelectorAll(
+      `#${containerId} .color-selector .swatch`
+    );
+
+    for (const button of buttons) {
+      button.addEventListener('click', evt => {
+        // Update button state
+        const selected = evt.target.parentElement.querySelector(
+          '.swatch.-selected'
+        );
+        if (selected && selected !== evt.target) {
+          selected.classList.remove('-selected');
+        }
+        evt.target.classList.add('-selected');
+
+        // Get grouping
+        const targetProperty =
+          evt.target.parentElement.dataset.group === 'primary'
+            ? '--primary-color'
+            : '--secondary-color';
+
+        // Set target color
+        const targetColor = getComputedStyle(evt.target).backgroundColor;
+        container.style.setProperty(targetProperty, targetColor);
+      });
+    }
+  }
+}
+
+setupGooseColoring('design-a-duck');
+</script>
+</section>
+
+<section id="hacking-colors">
+<h2><code>CSSTransition.setKeyframes()</code></h2>
+<pre><code class="hljs js" data-trim data-noescape>
+document.addEventListener(<span class="highlight fragment">'transitionrun'</span>, evt =&gt; {
+  <span class="highlight fragment">if (evt.propertyName !== 'fill') {</span>
+    return;
+  }
+
+  const transition = evt.target
+    .getAnimations()
+    .find(animation =&gt; animation.transitionProperty === 'fill');
+
+  <span class="highlight fragment">const keyframes = transition.effect.getKeyframes();</span>
+  const hslKeyframes = generateHslKeyframes(
+    keyframes[0].fill,
+    keyframes[1].fill
+  );
+
+  <span class="highlight fragment">transition.effect.setKeyframes(hslKeyframes);</span>
+});
+</code></pre>
+<style>
+#hacking-colors h2 {
+  font-size: 40px;
+}
+#hacking-colors pre code {
+  font-size: 19px;
+  max-height: none;
+}
+#hacking-colors .fragment.highlight {
+  opacity: 1;
+  visibility: visible;
+  background-color: transparent;
+}
+#hacking-colors .fragment.highlight.current-fragment {
+  background-color: var(--red-9);
+}
+</style>
+</section>
+
+<section id=design-a-duck-fixed>
+<div class=goose-container>
+  <svg viewBox="0 0 100 100" class="goose">
+    <defs>
+      <linearGradient id="color-goose-grad" x1="41.1" x2="41.1"
+        y1="56.7" y2="78.6" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+        <stop offset="1" stop-color="#000" stop-opacity="0.29"/>
+      </linearGradient>
+    </defs>
+    <path d="M39.9 77.9v11.2l8.6 6.1 12.6-9.4H44.9l-.1-7.9z"
+      fill="var(--secondary-color)" id="feet"/>
+    <g id="head">
+      <path d="M82.8 4h9c2.2 0 2.5 2.8 1 3.6l-10 4.8V4z"
+        fill="var(--secondary-color)" id="beak"/>
+      <path d="M63.7 39.8V13.6c0-6 4.6-9.6 9.5-9.6H83v8.3
+        c0 3.7-2.3 5-3.6 5.9-1.3.9-3.5 1.6-3.5 4.9v22.2
+        c0 2.1-.4 4.2-.4 4.2l-11.8-9.7z"
+        fill="var(--primary-color)" id="neck"/>
+      <circle cx="76.6" cy="9.6" r="1.5" id="eye" fill="var(--neutral-1)"/>
+    </g>
+    <path fill="var(--primary-color)"
+      d="M6.3 48.3c1.9 14.5 16.1 32.5 38.5 30.2s30.6-18.8 31-31.7
+      c-.9-5.4-6.9-8.6-10.6-7.4-3.7 1.2-8.5 9-8.5 9l-50.4-.1z" id="body"/>
+    <path fill="url(#color-goose-grad)"
+      d="M6.3 48.3c1.9 14.5 16.1 32.5 38.5 30.2s30.6-18.8 31-31.7
+      c-.9-5.4-6.9-8.6-10.6-7.4-3.7 1.2-8.5 9-8.5 9l-50.4-.1z"
+      id="body-shading"/>
+    <path
+      d="M63.8 40H56a29 29 0 00-21.6 9L17.1 66.1c-1.3 1.4-.3 2.8 1.3 2.8
+      h21.4c4.6 0 9-2.3 11.4-4.9l12.7-12.4c4.7-4.7 3.8-10.6.1-11.6"
+      fill="var(--neutral-1)" fill-opacity="0.2" id="wing-shadow"
+      transform="translate(0.5 0.5)" filter="blur(0.5px)"/>
+    <path
+      d="M63.8 40H56a29 29 0 00-21.6 9L17.1 66.1c-1.3 1.4-.3 2.8 1.3 2.8
+      h21.4c4.6 0 9-2.3 11.4-4.9l12.7-12.4c4.7-4.7 3.8-10.6.1-11.6"
+      fill="var(--primary-color)" id="wing"/>
+  </svg>
+</div>
+<div class=color-controls>
+  <div class=color-selector data-group=primary>
+    <span class=label>Color #1:</span>
+    <button class="swatch -selected"></button>
+    <button class=swatch></button>
+    <button class=swatch></button>
+    <button class=swatch></button>
+    <button class=swatch></button>
+  </div>
+  <div class=color-selector data-group=secondary>
+    <span class=label>Color #2:</span>
+    <button class=swatch></button>
+    <button class="swatch -selected"></button>
+    <button class=swatch></button>
+    <button class=swatch></button>
+    <button class=swatch></button>
+  </div>
+</div>
+<script>
+setupGooseColoring('design-a-duck-fixed');
+
+document
+  .getElementById('design-a-duck-fixed')
+  .addEventListener('transitionrun', evt => {
+    if (evt.propertyName !== 'fill') {
+      return;
+    }
+
+    const transition = evt.target
+      .getAnimations()
+      .find(animation => animation.transitionProperty === 'fill');
+    if (!transition) {
+      return;
+    }
+
+    const keyframes = transition.effect.getKeyframes();
+    const start = keyframes[0].fill;
+    const end = keyframes[1].fill;
+
+    // Implementations currently differ with regards to whether the easing goes
+    // on the keyframes or on the effect. Ultimately it should go on the effect
+    // but for now handle the case where it is on the keyframes by moving it
+    // to the effect.
+    if (keyframes[0].easing !== 'linear') {
+      transition.effect.updateTiming({ easing: keyframes[0].easing });
+    }
+
+    const hslKeyframes = generateHslKeyframes(start, end);
+    transition.effect.setKeyframes(hslKeyframes);
+  });
+
+function generateHslKeyframes(start, end) {
+  // From https://css-tricks.com/converting-color-spaces-in-javascript/
+  const toRgba = color => {
+    const sep = color.indexOf(",") > -1 ? "," : " ";
+    return color.substr(4).split(")")[0].split(sep);
+  };
+
+  const toHsl = rgb => {
+    const r = rgb[0] / 255;
+    const g = rgb[1] / 255;
+    const b = rgb[2] / 255;
+
+    const cmin = Math.min(r,g,b);
+    const cmax = Math.max(r,g,b);
+    const delta = cmax - cmin;
+
+    let h;
+
+    if (delta == 0) {
+      h = 0;
+    } else if (cmax == r) {
+      h = ((g - b) / delta) % 6;
+    } else if (cmax == g) {
+      h = (b - r) / delta + 2;
+    } else {
+      h = (r - g) / delta + 4;
+    }
+    h = Math.round(h * 60);
+
+    if (h < 0) {
+      h += 360;
+    }
+
+    let l = (cmax + cmin) / 2;
+    let s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+
+    l = +(l * 100);
+    s = +(s * 100);
+
+    return [h, s, l];
+  };
+
+  const startHsl = toHsl(toRgba(start));
+  const endHsl = toHsl(toRgba(end));
+
+  const numKeyframes = 11;
+  const keyframes = [];
+  for (let i = 0; i < numKeyframes; i++) {
+    const p = i / (numKeyframes - 1);
+    const interpolate = (a, b) => (1 - p) * a + p * b;
+    const h = interpolate(startHsl[0], endHsl[0]);
+    const s = interpolate(startHsl[1], endHsl[1]);
+    const l = interpolate(startHsl[2], endHsl[2]);
+    const fill = `hsl(${h.toFixed(1)}, ${s.toFixed(1)}%, ${l.toFixed(1)}%)`;
+
+    keyframes.push({
+      offset: i / (numKeyframes - 1),
+      fill,
+    });
+  }
+
+  return keyframes;
+}
+</script>
+</section>
+
+<section id=ok-maybe-not-hsv>
+<h2>Maybe HSV wasn't such a good idea&hellip;</h2>
+<figure>
+  <img src="img/hsl-not-such-a-good-idea.png">
+  <figcaption>Source:
+    <a
+      href="https://howlettstudios.com/articles/2017/5/6/the-problem-with-hsv"
+      target="_blank"
+      >https://howlettstudios.com/articles/2017/5/6/the-problem-with-hsv</a>
+  </figcaption>
+</figure>
+<style>
+#ok-maybe-not-hsv figure img {
+  width: 500px;
+}
+#ok-maybe-not-hsv figure figcaption {
+  font-size: 20px;
+}
+#ok-maybe-not-hsv figure figcaption a,
+#ok-maybe-not-hsv figure figcaption a:visited {
+  color: var(--neutral-1);
+}
+</style>
+</section>
+<!-- TODO: Get permission to use the above image -->
+
+<section id="still-blocked-on-get-animations">
+<h2><code>CSSTransition.setKeyframes (Element.getAnimations)</code></h2>
+<ul class="logo-list">
+  <li><img class="logo" src="img/nightly-logo.svg"><span>Nightly</span>
+  <li><img class="logo" src="img/canary-logo.svg"><span>Canary</span>
+  <li><img class="logo" src="img/technology-preview.png"><span>Tech Preview</span>
+  <li><img class="logo" src="img/edge-logo.svg"><span class=batsu>x</span>
+  <li><img class="logo" src="img/edgium-canary.png"><span>Canary</span>
+</ul>
+<style>
+#still-blocked-on-get-animations h2 {
+  font-size: 40px;
+}
+#still-blocked-on-get-animations .logo-list {
+  margin-top: 50px;
+}
+</style>
+</section>
 
 </div> <!-- end slides -->
 </div> <!-- end reveal -->
