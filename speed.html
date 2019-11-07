@@ -39,7 +39,7 @@ html, body {
   margin-top: -50px;
   width: 100px;
   height: 100px;
-  transition: transform 1s;
+  transition: transform cubic-bezier(.36,0,.84,1) 1s, filter ease-in-out 1s;
 }
 .hotspot {
   position: absolute;
@@ -55,7 +55,7 @@ html, body {
 .hotspot[data-hotspot-id="1"] {
   left: 100px;
   top: 600px;
-  transform: scale(0.8);
+  transform: scale(0.7);
 }
 .hotspot[data-hotspot-id="2"] {
   left: 850px;
@@ -96,6 +96,7 @@ function moveToHotspot(id) {
   const y = position.top + position.height / 2;
   const scale = parseScale(getComputedStyle(hotspot).transform);
   goose.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+  goose.style.filter = `brightness(${((scale - 1) * 0.25 + 1)})`;
 }
 
 function parseScale(transform) {
@@ -109,8 +110,14 @@ function parseScale(transform) {
 moveToHotspot(1);
 
 document.addEventListener('transitionrun', evt => {
-  const transition = evt.target.getAnimations()[0];
-  if (!transition || transition.transitionProperty !== 'transform') {
+  if (evt.propertyName !== 'transform') {
+    return;
+  }
+
+  const transition = evt.target
+    .getAnimations()
+    .find(animation => animation.transitionProperty === 'transform');
+  if (!transition) {
     return;
   }
   const keyframes = transition.effect.getKeyframes();
@@ -119,8 +126,8 @@ document.addEventListener('transitionrun', evt => {
 
   const distance = calculateDistance(start, end);
 
-  // Progress at a rate of 500px per second
-  const duration = distance / 500 * 1000;
+  // Progress at a rate of 700px per second
+  const duration = (distance / 700) * 1000;
   transition.effect.updateTiming({ duration });
 });
 
@@ -130,12 +137,11 @@ function calculateDistance(start, end) {
 
   const startScale = getScaleFromTransform(start);
   const endScale = getScaleFromTransform(end);
-  console.log(startScale, endScale);
 
-  // For the scale, treat each time we double the size as being 800px.
+  // For the scale, treat each time we double the size as being 700px.
   const scaleFactor = scale => Math.log(scale) / Math.LN2;
   const scaleDiff = Math.abs(scaleFactor(startScale) - scaleFactor(endScale));
-  const scaleDist = scaleDiff * 800;
+  const scaleDist = scaleDiff * 700;
 
   // Leave out the y distance from the distance calculation since the scale
   // distance should cover this.
