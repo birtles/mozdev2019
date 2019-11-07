@@ -39,7 +39,7 @@ html, body {
   margin-top: -50px;
   width: 100px;
   height: 100px;
-  transition: transform cubic-bezier(.36,0,.84,1) 1s, filter ease-in-out 1s;
+  transition: all cubic-bezier(.36,0,.84,1) 1s;
 }
 .hotspot {
   position: absolute;
@@ -96,7 +96,7 @@ function moveToHotspot(id) {
   const y = position.top + position.height / 2;
   const scale = parseScale(getComputedStyle(hotspot).transform);
   goose.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
-  goose.style.filter = `brightness(${((scale - 1) * 0.25 + 1)})`;
+  goose.style.filter = `brightness(${(scale - 1) * 0.25 + 1})`;
 }
 
 function parseScale(transform) {
@@ -114,21 +114,42 @@ document.addEventListener('transitionrun', evt => {
     return;
   }
 
-  const transition = evt.target
+  const transformTransition = evt.target
     .getAnimations()
     .find(animation => animation.transitionProperty === 'transform');
-  if (!transition) {
+  if (!transformTransition) {
     return;
   }
-  const keyframes = transition.effect.getKeyframes();
+
+  const keyframes = transformTransition.effect.getKeyframes();
   const start = keyframes[0].transform;
   const end = keyframes[1].transform;
 
-  const distance = calculateDistance(start, end);
+  // Skip the initial transition where start === 'none'
+  const distance = start === 'none' ? 0 : calculateDistance(start, end);
 
   // Progress at a rate of 700px per second
-  const duration = (distance / 700) * 1000;
-  transition.effect.updateTiming({ duration });
+  const targetDuration = (distance / 700) * 1000;
+
+  // Update all the transitions
+  for (const animation of evt.target.getAnimations()) {
+    if (!animation instanceof CSSTransition) {
+      continue;
+    }
+
+    // We could just do:
+    //
+    //  transition.effect.updateTiming({ duration });
+    //
+    // But using updatePlaybackRate will produce a smoother change if the
+    // transition is already in progress.
+    const { duration: currentDuration } = animation.effect.getTiming();
+    const playbackRate = targetDuration
+      ? currentDuration / targetDuration
+      : 1000;
+
+    animation.updatePlaybackRate(playbackRate);
+  }
 });
 
 function calculateDistance(start, end) {
@@ -178,7 +199,6 @@ function getScaleFromTransform(transform) {
   return parseFloat(matches[1]);
 }
 
-// TODO: Fix initial positioning
 // TODO: Get it to work in Chrome and Safari
 // TODO: Attribute background
 // <a href="https://www.freepik.com/free-photos-vectors/design">Design vector created by pikisuperstar - www.freepik.com</a>
