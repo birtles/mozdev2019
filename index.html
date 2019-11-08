@@ -2549,10 +2549,109 @@ function generateHslKeyframes(start, end) {
 <h2>#7: I want to fly</h2>
 </section>
 
+<section id="it-flies" data-background="var(--blue-5)">
+<div class=airfield>
+  <svg viewBox="0 0 850 600" class=flight-path>
+    <path fill="none" stroke="white" stroke-dasharray="5 5" stroke-linecap="round" d="M235.5 537.5c111.9-1.3 201.5-13.4 312.9 6.8 97.8 17.8 216.6-1.5 246.1-115.8C837.8 260.4 503.4 272 599.1 96.9c38.5-70.4 145.4-68.5 153.7 22.2 7 76.9-96.7 135.9-155.4 163.9-66.9 32-148.2 53-221.7 33.4C322 302 213.2 229 231.8 159c19-71.6 139.4-77.4 131.2 13.8-6.2 69.4-100.1 93.8-185.8 92.8s-105.7-116-74.7-147 87.9 10.3 52 54.1c-53.9 53.9-143-57.1-57-114.1 58-32 113.8 67.6 123.8 127.1 12.1 71.8 1.3 166.5 46.4 228.1 67.1 91.7 144.8 28.6 184.5-49.6 37.6-73.9 60.8-181.1-2-246.7-82-85.5-233-59.1-315.2 11.2C.9 243.4 21.3 540 235.5 537.5z"/>
+</svg>
+  <svg viewBox="0 0 100 100" class="goose">
+    <path d="M92.6 67.3c2-.4 4.4.1 6.1-.3
+    1.2-.3.7-1.6-1.2-1.8-1.2-.1-2.1-.6-3.6-1.4-.1 1.7-.3 2.6-1.3 3.5zM18.1
+    79.5c-2.3 1.4-6.6.5-8.9 1-2 .3-2.6 2.3-1.4 3.2 1.5.6 10.5.7 10.5.7 1.4-.2
+    1-4.4-.2-4.9z" fill="#ff8b38" class="beak-and-feet"/>
+    <linearGradient id="wing-grad" x1="48.7" x2="88.1" y1="41.6" y2="41.6" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#bdbdbd"/>
+      <stop offset=".4" stop-color="#fff"/>
+    </linearGradient>
+    <path fill="url(#wing-grad)" d="M67.1 61.7c-7-2.7 8.9-15.3 14.2-22.1 5.3-6.8 8.5-16.3 5.8-18.2-1.2-.9-1.9 4.6-2.1 2.5-.2-2.1-1.2-2.1-2.1-1.2-.9.9-2 6.1-2 3.8s-1-4-2.2-2.8c-1.3 1.3-1 4.2-2.3 5.8-.2-1.8.2-3.9-1.1-3.5-1.2.3-4.5 5.2-4.5 5.2s1.3-4.1-.1-4c-6 .3-20.4 17.4-22 26.5 2.6 4.6 8.9 9.4 14.1 8.2l4.3-.2z"/>
+    <path fill="#fff" d="M62.8 61.8c-6.1.4-10.3-3-17.1-12-3.7-4.9-31.5-34.9-34.9-34.7-1.3.1-.3 5.4-1 4.9-.6-.4-2.5-5.1-4.6-3.8-1.4.9 2.3 6 2.3 6s-4.1-4-5.2-3.6c-1.2.5 3.8 5.8 3.8 5.8S2 21 .5 22.5C-.6 23.8 6 28.1 6 28.1s-4.7-2.3-5.3-1C.1 28.6 5 31.4 5 31.4s-3.4-1.7-3.3.9c0 .9 7.9 9.9 11.9 13.3 4 3.3 11.8 14.2 14.2 17.5 2.5 3.3 4 7.4 4 7.4s-.4 3.1-3.9 4c-4.8 1.3-6.9 1.8-7.4 2.6-.6 1-.9 2.1-2.7 2.5-.9.8-1.5 4.5.5 4.8s15.4.6 24.7-.5a53.4 53.4 0 0018.6-5.4c3.3-1.8 15.2-9.1 16.8-9.7s6.3 1.4 11.6-.8c.9-.4.5-.2 2.4-.6 1.2-.3 1.6-3.2 1.3-3.4l-1-.6c-1.9-1.8-4.7-3.5-7.4-3.5s-6.1 3-8.1 3.3c-1.9.3-10.2-1.6-10.2-1.6"/>
+    <circle cx="88.2" cy="62.9" r=".8" fill="#211f1c"/>
+  </svg>
+</div>
+<style>
+#it-flies .airfield {
+  position: relative;
+  width: 850px;
+  height: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+#it-flies .flight-path {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+#it-flies .flight-path path {
+  stroke-dasharray: 0 4628 10 10 10 10 10 10 10 4668 10 10 10 10 10 10 10 200;
+  stroke-width: 2px;
+  animation: it-flies-flight-path 10s infinite linear;
+}
+@keyframes it-flies-flight-path {
+  from { stroke-dashoffset: 4738px };
+  to { stroke-dashoffset: 0px };
+}
+#it-flies .goose {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 50px;
+  offset-path: path('M235.5 537.5c111.9-1.3 201.5-13.4 312.9 6.8 97.8 17.8 216.6-1.5 246.1-115.8C837.8 260.4 503.4 272 599.1 96.9c38.5-70.4 145.4-68.5 153.7 22.2 7 76.9-96.7 135.9-155.4 163.9-66.9 32-148.2 53-221.7 33.4C322 302 213.2 229 231.8 159c19-71.6 139.4-77.4 131.2 13.8-6.2 69.4-100.1 93.8-185.8 92.8s-105.7-116-74.7-147 87.9 10.3 52 54.1c-53.9 53.9-143-57.1-57-114.1 58-32 113.8 67.6 123.8 127.1 12.1 71.8 1.3 166.5 46.4 228.1 67.1 91.7 144.8 28.6 184.5-49.6 37.6-73.9 60.8-181.1-2-246.7-82-85.5-233-59.1-315.2 11.2C.9 243.4 21.3 540 235.5 537.5z');
+  offset-anchor: 50% 83%;
+  animation: it-flies 10s infinite linear;
+}
+@keyframes it-flies {
+  to { offset-distance: 100% }
+}
+</style>
+</section>
+
+<section id="flying-explained">
+<h2><code>offset-path</code></h2>
+<pre><code class="hljs css" data-trim data-noescape>
+.goose {
+  offset-path: path('M100 100...');
+  animation: fly 10s linear infinite;
+}
+@keyframes fly {
+  to { offset-distance: 100%; }
+}
+</code></pre>
+<style>
+#flying-explained h2 {
+  font-size: 40px;
+}
+</style>
+</section>
+
+<section id="motion-in-motion">
+<h2><code>offset-path</code></h2>
+<ul class="logo-list">
+  <li><img class="logo" src="img/nightly-logo.svg"><span>Nightly</span>
+    <span class=fineprint>(Release in 72? 73?)</span>
+  <li><img class="logo" src="img/chrome-logo.svg"><span>55+</span>
+    <span class=fineprint>(<code>offset-anchor</code> preffed off)</span>
+  <li><img class="logo" src="img/safari-logo.svg"><span class=batsu>x</span>
+  <li><img class="logo" src="img/edge-logo.svg"><span class=batsu>x</span>
+  <li><img class="logo" src="img/edgium.png"><span class=maru>〇</span>
+    <span class=fineprint>(<code>offset-anchor</code> preffed off)</span>
+</ul>
+<style>
+#motion-in-motion h2 {
+  font-size: 40px;
+}
+#motion-in-motion .logo-list {
+  margin-top: 50px;
+}
+#motion-in-motion .logo-list .fineprint {
+  display: block;
+  margin-top: 10px;
+  font-size: 20px;
+}
+</style>
+</section>
+
 <!-- Slide of goose crying with geese in the air -->
 <!-- Slide with goose moving in straight lines -->
-<!-- Slide with goose moving in circles -->
-<!-- Slide of syntax -->
 <!-- Slide showing onboarding flow where finger leaves a trail
      (Overlay on top of color selector somehow-could be a bit hard) -->
 <!-- Slide of browser support -->
