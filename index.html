@@ -3057,13 +3057,113 @@ function generateHslKeyframes(start, end) {
 </style>
 </section>
 
-<!-- #9: Animations give me a headache -->
+<section id="sick-of-animation">
+<h2>#9: Animations give me a headache</h2>
+</section>
 
-<!-- Slide of planet labo -->
-<!-- Slide of Windows / Mac screenshots -->
-<!-- Slide of CSS syntax -->
-<!-- Slide of JS syntax -->
-<!-- Slide of support -->
+<section id="vestibular-disorders">
+<h2>Sick of Animation</h2>
+<img src="img/headache-city-1.jpg">
+<div class=callout>
+  Headaches, dizziness, migraines, epilepsy&hellip;
+</div>
+<style>
+#vestibular-disorders h2 {
+  margin-bottom: 0px;
+}
+#vestibular-disorders img {
+  max-height: 400px;
+}
+</style>
+</section>
+
+<section id="motion-settings">
+<div class=side-by-side>
+  <figure>
+    <img src="img/reduce-motion-windows.png">
+    <figcaption>Windows</figcaption>
+  </figure>
+  <figure>
+    <img src="img/reduce-motion-mac.png">
+    <figcaption>Mac</figcaption>
+  </figure>
+</div>
+<style>
+#motion-settings .side-by-side img {
+  margin: 20px;
+}
+</style>
+</section>
+
+<section id="prefers-reduced-motion" data-transition="fade-out">
+<code class=css-prod>prefers-reduced-motion: reduce | no-preference</code>
+<pre><code class="hljs css" data-trim>
+div {
+  animation: ...
+  transition: ...
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-name: none !important;
+    transition-property: none !important;
+
+    /* Or to ensure events still fire, e.g.
+     *  transition-duration: 0.01s !important;
+     *  transition-delay: 0s !important;
+     *  ...
+     */
+  }
+}
+</code></pre>
+<style>
+#prefers-reduced-motion pre code {
+  max-height: none;
+}
+#prefers-reduced-motion .css-prod {
+  font-family: "Courier New", monospace;
+  font-weight: bold;
+  font-size: 30px;
+  color: var(--pink);
+
+  display: block;
+  margin-bottom: 1em;
+}
+</style>
+</section>
+
+<section id="prefers-reduced-motion-js">
+<h2>From JS&hellip;</h2>
+<pre><code class="hljs js" data-trim>
+// Check for browser support
+if (!('animate' in elem)) {
+  return;
+}
+
+// Check for user support
+if (matchMedia('(prefers-reduced-motion)').matches) {
+  return;
+}
+
+// Animate away...
+</code></pre>
+</section>
+
+<section id="i-prefer-you">
+<h2><code>prefers-reduced-motion</code></h2>
+<ul class="logo-list">
+  <li><img class="logo" src="img/firefox-logo.svg"><span>64+</span>
+  <li><img class="logo" src="img/chrome-logo.svg"><span>74+</span>
+  <li><img class="logo" src="img/safari-logo.svg"><span>10.1+</span>
+  <li><img class="logo" src="img/edge-logo.svg"><span class=batsu>x</span>
+  <li><img class="logo" src="img/edgium.png"><span class=maru>〇</span>
+</ul>
+<style>
+#i-prefer-you .logo-list {
+  margin-top: 50px;
+}
+</style>
+</section>
 
 <!-- Summary -->
 <!-- Thank you -->
