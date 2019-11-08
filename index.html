@@ -788,8 +788,8 @@ document.getElementsByTagName('head')[0].appendChild(link);
 <ul class="logo-list">
   <li><img class="logo" src="img/firefox-logo.svg"><span>65+</span>
   <li><img class="logo" src="img/chrome-logo.svg"><span>77+</span>
-  <li><img class="logo" src="img/safari-logo.svg"><span class=batsu>x</span>
-  <li><img class="logo" src="img/edge-logo.svg"><span class=batsu>x</span>
+  <li class=no-support><img class="logo" src="img/safari-logo.svg"><span class=batsu>x</span>
+  <li class=no-support><img class="logo" src="img/edge-logo.svg"><span class=batsu>x</span>
   <li><img class="logo" src="img/edgium.png"><span class=maru>〇</span>
 </ul>
 <style>
@@ -833,6 +833,13 @@ document.getElementsByTagName('head')[0].appendChild(link);
 .reveal .logo-list .maru {
   color: var(--green);
   font-weight: bold;
+}
+.reveal .logo-list .no-support {
+  filter: grayscale(100%);
+  opacity: 0.4;
+}
+.reveal .logo-list .exp-support {
+  opacity: 0.6;
 }
 </style>
 </section>
@@ -966,8 +973,8 @@ document.getElementsByTagName('head')[0].appendChild(link);
 <ul class="logo-list">
   <li><img class="logo" src="img/firefox-logo.svg"><span>53+</span>
   <li><img class="logo" src="img/chrome-logo.svg"><span>74+</span>
-  <li><img class="logo" src="img/technology-preview.png"><span>Tech Preview</span>
-  <li><img class="logo" src="img/edge-logo.svg"><span class=batsu>x</span>
+  <li class=exp-support><img class="logo" src="img/technology-preview.png"><span>Tech Preview</span>
+  <li class=no-support><img class="logo" src="img/edge-logo.svg"><span class=batsu>x</span>
   <li><img class="logo" src="img/edgium.png"><span class=maru>〇</span>
 </ul>
 <style>
@@ -1177,8 +1184,8 @@ star.animate(
 <ul class="logo-list">
   <li><img class="logo" src="img/firefox-logo.svg"><span>48+</span>
   <li><img class="logo" src="img/chrome-logo.svg"><span>36+</span>
-  <li><img class="logo" src="img/technology-preview.png"><span>Tech Preview</span>
-  <li><img class="logo" src="img/edge-logo.svg"><span class=batsu>x</span>
+  <li class=exp-support><img class="logo" src="img/technology-preview.png"><span>Tech Preview</span>
+  <li class=no-support><img class="logo" src="img/edge-logo.svg"><span class=batsu>x</span>
   <li><img class="logo" src="img/edgium.png"><span class=maru>〇</span>
 </ul>
 <style>
@@ -1916,11 +1923,11 @@ function getScaleFromTransform(transform) {
 <section id="get-animations-coming-up">
 <h2><code>Element.getAnimations</code></h2>
 <ul class="logo-list">
-  <li><img class="logo" src="img/nightly-logo.svg"><span>Nightly</span>
-  <li><img class="logo" src="img/canary-logo.svg"><span>Canary</span>
-  <li><img class="logo" src="img/technology-preview.png"><span>Tech Preview</span>
-  <li><img class="logo" src="img/edge-logo.svg"><span class=batsu>x</span>
-  <li><img class="logo" src="img/edgium-canary.png"><span>Canary</span>
+  <li class=exp-support><img class="logo" src="img/nightly-logo.svg"><span>Nightly</span>
+  <li class=exp-support><img class="logo" src="img/canary-logo.svg"><span>Canary</span>
+  <li class=exp-support><img class="logo" src="img/technology-preview.png"><span>Tech Preview</span>
+  <li class=no-support><img class="logo" src="img/edge-logo.svg"><span class=batsu>x</span>
+  <li class=exp-support><img class="logo" src="img/edgium-canary.png"><span>Canary</span>
 </ul>
 <style>
 #get-animations-coming-up .logo-list {
@@ -2529,11 +2536,11 @@ function generateHslKeyframes(start, end) {
 <section id="still-blocked-on-get-animations">
 <h2><code>CSSTransition.setKeyframes (Element.getAnimations)</code></h2>
 <ul class="logo-list">
-  <li><img class="logo" src="img/nightly-logo.svg"><span>Nightly</span>
-  <li><img class="logo" src="img/canary-logo.svg"><span>Canary</span>
-  <li><img class="logo" src="img/technology-preview.png"><span>Tech Preview</span>
-  <li><img class="logo" src="img/edge-logo.svg"><span class=batsu>x</span>
-  <li><img class="logo" src="img/edgium-canary.png"><span>Canary</span>
+  <li class=exp-support><img class="logo" src="img/nightly-logo.svg"><span>Nightly</span>
+  <li class=exp-support><img class="logo" src="img/canary-logo.svg"><span>Canary</span>
+  <li class=exp-support><img class="logo" src="img/technology-preview.png"><span>Tech Preview</span>
+  <li class=no-support><img class="logo" src="img/edge-logo.svg"><span class=batsu>x</span>
+  <li class=exp-support><img class="logo" src="img/edgium-canary.png"><span>Canary</span>
 </ul>
 <style>
 #still-blocked-on-get-animations h2 {
@@ -2677,14 +2684,14 @@ function generateHslKeyframes(start, end) {
 <section id="motion-in-motion">
 <h2><code>offset-path</code></h2>
 <ul class="logo-list">
-  <li><img class="logo" src="img/nightly-logo.svg"><span>Nightly</span>
+  <li class=exp-support><img class="logo" src="img/nightly-logo.svg"><span>Nightly</span>
     <span class=fineprint>(Release in 72? 73?)</span>
   <li><img class="logo" src="img/chrome-logo.svg"><span>55+</span>
-    <span class=fineprint>(<code>offset-anchor</code> preffed off)</span>
-  <li><img class="logo" src="img/safari-logo.svg"><span class=batsu>x</span>
-  <li><img class="logo" src="img/edge-logo.svg"><span class=batsu>x</span>
-  <li><img class="logo" src="img/edgium.png"><span class=maru>〇</span>
-    <span class=fineprint>(<code>offset-anchor</code> preffed off)</span>
+    <span class=fineprint>(⚠️&nbsp;<code>offset-anchor</code> preffed off)</span>
+  <li class=no-support><img class="logo" src="img/safari-logo.svg"><span class=batsu>x</span>
+  <li class=no-support><img class="logo" src="img/edge-logo.svg"><span class=batsu>x</span>
+    <li><img class="logo" src="img/edgium.png"><span class=maru>〇</span>
+    <span class=fineprint>(⚠️&nbsp;<code>offset-anchor</code> preffed off)</span>
 </ul>
 <style>
 #motion-in-motion h2 {
@@ -3155,7 +3162,7 @@ if (matchMedia('(prefers-reduced-motion)').matches) {
   <li><img class="logo" src="img/firefox-logo.svg"><span>64+</span>
   <li><img class="logo" src="img/chrome-logo.svg"><span>74+</span>
   <li><img class="logo" src="img/safari-logo.svg"><span>10.1+</span>
-  <li><img class="logo" src="img/edge-logo.svg"><span class=batsu>x</span>
+  <li class=no-support><img class="logo" src="img/edge-logo.svg"><span class=batsu>x</span>
   <li><img class="logo" src="img/edgium.png"><span class=maru>〇</span>
 </ul>
 <style>
