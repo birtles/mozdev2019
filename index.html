@@ -1977,14 +1977,16 @@ function calculateDistance(start, end) {
   const startScale = getScaleFromTransform(start);
   const endScale = getScaleFromTransform(end);
 
-  // For the scale, treat each time we double the size as being 350px.
+  // For the scale, treat each time we double the size as being 200px.
   const scaleFactor = scale => Math.log(scale) / Math.LN2;
   const scaleDiff = Math.abs(scaleFactor(startScale) - scaleFactor(endScale));
-  const scaleDist = scaleDiff * 350;
+  const scaleDist = scaleDiff * 200;
 
-  // Leave out the y distance from the distance calculation since the scale
-  // distance should cover this.
-  return Math.sqrt(Math.pow(endPos.x - startPos.x, 2) + Math.pow(scaleDist, 2));
+  return Math.sqrt(
+    Math.pow(endPos.x - startPos.x, 2) +
+      Math.pow(endPos.y - startPos.y, 2) +
+      Math.pow(scaleDist, 2)
+  );
 }
 
 function getPositionFromTransform(transform) {
