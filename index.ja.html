@@ -1,0 +1,3431 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>アニメーションについて10つ嫌いなこと</title>
+<meta name="author" content="Brian Birtles">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="viewport"
+  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+<link rel="stylesheet" href="css/reveal.css">
+<link rel="stylesheet" href="css/theme/goose.css" id="theme">
+
+<!-- For syntax highlighting -->
+<link rel="stylesheet" href="lib/css/github-gist.css">
+
+<!-- Printing and PDF exports -->
+<script>
+const link = document.createElement('link');
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match(/print-pdf/gi)
+  ? 'css/print/pdf.css'
+  : 'css/print/paper.css';
+document.getElementsByTagName('head')[0].appendChild(link);
+</script>
+
+<style>
+.reveal pre {
+  font-size: 24px;
+  display: block;
+  position: relative;
+  width: 90%;
+  margin: 15px auto;
+  text-align: left;
+  font-family: monospace;
+  line-height: 1.2em;
+  word-wrap: break-word;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3);
+}
+
+.reveal pre code {
+  font-family: "Courier New", monospace;
+  word-wrap: normal;
+  text-align: left;
+  padding: 1em;
+  font-weight: bold;
+}
+
+.reveal pre code .highlight {
+  background-color: var(--red-9);
+}
+
+/*********************************************
+ * CODE SAMPLE AND LIVE PREVIEW
+ *********************************************/
+.reveal .slides .side-by-side {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.reveal .slides .side-by-side > .target-content {
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+/*********************************************
+ * SORT OF FULL-SCREEN PICTURE, but not cropped
+ *********************************************/
+.reveal .slides > section.fit-picture {
+  padding: 0;
+  margin: 0;
+}
+
+.reveal .fit-picture > img {
+  height: 700px;
+  border: 0;
+  margin: 0;
+}
+</style>
+</head>
+
+<body>
+<div class="reveal">
+<div class="slides">
+
+<section id="title" class="title-slide" data-background="var(--blue-6)">
+<h1>
+  <span class="highlight">10 things</span>
+  I hate about animation
+</h1>
+<h2>
+  Mozilla Roadshow 2019<br>
+  <a href="https://twitter.com/brianskold">Brian Birtles</a>,
+  <a href="https://birchill.co.jp">Birchill, Inc.</a><br>
+</h2>
+<style>
+#title h1 {
+  font-size: 100px;
+  font-weight: 800;
+  color: white;
+}
+#title h1 .highlight {
+  color: var(--red-7);
+  font-size: 120px;
+  text-shadow: var(--blue-2) 0px 3px 3px;
+}
+#title h2 {
+  color: white;
+  font-size: 40px;
+  font-weight: 600;
+}
+#title h2 a,
+#title h2 a:visited {
+  color: white;
+  text-decoration: underline dotted white 2px;
+}
+</style>
+</section>
+<!-- TODO: Add a hand-written "And how to fix them" insertion -->
+
+<section id="about-me">
+<h2>自己紹介</h2>
+<ul class="grid">
+  <li class="fragment fade-in"><img src="img/koala.svg"></li>
+  <li class="fragment fade-in"><img src="img/tokyo-tower.svg"></li>
+  <li class="fragment fade-in"><figure><img
+      src="img/firefox-logo.svg"><figcaption>2004~2019</figcaption></figure></li>
+  <li class="fragment fade-in"><figure><img
+      src="img/w3c-member.svg"><figcaption class=smaller>SVG WG 2011~<br>
+        CSS WG 2015~</figcaption></figure></li>
+  <li class="fragment fade-in"><figure><a href="https://birchill.co.jp"><img
+      src="img/birchill-logo.svg"></a><figcaption>2019~</figcaption
+    ></figure></li>
+</ul>
+<style>
+#about-me ul.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  margin: 0;
+}
+#about-me ul.grid li {
+  list-style: none;
+
+  width: 240px;
+  height: 240px;
+  border-radius: 120px;
+  margin-left: 5px;
+  margin-right: 5px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+#about-me ul.grid li.fragment.current-fragment {
+  background: var(--blue-10);
+}
+#about-me ul.grid li > img {
+  width: 200px;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+}
+#about-me ul.grid li > img.shrink {
+  width: 150px;
+}
+#about-me ul.grid li > figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: center;
+}
+#about-me ul.grid li > figure > a {
+  /*
+   * I simply ran out of time to work out what on earth flex box is doing here.
+   * CSS is the worst.
+   */
+  display: contents;
+}
+#about-me ul.grid li > figure > * {
+  /* If I use flex: 1, Chrome does something awful */
+  flex: 0 1 auto;
+}
+#about-me ul.grid li > figure img {
+  border: none;
+  margin: 0;
+  width: 140px;
+  box-shadow: none;
+  background: transparent;
+}
+#about-me ul.grid li > figure > figcaption {
+  font-size: 25px;
+  margin-top: 15px;
+}
+#about-me ul.grid li > figure > figcaption.smaller {
+  font-size: 20px;
+}
+</style>
+</section>
+
+<section id="animations-suck" data-background="var(--blue-5)">
+<h2>アニメーションが&hellip;</h2>
+<ul>
+  <li>複雑
+  <li>重くなる
+  <li>よくバグる
+  <li>イライラさせる
+</ul>
+<svg viewBox="0 0 100 100" class="fragment bad-goose">
+  <g class="man" fill="white">
+    <path d="M58.6 77.5c.5 0 .9-.1 1.4-.3L73.5 71a3.3 3.3 0 001.8-3.9l-.8-2.8 2.4 1.4 2.5 13a3.3 3.3 0 003.2 2.7l.6-.1c1.8-.3 2.9-2.1 2.6-3.9L83.1 63c-.2-.9-.8-1.7-1.6-2.2l-7.8-4.6c1.9-3.4 4.7-6.4 6.7-8.7.6-.6 1.1-1.4 1.5-2.2l15.1 7 .9.2c.8 0 1.6-.5 1.9-1.2.5-1.1 0-2.3-1-2.8l-9.4-4.3c-3.1 1-6.6-.6-7.9-3.6l-1.3-.6-.8-.2c-1.3-.4-3-.3-4.6.5 1.7.3 3 .7 3.6.9 1.4.6 2 2.1 1.4 3.5-.4 1-1.4 1.6-2.4 1.6l-1-.2-.2-.1-.9-.3a10 10 0 00-6.6.3c-1.5 2-2.7 4.2-4 7.3-1 3 0 4.8 1.4 6l2 6.9-10.9 5a3.2 3.2 0 00-1.6 4.4 3.4 3.4 0 003 1.9z"/>
+    <path d="M76.4 45.4l.2.1c1.1.4 2.3-.1 2.8-1.1.4-1.1-.1-2.3-1.1-2.8-.2-.1-2.6-1.1-5.9-1.1-1.9 0-4.2.4-6.4 1.6a13.4 13.4 0 00-5.7 6.4 2 2 0 001 2.8l.9.2a2 2 0 001.9-1.2 10 10 0 014-4.5 9 9 0 014.4-1.1c1.2 0 2.3.2 3.1.4l.8.3z"/>
+    <circle cx="87.5" cy="37.9" r="5.9" transform="rotate(-21.5 87.5 38)"/>
+  </g>
+  <g class="sparks" fill="white">
+    <path d="M81.8 31.1L73 22.7l-1 .6 9.4 8.1zM84 30.4l-3.2-11.8h-1.2l3.8 11.8zM80 33.4l-11.7-3.6-.6 1.1 12 3z"/>
+  </g>
+  <g class="goose">
+    <path fill="white" d="M15.8 69.2l2.8-1.6.1-.1c3.8-1.2 7.5-4.3 9.2-7.8 1.3-.6 2.8-1.1 4.3-1.4 2.7-.6 5.6-.8 7.8-.8h.6c.9.6 3 1.1 4.5 1.1a8 8 0 004.2-1.2c.7-.6.7-.7.7-1.1s-.2-.6-1-1.1a8 8 0 00-3.7-.9c-1.5 0-3 0-4.1.8H40c-2.3 0-5.3.2-8.3.8-1.2.3-2.4.6-3.6 1.1H26c.7-1.4 1.3-2.9 1.4-4.2.5-6.3-5.7-14.4-8.5-15.3-.3-.1-.6-.1-.8 0-2 1.1-2.1 9.5-2.1 9.5s-6.1 5.9-2.9 12.9h-.6c-3.5-7.2 2.7-13.2 2.7-13.2s0-2.4.4-4.8c-3.3-2.3-6.7-3.5-7.4-2.6C6.9 41.1 9.9 49 9.9 49s-2.5 5.6.1 10.5l-.2.3C6.2 64.2 0 65 0 65l3.1 2s3.5-2.3 8.7.4l.2.1 3.8 1.7z"/>
+    <path fill="#ff8b38" d="M48.5 56.4c.1.5.6 1.1 1.6 1.1 1.8 0 3.3-.1 3.3-.5 0-.3-.9-.5-2.4-.7 1.4-.2 2.4-.6 2.3-.9 0-.3-1.1-.2-3.1-.2-1.3 0-1.8.6-1.7 1.2zM12 67.4l-4.1 2.8c-.3.2-.4.7-.2 1.1.1.2.4.4.7.4l.4-.1 1.7-.9c-.1.2 0 .4.1.6.1.2.4.4.7.4l.4-.1 4.4-2.4-4.1-1.8z"/>
+    <linearGradient id="animations-suck-wing-grad" x1="11.9" x2="11.9" y1="39.1" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#9e9e9e"/>
+    </linearGradient>
+    <path fill="url(#animations-suck-wing-grad)" d="M12.7 60c-3.5-7.2 2.7-13.2 2.7-13.2s0-2.4.4-4.8c-3.3-2.3-6.7-3.5-7.4-2.6C6.9 41.1 9.9 49 9.9 49s-2.5 5.6.1 10.5l2.7.5z"/>
+    <circle cx="47.1" cy="55.7" r=".4" fill="#211F1C"/>
+  </g>
+</svg>
+<style>
+#animations-suck h2 {
+  color: var(--red-7);
+  font-weight: 800;
+  text-shadow: var(--blue-2) 0px 3px 3px;
+}
+#animations-suck ul {
+  color: white;
+}
+#animations-suck .bad-goose {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 300px;
+  margin-top: -100px;
+}
+#animations-suck .bad-goose .sparks {
+  animation: animations-suck-blink 1s infinite steps(1);
+}
+@keyframes animations-suck-blink {
+  from { opacity: 0 }
+  50% { opacity: 1 }
+}
+</style>
+</section>
+
+<section id="no-frames-for-you">
+  <h2>① フレームベースのアニメーションが難しい</h2>
+</section>
+
+<section id="ga" data-background="var(--blue-5)">
+<svg width="500" viewBox="0 0 100 100" class="goose">
+  <path id="goose-feathers" fill="#fff" d="M11.8 28C-5.9 47.3 16 73.6 19.6 79.7s6.4 10.6 7 15.2c.6 4.6.8 8.9.8 8.9l55.8.2s2-8.5-1.8-14.9c-2-3.5-4.1-9.5-14.8-16.1s-17.4-9.7-21.9-12.3-7.8-8-5.3-11.5 5.6-3.6 8.1-3 12.8.5 15.5-10 1.6-15.1-1.5-18.4C51.7 7.2 29.4 8.7 11.8 28z"/>
+  <path id="goose-lower-beak" class="beak" fill="#d1722e" d="M58.8 41.3c-2.6 1-3.8.6-3.9 2.2.8 1.4 3.2 2.4 4.4 3 1.2.6 3.8 1.1 5.8 2.2s7.7 4.4 10.1 5.5c2.4 1.1 4.4 1.7 5.8 2 1.5.3 5.7.4 6.9.2s3.3.2 4.2-.2c.9-.5 2.1-.7 2.6-2.2.5-1.5.6-3 0-3.5s-9.3-4.9-12.3-6.3c-3-1.4-8.6-4.3-11.7-5.2-1.8-.5-5-1.6-7.9-2.3-1.6 2.2-2.9 4.2-4 4.6z"/>
+  <path id="goose-upper-beak" fill="#ff8b38" d="M64.8 26.3c-1.5 0-3.7.4-5 2.7-2 3.6-1 7.1-1.7 8.9-.7 1.8-1.7 3-2.9 4.7 1.9.5 2.4.4 4.2 1.2 4.2 1.8 11 6.1 14.7 7.3 3.7 1.1 7.6 3.3 12.3 3.2s9-1.9 9.3-3c.3-1.1-.2-2.6-2-4.2-2.5-2.1-3.3-1.3-5.3-2.5a282 282 0 01-23.6-18.3z"/>
+  <circle id="goose-eye" cx="40.5" cy="26" r="2.9"/>
+</svg>
+<svg class="frames" viewBox="0 -50 312 350">
+  <g class="framestrip">
+    <g transform="translate(300)"> <!-- Frame 1 -->
+      <g id="ga-frame-1">
+        <path
+          d="M75.48 100.11C75.48 100.11 75.74 100.03 80.48 95.61 85.22 91.19 91.61 84.60 94.48 82.11 97.35 79.62 101.88 76.21 103.48 75.11 105.08 74.01 105.39 73.76 108.48 72.11 111.57 70.45 117.08 68.17 117.98 67.61 118.89 67.04 119.51 66.32 120.48 65.61 121.45 64.90 123.48 63.61 123.48 63.61"></path>
+        <path
+          d="M89.48 128.11C89.48 128.11 103.14 128.28 110.48 128.11 117.82 127.94 129.13 127.44 132.48 127.11 135.84 126.78 136.58 126.81 142.48 125.61 148.38 124.41 156.47 122.06 159.98 121.11 163.49 120.15 165.87 119.01 170.48 118.11 175.09 117.21 184.48 116.61 184.48 116.61"></path>
+        <path
+          d="M89.48 165.11C89.48 165.11 91.41 166.80 94.48 167.61 97.55 168.42 101.30 167.87 103.98 168.11 106.66 168.35 106.81 168.45 111.98 169.11 117.15 169.76 123.48 170.60 127.48 171.11 131.48 171.62 138.81 172.48 139.48 172.61 140.16 172.73 141.07 172.88 141.48 173.11 141.89 173.34 139.74 172.04 142.48 174.11 145.22 176.17 150.34 178.55 151.48 179.11 152.62 179.67 154.98 180.61 154.98 180.61"></path>
+      </g>
+    </g>
+    <g transform="translate(600)"> <!-- Frame 2 -->
+      <g id="ga-frame-2">
+        <path
+          d="M76.48 99.61C76.48 99.61 78.59 100.13 80.98 99.11 83.38 98.09 83.92 97.06 86.98 94.11 90.04 91.16 92.70 87.20 95.48 84.61 98.26 82.02 102.18 79.32 104.48 77.61 106.78 75.89 109.25 73.95 111.48 72.61 113.72 71.26 117.15 69.78 118.48 69.11 119.81 68.44 120.35 68.42 122.48 67.11 124.61 65.79 127.50 63.30 128.48 62.61 129.46 61.91 129.28 61.63 131.48 60.61 133.68 59.59 138.48 58.61 138.48 58.61"></path>
+        <path
+          d="M91.48 128.11C91.48 128.11 93.32 127.78 97.48 127.61 101.64 127.44 104.43 128.03 109.98 127.61 115.53 127.19 121.15 125.93 126.48 125.11 131.82 124.29 138.82 123.14 142.48 122.61 146.14 122.07 147.17 121.70 153.48 121.11 159.79 120.51 170.30 120.33 172.48 120.11 174.66 119.88 177.15 119.25 178.98 119.11 180.81 118.97 183.48 119.11 184.48 119.11 185.48 119.11 185.65 119.11 187.48 119.11 189.31 119.11 192.98 119.11 192.98 119.11"></path>
+        <path
+          d="M92.48 165.11C92.48 165.11 102.13 166.87 105.48 167.61 108.84 168.35 109.44 168.43 115.48 170.11 121.53 171.79 131.49 175.06 133.48 175.61 135.47 176.16 138.15 176.78 139.48 177.11 140.81 177.44 139.52 176.76 143.48 178.11 147.44 179.45 153.17 182.39 154.98 183.11 156.79 183.83 159.82 184.91 160.48 185.11 161.14 185.31 161.43 185.22 162.48 185.61 163.53 186.00 164.51 186.88 165.48 187.11 166.45 187.34 167.24 186.85 168.48 187.11 169.72 187.36 171.98 188.61 171.98 188.61"></path>
+      </g>
+    </g>
+    <g transform="translate(900)"> <!-- Frame 3 -->
+      <g id="ga-frame-3">
+        <path
+          d="M78.48 94.11C78.48 94.11 80.97 92.26 82.48 91.11 83.99 89.95 84.54 89.37 86.98 87.61 89.42 85.85 89.35 85.50 94.48 82.61 99.61 79.72 109.47 75.60 110.48 75.11 111.49 74.62 112.87 74.60 113.48 73.61 114.09 72.62 112.95 71.55 113.48 70.11 114.01 68.67 114.44 68.01 116.48 66.61 118.52 65.20 122.33 64.48 123.48 64.11 124.64 63.74 125.00 64.00 126.98 63.11 128.96 62.22 131.51 60.16 132.48 59.61 133.45 59.06 134.15 58.78 135.48 58.11 136.81 57.44 139.48 56.11 139.48 56.11"></path>
+        <path
+          d="M90.48 129.61C90.48 129.61 100.48 128.43 102.98 128.11 105.48 127.79 103.16 127.93 110.48 127.11 117.80 126.29 127.15 125.60 132.48 125.11 137.81 124.62 146.15 123.72 148.48 123.61 150.81 123.50 148.81 123.61 155.48 123.61 162.15 123.61 173.60 123.86 175.48 123.61 177.36 123.36 179.33 122.50 180.98 122.11 182.63 121.72 184.49 121.26 185.98 121.11 187.47 120.96 188.65 121.11 190.48 121.11 192.31 121.11 195.98 121.11 195.98 121.11"></path>
+        <path
+          d="M87.48 167.61C87.48 167.61 88.02 167.42 92.48 169.11 96.94 170.80 100.28 173.19 105.48 175.11 110.68 177.03 119.70 178.84 121.48 179.61 123.27 180.38 122.59 180.56 126.48 182.61 130.37 184.66 134.12 186.73 138.48 188.11 142.84 189.49 148.79 189.89 151.98 190.61 155.18 191.32 160.82 193.02 161.48 193.11 162.14 193.19 162.24 192.85 163.48 193.11 164.72 193.36 166.12 194.17 166.98 194.61 167.85 195.05 169.48 196.11 169.48 196.11"></path>
+      </g>
+    </g>
+    <g transform="translate(1200)"> <!-- Frame 4 -->
+      <g id="ga-frame-4">
+        <path
+          d="M77.48 100.11C77.48 100.11 81.52 97.69 84.48 96.11 87.44 94.53 91.26 92.85 93.48 91.61 95.70 90.37 97.31 89.57 99.98 87.61 102.65 85.65 105.00 82.76 107.48 81.11 109.96 79.45 114.58 77.68 115.48 77.11 116.38 76.53 110.69 80.04 117.98 75.11 125.28 70.18 139.63 62.91 140.98 62.11 142.33 61.30 144.98 59.61 144.98 59.61"></path>
+        <path
+          d="M92.98 127.61C92.98 127.61 92.40 128.08 99.48 126.61 106.57 125.14 114.87 122.25 120.48 121.11 126.09 119.96 133.82 118.88 137.48 118.61 141.14 118.34 147.65 118.61 148.48 118.61 149.31 118.61 146.15 118.61 150.98 118.61 155.81 118.61 161.97 118.44 165.48 118.61 168.99 118.78 174.79 119.38 175.98 119.61 177.17 119.83 176.18 120.15 179.48 120.61 182.78 121.07 187.81 120.61 189.48 120.61 191.15 120.61 194.48 120.61 194.48 120.61"></path>
+        <path
+          d="M89.48 164.11C89.48 164.11 84.72 162.42 94.48 164.11 104.25 165.80 118.53 172.91 122.48 174.11 126.43 175.30 133.52 176.63 134.48 177.11 135.44 177.58 134.78 177.70 136.98 179.11 139.18 180.51 143.08 182.03 143.98 182.61 144.88 183.18 143.39 182.90 146.48 184.61 149.57 186.32 154.83 187.57 156.48 188.11 158.14 188.65 159.13 188.84 161.48 189.61 163.83 190.38 167.50 191.94 168.48 192.11 169.47 192.28 170.64 192.02 171.48 192.11 172.33 192.19 173.98 192.61 173.98 192.61"></path>
+      </g>
+    </g>
+    <g transform="translate(1500)"> <!-- Frame 5 -->
+      <g id="ga-frame-5">
+        <path
+          d="M77.98 94.11C77.98 94.11 77.47 94.70 80.48 94.11 83.49 93.51 86.08 91.97 88.98 90.61 91.88 89.25 91.56 89.45 97.48 86.11 103.41 82.77 110.11 78.20 114.98 75.61 119.85 73.02 128.49 69.29 129.98 68.61 131.47 67.93 132.85 67.58 134.48 66.61 136.11 65.63 136.33 64.65 138.98 63.11 141.63 61.57 146.46 60.07 147.48 59.61 148.50 59.15 150.48 58.11 150.48 58.11"></path>
+        <path
+          d="M93.98 124.11C93.98 124.11 93.04 124.45 96.48 125.11 99.92 125.77 101.97 125.28 106.98 125.11 111.99 124.94 118.14 124.40 121.98 124.11 125.82 123.81 132.15 123.17 133.48 123.11 134.81 123.05 135.15 123.11 137.48 123.11 139.81 123.11 142.48 123.11 144.48 123.11 146.48 123.11 140.94 123.61 150.48 123.11 160.02 122.61 177.81 120.25 178.98 120.11 180.15 119.96 179.65 119.98 182.48 119.61 185.31 119.24 189.82 118.68 190.98 118.61 192.15 118.54 194.48 118.61 194.48 118.61"></path>
+        <path
+          d="M87.98 166.11C87.98 166.11 88.71 166.71 95.98 168.11 103.25 169.51 114.42 170.36 117.98 171.11 121.54 171.86 125.90 173.14 128.48 174.11 131.07 175.07 132.99 176.25 135.98 177.61 138.97 178.97 141.24 179.76 144.98 181.61 148.73 183.46 153.96 186.17 155.98 187.61 158.00 189.05 157.94 190.13 161.48 192.61 165.03 195.08 172.98 198.61 172.98 198.61"></path>
+      </g>
+    </g>
+    <g transform="translate(1800)"> <!-- Frame 6 -->
+      <g id="ga-frame-6">
+        <path
+          d="M99.48 84.11C99.48 84.11 103.78 82.21 105.98 81.11 108.18 80.01 110.79 78.57 112.48 77.61 114.17 76.65 114.84 76.15 117.48 74.61 120.13 73.07 122.70 71.54 125.48 70.11 128.26 68.67 132.04 66.80 133.98 66.11 135.92 65.42 138.14 65.09 139.98 64.61 141.82 64.13 142.50 63.85 145.48 63.11 148.46 62.37 154.48 61.11 154.48 61.11"></path>
+        <path
+          d="M117.48 121.11C117.48 121.11 119.65 121.11 125.98 121.11 132.31 121.11 142.65 121.11 144.98 121.11 147.31 121.11 146.15 121.11 151.98 121.11 157.81 121.11 168.81 121.11 169.48 121.11 170.15 121.11 167.81 121.11 171.48 121.11 175.15 121.11 180.15 121.11 182.48 121.11 184.81 121.11 187.15 121.11 189.48 121.11 191.81 121.11 195.81 121.11 196.48 121.11 197.15 121.11 198.48 121.11 198.48 121.11"></path>
+        <path
+          d="M115.48 171.11C115.48 171.11 114.36 170.37 119.48 172.61 124.60 174.84 130.29 178.51 134.48 180.11 138.68 181.70 146.78 183.34 147.48 183.61 148.18 183.87 147.81 183.78 149.48 184.61 151.15 185.44 152.87 186.56 154.48 187.11 156.09 187.66 157.72 187.50 159.48 188.11 161.24 188.71 163.25 189.87 164.48 190.61 165.71 191.35 165.72 191.66 167.98 193.11 170.24 194.56 174.98 197.11 174.98 197.11"></path>
+      </g>
+    </g>
+  </g>
+</svg>
+<style>
+#ga {
+  width: 100%;
+  height: 100%;
+}
+#ga .goose {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+#ga .beak {
+  animation: ga-beak 0.75s alternate steps(1) infinite forwards;
+  /* This seems to be off in Safari somehow... not sure why. */
+  transform-origin: 5% 40%;
+  transform-box: fill-box;
+}
+@keyframes ga-beak {
+  20% { transform: rotate(15deg); }
+  to { transform: rotate(15deg); }
+}
+#ga .frames {
+  position: absolute;
+  left: 400px;
+  bottom: -85px;
+  width: 500px;
+  transform: rotate(15deg);
+}
+#ga .framestrip {
+  stroke: white;
+  stroke-width: 6px;
+  stroke-linecap: round;
+  fill: none;
+  animation: ga-framestrip 1.5s infinite steps(7) forwards;
+  animation-timing-function: steps(8, jump-none);
+}
+@keyframes ga-framestrip {
+  from { transform: translate(0px); }
+  to { transform: translate(-2100px); }
+}
+</style>
+</section>
+
+<section id="a-simple-filmstrip">
+<svg width="0" height="0" viewBox="0 0 100 100">
+  <symbol id=static-goose-close viewBox="0 0 100 100">
+    <use href="#goose-feathers"/>
+    <!-- We duplicate the path so it doesn't get animated in Chrome.
+      We could work around this by wrapping the beak and animating the wrapper
+      only but that still wouldn't fix the other Chrome issue described below
+      so we just duplicate it for now. -->
+    <path id="goose-lower-beak-closed"
+      fill="#d1722e" d="M58.8 41.3c-2.6 1-3.8.6-3.9 2.2.8 1.4 3.2 2.4 4.4 3 1.2.6 3.8 1.1 5.8 2.2s7.7 4.4 10.1 5.5c2.4 1.1 4.4 1.7 5.8 2 1.5.3 5.7.4 6.9.2s3.3.2 4.2-.2c.9-.5 2.1-.7 2.6-2.2.5-1.5.6-3 0-3.5s-9.3-4.9-12.3-6.3c-3-1.4-8.6-4.3-11.7-5.2-1.8-.5-5-1.6-7.9-2.3-1.6 2.2-2.9 4.2-4 4.6z"/>
+    <use href="#goose-upper-beak"/>
+    <use href="#goose-eye"/>
+  </symbol>
+  <symbol id=static-goose-open viewBox="0 0 100 100">
+    <use href="#goose-feathers"/>
+    <!-- We have to duplicate the path here because Chrome will otherwise
+      apply the `transform` but not the `transform-origin` or `transform-box`
+      but... unless we touch the element in DevTools, at which point it starts
+      working correctly. Yep, <use> in Chrome is just completely broken. -->
+    <path
+      style="transform-origin: 5% 40%;
+              transform-box: fill-box;
+              transform: rotate(15deg)"
+      fill="#d1722e" d="M58.8 41.3c-2.6 1-3.8.6-3.9 2.2.8 1.4 3.2 2.4 4.4 3 1.2.6 3.8 1.1 5.8 2.2s7.7 4.4 10.1 5.5c2.4 1.1 4.4 1.7 5.8 2 1.5.3 5.7.4 6.9.2s3.3.2 4.2-.2c.9-.5 2.1-.7 2.6-2.2.5-1.5.6-3 0-3.5s-9.3-4.9-12.3-6.3c-3-1.4-8.6-4.3-11.7-5.2-1.8-.5-5-1.6-7.9-2.3-1.6 2.2-2.9 4.2-4 4.6z"/>
+    <use href="#goose-upper-beak"/>
+    <use href="#goose-eye"/>
+  </symbol>
+</svg>
+<div class=filmstrip>
+  <div class=background>
+    <hr class=dots>
+    <div class=cell>
+      <svg id="frame-1" viewBox="0 0 200 130">
+        <use href="#static-goose-close"
+          transform="translate(-5,40) scale(0.7)"/>
+        <text fill="white" font-weight="bold" font-size="60"
+          text-anchor="middle" opacity="0.3"
+          transform="translate(100,50)">1</text>
+      </svg>
+    </div
+    ><div class=cell>
+      <svg id="frame-2" viewBox="0 0 200 130">
+        <use href="#static-goose-open"
+          transform="translate(-5,40) scale(0.7)"/>
+        <use href="#ga-frame-1"
+          transform="translate(105,30) scale(0.4) rotate(15)"
+          stroke="white"
+          stroke-width="5"
+          stroke-linecap="round"
+          fill="none"/>
+        <text fill="white" font-weight="bold" font-size="60"
+          text-anchor="middle" opacity="0.3"
+          transform="translate(100,50)">2</text>
+      </svg>
+    </div
+    ><div class=cell>
+      <svg id="frame-3" viewBox="0 0 200 130">
+        <use href="#static-goose-open"
+          transform="translate(-5,40) scale(0.7)"/>
+        <use href="#ga-frame-2"
+          transform="translate(105,30) scale(0.4) rotate(15)"
+          stroke="white"
+          stroke-width="5"
+          stroke-linecap="round"
+          fill="none"/>
+        <text fill="white" font-weight="bold" font-size="60"
+          text-anchor="middle" opacity="0.3"
+          transform="translate(100,50)">3</text>
+      </svg>
+    </div
+    ><div class=cell>
+      <svg id="frame-4" viewBox="0 0 200 130">
+        <use href="#static-goose-open"
+          transform="translate(-5,40) scale(0.7)"/>
+        <use href="#ga-frame-3"
+          transform="translate(105,30) scale(0.4) rotate(15)"
+          stroke="white"
+          stroke-width="5"
+          stroke-linecap="round"
+          fill="none"/>
+        <text fill="white" font-weight="bold" font-size="60"
+          text-anchor="middle" opacity="0.3"
+          transform="translate(100,50)">4</text>
+      </svg>
+    </div>
+    <hr class=dots>
+  </div>
+</div>
+<div class=filmstrip>
+  <div class=background>
+    <hr class=dots>
+    <div class=cell>
+      <svg id="frame-5" viewBox="0 0 200 130">
+        <use href="#static-goose-open"
+          transform="translate(-5,40) scale(0.7)"/>
+        <use href="#ga-frame-4"
+          transform="translate(105,30) scale(0.4) rotate(15)"
+          stroke="white"
+          stroke-width="5"
+          stroke-linecap="round"
+          fill="none"/>
+        <text fill="white" font-weight="bold" font-size="60"
+          text-anchor="middle" opacity="0.3"
+          transform="translate(100,50)">5</text>
+      </svg>
+    </div
+    ><div class=cell>
+      <svg id="frame-6" viewBox="0 0 200 130">
+        <use href="#static-goose-open"
+          transform="translate(-5,40) scale(0.7)"/>
+        <use href="#ga-frame-5"
+          transform="translate(105,30) scale(0.4) rotate(15)"
+          stroke="white"
+          stroke-width="5"
+          stroke-linecap="round"
+          fill="none"/>
+        <text fill="white" font-weight="bold" font-size="60"
+          text-anchor="middle" opacity="0.3"
+          transform="translate(100,50)">6</text>
+      </svg>
+    </div
+    ><div class=cell>
+      <svg id="frame-7" viewBox="0 0 200 130">
+        <use href="#static-goose-open"
+          transform="translate(-5,40) scale(0.7)"/>
+        <use href="#ga-frame-6"
+          transform="translate(105,30) scale(0.4) rotate(15)"
+          stroke="white"
+          stroke-width="5"
+          stroke-linecap="round"
+          fill="none"/>
+        <text fill="white" font-weight="bold" font-size="60"
+          text-anchor="middle" opacity="0.3"
+          transform="translate(100,50)">7</text>
+      </svg>
+    </div>
+    <hr class=dots>
+  </div>
+</div>
+<style>
+#a-simple-filmstrip .filmstrip {
+  padding: 0.1px;
+  line-height: 0;
+  margin: 20px 0;
+}
+#a-simple-filmstrip .filmstrip .background {
+  display: inline-block;
+  background: var(--neutral-2);
+}
+#a-simple-filmstrip .filmstrip .dots {
+  border: 0;
+  border-color: var(--neutral-10);
+  border-style: dotted;
+  border-bottom-width: 10px;
+  margin: 10px 0;
+}
+#a-simple-filmstrip .filmstrip .cell {
+  display: inline-block;
+  width: 200px;
+  height: 130px;
+  border-radius: 15px;
+  background: var(--blue-5);
+  margin-left: 10px;
+  margin-right: 10px;
+}
+</style>
+</section>
+
+<section id="a-simple-attempt">
+<div class=filmstrip>
+  <svg viewBox="0 0 840 78" width="840"><use href="#fullstrip"></svg>
+</div>
+<pre class="fragment"><code class="hljs css" data-trim data-noescape>
+.filmstrip {
+  animation: slide 1s infinite <span class="highlight">steps(7)</span>;
+}
+@keyframes slide {
+  to { transform: translate(-700px); }
+}
+</code></pre>
+<div class="preview tv-filmstrip-preview fragment">
+  <div class=mask>
+    <svg class=animated-strip viewBox="0 0 840 78">
+      <symbol id="fullstrip" viewBox="0 0 840 78">
+        <rect width="840" height="78" style="fill: var(--blue-5)"/>
+        <use href="#frame-1" width="120"/>
+        <use href="#frame-2" width="120" x="120"/>
+        <use href="#frame-3" width="120" x="240"/>
+        <use href="#frame-4" width="120" x="360"/>
+        <use href="#frame-5" width="120" x="480"/>
+        <use href="#frame-6" width="120" x="600"/>
+        <use href="#frame-7" width="120" x="720"/>
+      </symbol>
+      <use href="#fullstrip">
+    </svg>
+  </div>
+  <div class=tv-overlay>
+    <svg id=tv-overlay class=tv viewBox="0 0 48 48">
+      <path d="M45 9.5H28.1l3.8-3.8c.4-.4.4-1 0-1.4s-1-.4-1.4 0l-5.3
+      5.3H25l-6.7-6.7c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l5.3 5.3H3a3 3 0 00-3
+      3V36a3 3 0 003 3h3.1v1.6h3.4V39h28.9v1.6h3.4V39H45a3 3 0 003-3V12.5a3
+      3 0 00-3-3zm-6.7 25.4H4V13.5h34.3v26.4z" fill="var(--neutral-1)"/>
+      <circle cx="43.1" cy="17.4" r="2.6" fill="var(--neutral-4)"/>
+      <circle cx="43.1" cy="25.4" r="2.6" fill="var(--neutral-4)"/>
+    </svg>
+  </div>
+</div>
+<style>
+#a-simple-attempt code {
+  margin-top: 50px;
+}
+#a-simple-attempt .preview {
+  margin-top: 80px;
+}
+#a-simple-attempt .preview .animated-strip {
+  animation: keyframe-slide 3s infinite steps(7);
+}
+@keyframes keyframe-slide {
+  from { transform: translate(540px); }
+  to { transform: translate(-540px); }
+}
+
+/* Re-usable parts */
+.reveal .tv-filmstrip-preview {
+  position: relative;
+  width: 1260px;
+  margin-left: -150px;
+}
+.reveal .tv-filmstrip-preview .mask {
+  -webkit-mask: linear-gradient(to right, transparent, rgba(0,0,0,0.3) 42%, white 43%, white 60%, rgba(0,0,0,0.3) 61%, transparent);
+  mask: linear-gradient(to right, transparent, rgba(0,0,0,0.3) 42%, white 43%, white 57%, rgba(0,0,0,0.3) 58%, transparent);
+}
+.reveal .tv-filmstrip-preview .tv-overlay {
+  position: absolute;
+  left: 521px;
+  top: -67px;
+}
+.reveal .tv-filmstrip-preview .tv-overlay .tv {
+  width: 248px;
+}
+</style>
+</section>
+
+<section id="a-simple-attempt-explained">
+<pre><code class="hljs css" data-trim data-noescape>
+.filmstrip {
+  /* steps(7) = 7つの<span class=cheat-em>変更</span>。最後の変更も含む。 */
+  animation: slide 1s infinite <span class="highlight">steps(7)</span>;
+}
+@keyframes slide {
+  to { transform: translate(-700px); }
+}
+</code></pre>
+<div class=timing-graph>
+  <svg width="840" height="100" viewBox="-1 -1 702 72"
+    preserveAspectRatio="none">
+    <path class="area"
+      d="M0 70 h100v-10h100v-10h100v-10
+          h100v-10h100v-10h100v-10 h100v-10 v70z"/>
+    <path class="line"
+      d="M0 70 h100v-10h100v-10h100v-10
+          h100v-10h100v-10h100v-10 h100v-10"/>
+  </svg>
+</div>
+<style>
+#a-simple-attempt-explained code .cheat-em {
+  text-emphasis: dot;
+}
+/* Re-usable parts */
+.reveal .timing-graph .area {
+  fill: var(--red-9);
+}
+.reveal .timing-graph .line {
+  fill: none;
+  stroke: var(--red-6);
+  stroke-width: 2px;
+}
+</style>
+</section>
+
+<section id="a-second-attempt">
+<pre><code class="hljs css" data-trim data-noescape>
+.filmstrip {
+  animation: slide 1s infinite <span class="highlight">steps(6)</span>;
+}
+@keyframes slide {
+  to { transform: translate(-700px); }
+}
+</code></pre>
+<div class="preview tv-filmstrip-preview">
+  <div class=mask>
+    <svg class=animated-strip viewBox="0 0 840 78">
+      <use href="#fullstrip"/>
+    </svg>
+  </div>
+  <div class=tv-overlay>
+    <svg class=tv viewBox="0 0 48 48"><use href="#tv-overlay"/></svg>
+  </div>
+</div>
+<style>
+#a-second-attempt .preview {
+  margin-top: 80px;
+}
+#a-second-attempt .preview .animated-strip {
+  animation: keyframe-slide 3s infinite steps(6);
+}
+</style>
+</section>
+
+<section id="a-second-attempt-explained">
+<pre><code class="hljs css" data-trim data-noescape>
+.filmstrip {
+  /* steps(6) = steps(6, end) */
+  animation: slide 1s infinite <span class="highlight">steps(6)</span>;
+}
+@keyframes slide {
+  to { transform: translate(-700px); }
+}
+</code></pre>
+<div class=timing-graph>
+  <svg width="840" height="150" viewBox="-1 -1 602 72"
+    preserveAspectRatio="none">
+    <path class="area"
+      d="M0 70 h100v-10h100v-10h100v-10
+          h100v-10h100v-10h100v-10 v70z"/>
+    <path class="line"
+      d="M0 70 h100v-10h100v-10h100v-10
+          h100v-10h100v-10h100v-10"/>
+  </svg>
+</div>
+</section>
+
+<section id="a-third-attempt">
+<pre><code class="hljs css" data-trim data-noescape>
+.filmstrip {
+  animation: slide 1s infinite <span class="highlight">steps(6, start)</span>;
+}
+@keyframes slide {
+  to { transform: translate(-700px); }
+}
+</code></pre>
+<div class="preview tv-filmstrip-preview">
+  <div class=mask>
+    <svg class=animated-strip viewBox="0 0 840 78">
+      <use href="#fullstrip"/>
+    </svg>
+  </div>
+  <div class=tv-overlay>
+    <svg class=tv viewBox="0 0 48 48"><use href="#tv-overlay"/></svg>
+  </div>
+</div>
+<div class=timing-graph>
+  <svg width="840" height="150" viewBox="-1 -1 602 72"
+    preserveAspectRatio="none">
+    <path class="area"
+      d="M0 70 v-10h100v-10h100v-10h100v-10
+          h100v-10h100v-10h100 v70z"/>
+    <path class="line"
+      d="M0 70 v-10h100v-10h100v-10h100v-10
+          h100v-10h100v-10h100"/>
+  </svg>
+</div>
+<style>
+#a-third-attempt .preview {
+  margin-top: 80px;
+}
+#a-third-attempt .preview .animated-strip {
+  animation: keyframe-slide 3s infinite steps(6, start);
+}
+</style>
+</section>
+
+<!-- TODO: Add an exasperated goose slide here -->
+
+<section id="a-solution">
+<!-- TODO: Do something pretter for the "New!" highlight -->
+<pre><code class="hljs css" data-trim data-noescape>
+.filmstrip {
+  /* 新しい! jump-none! */
+  animation: slide 1s infinite <span class="highlight">steps(7, jump-none)</span>;
+}
+@keyframes slide {
+  to { transform: translate(-700px); }
+}
+</code></pre>
+<div class="preview tv-filmstrip-preview">
+  <div class=mask>
+    <svg class=animated-strip viewBox="0 0 840 78">
+      <use href="#fullstrip"/>
+    </svg>
+  </div>
+  <div class=tv-overlay>
+    <svg class=tv viewBox="0 0 48 48"><use href="#tv-overlay"/></svg>
+  </div>
+</div>
+<div class=timing-graph>
+  <svg width="840" height="150" viewBox="-1 -1 702 72"
+    preserveAspectRatio="none">
+    <path class="area"
+      d="M0 70 h100v-10h100v-10h100v-10h100v-10
+          h100v-10h100v-10h100 v70z"/>
+    <path class="line"
+      d="M0 70 h100v-10h100v-10h100v-10h100v-10
+          h100v-10h100v-10h100"/>
+  </svg>
+</div>
+<style>
+#a-solution .preview {
+  margin-top: 80px;
+}
+#a-solution .preview .animated-strip {
+  animation: keyframe-slide 3s infinite steps(7, jump-none);
+}
+#a-solution .graph {
+  margin-top: 50px;
+}
+</style>
+</section>
+
+<!-- TODO: Add a slide with the finished result again -->
+
+<section id="i-made-a-diagram" class="fit-picture">
+  <img src="img/easing-functions.svg">
+<p>
+<a href="https://drafts.csswg.org/css-easing/#funcdef-step-easing-function-steps" target="_new">CSS Easing Functions</a>
+</p>
+<style>
+#i-made-a-diagram {
+  padding: 0;
+  margin: 0;
+}
+
+#i-made-a-diagram img {
+  height: 600px;
+  border: 0;
+  margin: 0;
+  box-shadow: none;
+}
+
+#i-made-a-diagram a:visited,
+#i-made-a-diagram a {
+  color: var(--red-5);
+}
+</style>
+</section>
+
+<section id="mac-daddy-mac">
+<h2><code>jump-none</code>, <code>jump-both</code></h2>
+<ul class="logo-list">
+  <li><img class="logo" src="img/firefox-logo.svg"><span>65+</span>
+  <li><img class="logo" src="img/chrome-logo.svg"><span>77+</span>
+  <li class=no-support><img class="logo" src="img/safari-logo.svg"><span class=batsu>x</span>
+  <li class=no-support><img class="logo" src="img/edge-logo.svg"><span class=batsu>x</span>
+  <li><img class="logo" src="img/edgium.png"><span class=maru>〇</span>
+</ul>
+<style>
+#mac-daddy-mac .logo-list {
+  margin-top: 50px;
+}
+
+/* Re-useable parts */
+.reveal .logo-list {
+  line-height: 1.5;
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+}
+.reveal .logo-list li {
+  flex-basis: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-size: 35px;
+  line-height: 1;
+}
+.reveal .logo-list .logo {
+  width: 100px;
+  /* I have no idea how this works but it stops the Edgium logo from being
+     squashed vertically. */
+  max-width: 100px;
+  height: 100px;
+  margin: 0;
+  margin-bottom: 0.5em;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  vertical-align: text-bottom;
+}
+.reveal .logo-list .batsu {
+  color: hsl(354, 85%, 44%);
+  font-weight: bold;
+}
+.reveal .logo-list .maru {
+  color: var(--green);
+  font-weight: bold;
+}
+.reveal .logo-list .no-support {
+  filter: grayscale(100%);
+  opacity: 0.4;
+}
+.reveal .logo-list .exp-support {
+  opacity: 0.6;
+}
+</style>
+</section>
+
+<section id="transitions-suck">
+  <h2>② CSS Transitionがよくバグる</h2>
+</section>
+
+<section id="lots-of-bugs">
+<div class="container fragment">
+  <img src="img/bug683696.png" width="800" height="254">
+  <img src="img/bug1206913.png" width="800" height="204">
+  <img src="img/bug1118361.png" width="800" height="192">
+  <img src="img/bug1075333.png" width="800" height="187">
+  <img src="img/bug1059650.png" width="800" height="192">
+  <div class=labels>
+    <span>1) Transitionが生成されていない</span>
+    <span>2) Transitionが終わらない</span>
+  </div>
+</div>
+<style>
+#lots-of-bugs img {
+  border-width: 0;
+  box-shadow: none;
+}
+#lots-of-bugs img:nth-child(1) {
+  margin-left: -20px;
+  transition-delay: 0.5s, 0s;
+}
+#lots-of-bugs img:nth-child(2) {
+  margin-top: -180px;
+  margin-left: 60px;
+  transition-delay: 1.5s, 0s;
+}
+#lots-of-bugs img:nth-child(3) {
+  margin-top: -120px;
+  margin-left: -70px;
+  transition-delay: 2.5s, 0s;
+}
+#lots-of-bugs img:nth-child(4) {
+  margin-top: -120px;
+  margin-left: 40px;
+  transition-delay: 3.3s, 0s;
+}
+#lots-of-bugs img:nth-child(5) {
+  margin-top: -110px;
+  margin-left: -40px;
+  transition-delay: 3.8s, 0s;
+}
+#lots-of-bugs img {
+  opacity: 0;
+  transition: opacity 0.7s, transform 0.5s;
+}
+#lots-of-bugs.present img {
+  opacity: 1;
+}
+#lots-of-bugs.future img {
+  transition-property: none;
+}
+#lots-of-bugs .container {
+  visibility: visible;
+  opacity: 1;
+}
+#lots-of-bugs .container .labels {
+  opacity: 0;
+  transition: opacity 0.5s;
+  display: flex;
+}
+#lots-of-bugs .container .labels span {
+  color: var(--red-5);
+  margin-top: -200px;
+  font-weight: 500;
+}
+#lots-of-bugs .container.visible img:nth-child(1) {
+  transform: scale(0.5) translate(-450px);
+}
+#lots-of-bugs .container.visible img:nth-child(2) {
+  transform: scale(0.5) translate(-460px);
+}
+#lots-of-bugs .container.visible img:nth-child(3) {
+  transform: scale(0.5) translate(-450px, -50px);
+}
+#lots-of-bugs .container.visible img:nth-child(4) {
+  transform: scale(0.5) translate(450px, -500px);
+}
+#lots-of-bugs .container.visible img:nth-child(5) {
+  transform: scale(0.5) translate(480px, -550px);
+}
+#lots-of-bugs .container.visible .labels {
+  opacity: 1;
+  transition-delay: 0.4s;
+}
+</style>
+</section>
+<!-- TODO: Force the staggered entry above to finish when advancing to the split
+  view -->
+
+<section id="lots-of-events">
+<h2>新しいイベント！</h2>
+<ul>
+  <li><code>transitionrun</code>
+    <p class=explanation>&rarr; transitionが生成された 🆕
+    <p class=explanation>&rarr; <code>transitionend</code>を待ってもオッケー 🙆‍♂️</p>
+  <li class=fragment><code>transitioncancel</code>
+    <p class=explanation>&rarr; 要素が消えた🗑️
+    <span style="font-size: smaller">（削除されたり、再生成されたり、
+      <code>display:none</code>になったり）</span></p>
+    <p class=explanation>&rarr; <code>transitionend</code>を待たない方が良い ❌</p>
+  <li class=fragment><code>transitionstart</code>
+    <span class=explanation>（<code>animationstart</code>と同様）</span>
+  <li class=fragment><code>animationcancel</code>
+    <span class=explanation>（<code>transitioncancel</code>と同様）</span>
+</ul>
+<style>
+#lots-of-events code {
+  color: var(--red-5);
+  font-weight: 600;
+  background: var(--red-10);
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+#lots-of-events .explanation {
+  font-size: 30px;
+}
+</style>
+</section>
+
+<section id="hows-your-event-game">
+<h2><code>transitioncancel</code>たち</h2>
+<ul class="logo-list">
+  <li><img class="logo" src="img/firefox-logo.svg"><span>53+</span>
+  <li><img class="logo" src="img/chrome-logo.svg"><span>74+</span>
+    <span class=fineprint>No <code>animationcancel</code></span>
+  <li class=exp-support><img class="logo" src="img/technology-preview.png"><span>Tech Preview</span>
+  <li class=no-support><img class="logo" src="img/edge-logo.svg"><span class=batsu>x</span>
+    <span class=fineprint><code>transitionstart</code>のみ</span>
+  <li><img class="logo" src="img/edgium.png"><span class=maru>〇</span>
+    <span class=fineprint>No <code>animationcancel</code></span>
+</ul>
+<style>
+#hows-your-event-game .logo-list {
+  margin-top: 50px;
+}
+#hows-your-event-game code {
+  color: var(--red-5);
+  background: var(--red-10);
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+#hows-your-event-game .logo-list .fineprint {
+  display: block;
+  margin-top: 10px;
+  font-size: 20px;
+  line-height: 1.2;
+}
+</style>
+</section>
+
+<section id="i-like-js">
+  <h2>#3: I ❤️ JS</h2>
+</section>
+
+<section id="geese-are-made-of-stars" data-background="var(--blue-2)">
+<div class=hoshis></div>
+<svg width="300" viewBox="0 0 100 100" class="goose">
+  <use href="#goose-feathers"/>
+  <use href="#goose-lower-beak-closed"/>
+  <use href="#goose-upper-beak"/>
+  <use href="#goose-eye"/>
+</svg>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const container = document.querySelector('#geese-are-made-of-stars .hoshis');
+  const numStars = 25;
+
+  // Based on https://mozanime.github.io/taketori/scene-mayreturn/index.html
+  for (let i = 0; i < numStars; i++) {
+    const hoshi = document.createElement('div');
+    hoshi.classList.add('hoshi');
+    const left = Math.floor(Math.random() * 960);
+    const top = Math.floor(Math.random() * 700);
+    container.appendChild(hoshi);
+
+    const duration = 2000 + Math.floor(Math.random() * 1000);
+    const delay = Math.floor(Math.random() * 2000);
+    const fullSize = 0.6 + Math.random() * 0.6;
+
+    let easing = 'linear';
+    switch (Math.floor(Math.random() * 4)) {
+      case 0: {
+        easing = 'ease-in';
+        break;
+      }
+      case 1: {
+        easing = 'ease-out';
+        break;
+      }
+      case 2: {
+        easing = 'ease-in-out';
+        break;
+      }
+    }
+    hoshi.animate(
+      {
+        transform: [
+          `translate(${left}px, ${top}px) scale(0)`,
+          `translate(${left}px, ${top}px) scale(${fullSize})`,
+          `translate(${left}px, ${top}px) scale(0)`,
+        ],
+        offset: [ 0, 0.95, 1 ]
+      },
+      { easing, duration, delay, iterations: Infinity }
+    );
+  }
+});
+</script>
+<style>
+#geese-are-made-of-stars {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+#geese-are-made-of-stars .hoshis {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 960px;
+  height: 700px;
+}
+#geese-are-made-of-stars .hoshi {
+  position: absolute;
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23fcf200' d='M20.1 2.1L25.9 14l13 1.8-9.4 9.2 2.2 13L20.1 32 8.4 38l2.3-13-9.5-9.2 13-1.8L20.2 2z'/%3E%3C/svg%3E");
+  background-size: cover;
+  width: 20px;
+  height: 20px;
+  transform: scale(0);
+}
+#geese-are-made-of-stars .goose {
+  position: absolute;
+  left: 100px;
+  bottom: 0;
+}
+</style>
+</section>
+
+<section id="keyframes-from-js">
+<h2>CSS animations from JS</h2>
+<pre><code class="hljs js" data-trim data-noescape>
+const <span class="highlight fragment">uniqueKeyframesName = generateUuid()</span>;
+document.<span class="highlight fragment">styleSheets[0]</span>.insertRule(
+  <span class="highlight fragment">`@keyframes ${uniqueKeyframesName} {
+    from { transform: scale(0) }
+    95% { transform: scale(${fullSize}) }
+    to { transform: scale(0) }
+  }`</span>
+);
+star.style.animation =
+  `${uniqueKeyframesName} ${duration}ms ` +
+  `${delay}ms infinite`;
+
+<span class="highlight fragment">// 要素がなくなったら、@keyframesも削除してね！</span>
+</code></pre>
+<style>
+#keyframes-from-js .fragment.highlight {
+  opacity: 1;
+  visibility: visible;
+  background-color: transparent;
+}
+#keyframes-from-js .fragment.highlight.current-fragment {
+  background-color: var(--red-9);
+}
+</style>
+</section>
+
+<section id="transitions-from-js">
+<h2>CSS transitions from JS</h2>
+<ul>
+  <li><code>transitionrun</code>, <code>transitioncancel</code>など
+  <li>JSからtransitionを生成させるのが意外と<em>難しい</em>&hellip; </ul>
+<div>
+  <figure>
+    <a
+      href="https://birtles.github.io/cssconf2019/#/css-transitions-title"
+      target="_blank"><img src="img/transition-firing-presentation.png" width="400"></a>
+    <figcaption>
+      <a href="https://birtles.github.io/cssconf2019/#/css-transitions-title" target="_blank">https://birtles.github.io/cssconf2019/</a>
+    </figcaption>
+  </figure>
+</div>
+<style>
+#transitions-from-js code {
+  color: var(--red-5);
+  font-weight: 600;
+  background: var(--red-10);
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+#transitions-from-js ul {
+  font-size: 30px;
+}
+#transitions-from-js figure img {
+  margin-bottom: 5px;
+}
+#transitions-from-js figcaption {
+  font-size: 20px;
+}
+#transitions-from-js em {
+  font-style: normal;
+  font-weight: bold;
+  text-emphasis: dot;
+}
+</style>
+</section>
+
+<section id="random-web-animations">
+<h2><code>Element.animate()</code>を利用して&hellip;</h2>
+<pre><code class="hljs js" data-trim data-noescape>
+star.animate(
+  [
+    { transform: 'scale(0)' },
+    { transform: `scale(${fullSize})`, offset: 0.95 },
+    { transform: 'scale(0)' },
+  ],
+  { easing, duration, delay, iterations: Infinity }
+);
+</code></pre>
+</section>
+
+<section id="web-animations-are-finished">
+<h2><code>Element.animate()</code>を利用して&hellip;</h2>
+<pre><code class="hljs js" data-trim data-noescape>
+<span class=highlight>const starAnimation =</span> star.animate(
+  [
+    { transform: 'scale(0)' },
+    { transform: `scale(${fullSize})`, offset: 0.95 },
+    { transform: 'scale(0)' },
+  ],
+  { easing, duration, delay, iterations: Infinity }
+);
+
+// starAnimation.reverse();
+// starAnimation.cancel();
+// starAnimation.updatePlaybackRate(0.5);
+
+<span class=highlight>starAnimation.finished</span>.then(() => { ... });
+</code></pre>
+<style>
+#web-animations-are-finished pre {
+  /* To avoid scrollbars on Edgium */
+  font-size: 23px;
+}
+</style>
+</section>
+
+<section id="safari-will-be-any-day-now">
+<h2><code>Element.animate</code></h2>
+<ul class="logo-list">
+  <li><img class="logo" src="img/firefox-logo.svg"><span>48+</span>
+  <li><img class="logo" src="img/chrome-logo.svg"><span>36+</span>
+  <li class=exp-support><img class="logo" src="img/technology-preview.png"><span>Tech Preview</span>
+  <li class=no-support><img class="logo" src="img/edge-logo.svg"><span class=batsu>x</span>
+  <li><img class="logo" src="img/edgium.png"><span class=maru>〇</span>
+</ul>
+<style>
+#safari-will-be-any-day-now .logo-list {
+  margin-top: 50px;
+}
+</style>
+</section>
+
+<section id="easing-peasing">
+<h2>④ アニメーションに<em>全体的に</em>イージングを適用するのが難しい</h2>
+<style>
+#easing-peasing h2 em {
+  color: var(--blue-5);
+  text-shadow: 1px 2px 2px var(--blue-9);
+  font-style: normal;
+}
+</style>
+</section>
+
+<section id="try-easing-this" data-background="var(--blue-5)">
+<svg viewBox="0 0 140 100" class="goose">
+  <defs>
+    <linearGradient id="try-easing-this-body-grad" x1="41.1" x2="41.1" y1="56.7" y2="78.6" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#b5b5b5"/>
+    </linearGradient>
+  </defs>
+  <path d="M39.9 77.9v11.2l8.6 6.1 12.6-9.4H44.9l-.1-7.9z" fill="#ff8b38" class="feet"/>
+  <g class="body">
+    <g class="head">
+      <path d="M82.8 4h9c2.2 0 2.5 2.8 1 3.6l-10 4.8V4z" fill="#ff8b38" class="beak"/>
+      <path d="M63.7 45V13.6c0-6 4.6-9.6 9.5-9.6H83v8.3c0 3.7-2.3 5-3.6
+      5.9-1.3.9-3.5 1.6-3.5 4.9v22.2c0 2.1-.4 4.2-.4 4.2l-11.8-4.7z"
+        fill="white" class="neck"/>
+      <circle cx="76.6" cy="9.6" r="1.5" class="eye"/>
+    </g>
+    <path fill="url(#try-easing-this-body-grad)" d="M6.3 48.3c1.9 14.5 16.1 32.5
+    38.5 30.2s30.6-18.8 31-31.7c-.9-5.4-6.9-8.6-10.6-7.4-3.7 1.2-8.5 9-8.5
+    9l-50.4-.1z" class="torso"/>
+    <path d="M63.8 40H56a29 29 0 00-21.6 9L17.1 66.1c-1.3 1.4-.3 2.8 1.3
+    2.8h21.4c4.6 0 9-2.3 11.4-4.9l12.7-12.4c4.7-4.7 3.8-10.6.1-11.6"
+    fill="white" class="wing"/>
+  </g>
+</svg>
+<style>
+#try-easing-this {
+  width: 100%;
+  height: 100%;
+}
+#try-easing-this .goose {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 800px;
+}
+#try-easing-this .body {
+  transform-origin: 42px 53px;
+  animation: easing-rotate-body 2s infinite;
+}
+@keyframes easing-rotate-body {
+  10% { transform: none }
+  60% { transform: rotate(40deg) }
+  65% { transform: rotate(40deg) }
+}
+#try-easing-this .head {
+  transform-origin: 72px 45px;
+  animation: easing-drop-head 2s infinite;
+}
+@keyframes easing-drop-head {
+  60% { transform: rotate(45deg) }
+}
+</style>
+</section>
+
+<section id="easing-is-not-easy-after-all" data-background="var(--blue-5)">
+<svg viewBox="0 0 140 100" class="goose">
+  <path d="M39.9 77.9v11.2l8.6 6.1 12.6-9.4H44.9l-.1-7.9z" fill="#ff8b38" class="feet"/>
+  <g class="body">
+    <g class="head">
+      <path d="M82.8 4h9c2.2 0 2.5 2.8 1 3.6l-10 4.8V4z" fill="#ff8b38" class="beak"/>
+      <path d="M63.7 45V13.6c0-6 4.6-9.6 9.5-9.6H83v8.3c0 3.7-2.3 5-3.6
+      5.9-1.3.9-3.5 1.6-3.5 4.9v22.2c0 2.1-.4 4.2-.4 4.2l-11.8-4.7z"
+        fill="white" class="neck"/>
+      <circle cx="76.6" cy="9.6" r="1.5" class="eye"/>
+    </g>
+    <path fill="url(#try-easing-this-body-grad)" d="M6.3 48.3c1.9 14.5 16.1 32.5
+    38.5 30.2s30.6-18.8 31-31.7c-.9-5.4-6.9-8.6-10.6-7.4-3.7 1.2-8.5 9-8.5
+    9l-50.4-.1z" class="torso"/>
+    <path d="M63.8 40H56a29 29 0 00-21.6 9L17.1 66.1c-1.3 1.4-.3 2.8 1.3
+    2.8h21.4c4.6 0 9-2.3 11.4-4.9l12.7-12.4c4.7-4.7 3.8-10.6.1-11.6"
+    fill="white" class="wing"/>
+  </g>
+</svg>
+<pre class=code-overlay><code class="hljs css" data-trim data-noescape>
+.body, .head {
+  animation-timing-function: steps(4);
+}
+</code></pre>
+<style>
+#easing-is-not-easy-after-all {
+  width: 100%;
+  height: 100%;
+}
+#easing-is-not-easy-after-all .goose {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 600px;
+}
+#easing-is-not-easy-after-all .body {
+  transform-origin: 42px 53px;
+  animation: easing-rotate-body 2s infinite;
+}
+#easing-is-not-easy-after-all .head {
+  transform-origin: 72px 45px;
+  animation: easing-drop-head 2s infinite;
+}
+#easing-is-not-easy-after-all .body,
+#easing-is-not-easy-after-all .head {
+  animation-timing-function: steps(4);
+}
+#easing-is-not-easy-after-all .code-overlay {
+  margin-top: 50px;
+  background: var(--neutral-9);
+  box-shadow: 5px 8px 5px var(--blue-2);
+}
+#easing-is-not-easy-after-all .code-overlay,
+#easing-is-not-easy-after-all .code-overlay code {
+  border-radius: 20px;
+}
+</style>
+</section>
+
+<!-- TODO: Exasperated goose slide -->
+
+<section id="easing-explained">
+<img src="img/easing-explained-by-devtools.png" class=main-screenshot>
+<img src="img/easing-explained-rotate-body.png" class=sub-screenshot>
+<style>
+#easing-explained .main-screenshot,
+#easing-explained .sub-screenshot {
+  width: 550px;
+}
+</style>
+</section>
+
+<section id="easing-explained-with-code" data-transition="fade">
+<div class="side-by-side">
+  <pre><code class="css" data-trim data-noescape>
+.head {
+<span class=highlight>  animation-timing-function: steps(4);</span>
+}
+@keyframes drop-head {
+  60% { transform: rotate(45deg) }
+}
+  </code></pre>
+  <pre><code class="css" data-trim data-noescape>
+@keyframes drop-head {
+  0% {
+    transform: none;
+<span class=highlight>    animation-timing-function: steps(4);</span>
+  }
+  50% {
+    transform: rotate(45deg);
+<span class=highlight>    animation-timing-function: steps(4);</span>
+  }
+  100% { transform: none; }
+}
+  </code></pre>
+</div>
+<style>
+#easing-explained-with-code pre code {
+  line-height: 20px;
+  font-size: 14px;
+}
+</style>
+</section>
+
+<section id="easing-by-video">
+<video data-autoplay muted>
+  <source src="video/unlock-animation-stutter.mp4" type="video/mp4">
+</video>
+<style>
+#easing-by-video video {
+  border: 4px solid var(--neutral-1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+</style>
+<!-- FWIW: The CSS animation easing bug is here:
+  https://bugzilla.mozilla.org/show_bug.cgi?id=1072819#c17 -->
+</section>
+
+<section id="sloooow-mo">
+<video data-autoplay muted loop>
+  <source src="video/unlock-animation-slow-motion.mp4" type="video/mp4">
+</video>
+<style>
+#sloooow-mo video {
+  border: 4px solid var(--neutral-1);
+  height: 600px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+</style>
+</section>
+
+<section id="css-animations-easing-bug-in-devtools" data-transition="fade">
+  <img src="img/easing-bug-firefox-devtools.png">
+</section>
+
+<section id="nailed-it" data-background="var(--blue-5)">
+<svg viewBox="0 0 140 100" class="goose">
+  <defs>
+    <linearGradient id="nailed-it-body-grad" x1="41.1" x2="41.1" y1="56.7" y2="78.6" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#b5b5b5"/>
+    </linearGradient>
+  </defs>
+  <path d="M39.9 77.9v11.2l8.6 6.1 12.6-9.4H44.9l-.1-7.9z" fill="#ff8b38" class="feet"/>
+  <g class="body">
+    <g class="head">
+      <path d="M82.8 4h9c2.2 0 2.5 2.8 1 3.6l-10 4.8V4z" fill="#ff8b38" class="beak"/>
+      <path d="M63.7 45V13.6c0-6 4.6-9.6 9.5-9.6H83v8.3c0 3.7-2.3 5-3.6
+      5.9-1.3.9-3.5 1.6-3.5 4.9v22.2c0 2.1-.4 4.2-.4 4.2l-11.8-4.7z"
+        fill="white" class="neck"/>
+      <circle cx="76.6" cy="9.6" r="1.5" class="eye"/>
+    </g>
+    <path fill="url(#nailed-it-body-grad)" d="M6.3 48.3c1.9 14.5 16.1 32.5
+    38.5 30.2s30.6-18.8 31-31.7c-.9-5.4-6.9-8.6-10.6-7.4-3.7 1.2-8.5 9-8.5
+    9l-50.4-.1z" class="torso"/>
+    <path d="M63.8 40H56a29 29 0 00-21.6 9L17.1 66.1c-1.3 1.4-.3 2.8 1.3
+    2.8h21.4c4.6 0 9-2.3 11.4-4.9l12.7-12.4c4.7-4.7 3.8-10.6.1-11.6"
+    fill="white" class="wing"/>
+  </g>
+</svg>
+<pre class=code-overlay><code class="hljs js" data-trim data-noescape>
+head.animate(
+  {
+    // 暗黙の0%/100%キーフレームの機能は
+    // まだChrome/Firefoxのリリース版に入っていない
+    transform: ['none', 'rotate(60deg)', 'none'],
+    offset: [0, 0.6, 1],
+  },
+  {
+    duration: 2000,
+    iterations: Infinite,
+    <span class=highlight>easing: 'steps(4)'</span>
+  }
+);
+</code></pre>
+<style>
+#nailed-it {
+  width: 100%;
+  height: 100%;
+}
+#nailed-it .goose {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 400px;
+}
+#nailed-it .body {
+  transform-origin: 42px 53px;
+}
+#nailed-it .head {
+  transform-origin: 72px 45px;
+}
+#nailed-it .code-overlay {
+  margin-top: 50px;
+  background: var(--neutral-9);
+  box-shadow: 5px 8px 5px var(--blue-2);
+}
+#nailed-it .code-overlay,
+#nailed-it .code-overlay code {
+  border-radius: 20px;
+  font-size: 20px;
+}
+#nailed-it .code-overlay code {
+  padding-left: 2em;
+  padding-right: 2em;
+}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const body = document.querySelector('#nailed-it .body');
+  const head = document.querySelector('#nailed-it .head');
+
+  head.animate({
+    //
+    // This should be just:
+    //
+    //   transform: 'rotate(45deg)',
+    //   offset: 0.6,
+    //
+    // but partial keyframes are not being shipped everywhere yet.
+    //
+    transform: ['none', 'rotate(45deg)', 'none'],
+    offset: [0, 0.6, 1],
+  }, { duration: 2000, iterations: Infinity, easing: 'steps(4)' });
+  body.animate({
+    transform: ['none', 'none', 'rotate(40deg)', 'rotate(40deg)', 'none'],
+    offset: [0, 0.1, 0.6, 0.65, 1],
+  }, { duration: 2000, iterations: Infinity, easing: 'steps(4)' });
+});
+</script>
+</section>
+
+<section id="nailed-it-twice" data-background="var(--blue-5)">
+<svg viewBox="0 0 140 100" class="goose">
+  <path d="M39.9 77.9v11.2l8.6 6.1 12.6-9.4H44.9l-.1-7.9z" fill="#ff8b38" class="feet"/>
+  <g class="body">
+    <g class="head">
+      <path d="M82.8 4h9c2.2 0 2.5 2.8 1 3.6l-10 4.8V4z" fill="#ff8b38" class="beak"/>
+      <path d="M63.7 45V13.6c0-6 4.6-9.6 9.5-9.6H83v8.3c0 3.7-2.3 5-3.6
+      5.9-1.3.9-3.5 1.6-3.5 4.9v22.2c0 2.1-.4 4.2-.4 4.2l-11.8-4.7z"
+        fill="white" class="neck"/>
+      <circle cx="76.6" cy="9.6" r="1.5" class="eye"/>
+    </g>
+    <path fill="url(#nailed-it-body-grad)" d="M6.3 48.3c1.9 14.5 16.1 32.5
+    38.5 30.2s30.6-18.8 31-31.7c-.9-5.4-6.9-8.6-10.6-7.4-3.7 1.2-8.5 9-8.5
+    9l-50.4-.1z" class="torso"/>
+    <path d="M63.8 40H56a29 29 0 00-21.6 9L17.1 66.1c-1.3 1.4-.3 2.8 1.3
+    2.8h21.4c4.6 0 9-2.3 11.4-4.9l12.7-12.4c4.7-4.7 3.8-10.6.1-11.6"
+    fill="white" class="wing"/>
+  </g>
+</svg>
+<pre class=code-overlay><code class="hljs js" data-trim data-noescape>
+head.animate(
+  {
+    transform: ['none', 'rotate(60deg)', 'none'],
+    offset: [0, 0.6, 1],
+    <span class=highlight>easing: 'ease-in',</span>
+  },
+  {
+    duration: 2000,
+    iterations: Infinite,
+    <span class=highlight>easing: 'steps(4)'</span>
+  }
+);
+</code></pre>
+<style>
+#nailed-it-twice {
+  width: 100%;
+  height: 100%;
+}
+#nailed-it-twice .goose {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 400px;
+}
+#nailed-it-twice .body {
+  transform-origin: 42px 53px;
+}
+#nailed-it-twice .head {
+  transform-origin: 72px 45px;
+}
+#nailed-it-twice .code-overlay {
+  margin-top: 50px;
+  background: var(--neutral-9);
+  box-shadow: 5px 8px 5px var(--blue-2);
+}
+#nailed-it-twice .code-overlay,
+#nailed-it-twice .code-overlay code {
+  border-radius: 20px;
+  font-size: 20px;
+}
+#nailed-it-twice .code-overlay code {
+  padding-left: 2em;
+  padding-right: 2em;
+}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const body = document.querySelector('#nailed-it-twice .body');
+  const head = document.querySelector('#nailed-it-twice .head');
+
+  head.animate({
+    transform: ['none', 'rotate(45deg)', 'none'],
+    offset: [0, 0.6, 1],
+    easing: 'ease-in',
+  }, { duration: 2000, iterations: Infinity, easing: 'steps(5)' });
+  body.animate({
+    transform: ['none', 'none', 'rotate(40deg)', 'rotate(40deg)', 'none'],
+    offset: [0, 0.1, 0.6, 0.65, 1],
+    easing: 'ease-in',
+  }, { duration: 2000, iterations: Infinity, easing: 'steps(5)' });
+});
+</script>
+</section>
+
+<section id="this-is-going-too-far">
+<h2>⑤ 時間はなく<em>速度</em>でアニメーションの定義ができない</h2>
+<style>
+#this-is-going-too-far h2 em {
+  color: var(--blue-5);
+  text-shadow: 1px 2px 2px var(--blue-9);
+  font-style: normal;
+}
+</style>
+</section>
+
+<section id="going-to-the-farm">
+<div class=background>
+  <div class=hotspot data-hotspot-id=1></div>
+  <div class=hotspot data-hotspot-id=2></div>
+  <div class=hotspot data-hotspot-id=3></div>
+  <div class=hotspot data-hotspot-id=4></div>
+  <div class=hotspot data-hotspot-id=5></div>
+  <svg viewBox="0 0 100 100" class="goose">
+    <defs>
+      <linearGradient id="farm-body-grad" x1="41.1" x2="41.1" y1="56.7" y2="78.6" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#fff"/>
+        <stop offset="1" stop-color="#b5b5b5"/>
+      </linearGradient>
+    </defs>
+    <path d="M39.9 77.9v11.2l8.6 6.1 12.6-9.4H44.9l-.1-7.9z" fill="#ff8b38" id="feet"/>
+    <g id="head">
+      <path d="M82.8 4h9c2.2 0 2.5 2.8 1 3.6l-10 4.8V4z" fill="#ff8b38" id="beak"/>
+      <path d="M63.7 39.8V13.6c0-6 4.6-9.6 9.5-9.6H83v8.3c0 3.7-2.3 5-3.6 5.9-1.3.9-3.5 1.6-3.5 4.9v22.2c0 2.1-.4 4.2-.4 4.2l-11.8-9.7z" fill="white" id="neck"/>
+      <circle cx="76.6" cy="9.6" r="1.5" id="eye"/>
+    </g>
+    <path fill="url(#farm-body-grad)" d="M6.3 48.3c1.9 14.5 16.1 32.5 38.5 30.2s30.6-18.8 31-31.7c-.9-5.4-6.9-8.6-10.6-7.4-3.7 1.2-8.5 9-8.5 9l-50.4-.1z" id="body"/>
+    <path d="M63.8 40H56a29 29 0 00-21.6 9L17.1 66.1c-1.3 1.4-.3 2.8 1.3 2.8h21.4c4.6 0 9-2.3 11.4-4.9l12.7-12.4c4.7-4.7 3.8-10.6.1-11.6" fill="white" id="wing"/>
+  </svg>
+</div>
+<div class=caption>
+<a href="https://www.freepik.com/free-photos-vectors/design" target=_blank>背景 pikisuperstar</a>
+</div>
+<style>
+#going-to-the-farm .background,
+#a-more-natural-farm .background {
+  position: relative;
+  width: 750px;
+  height: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  background-image: url(img/farm-background.svg);
+  border: 4px solid var(--neutral-1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+#going-to-the-farm .goose,
+#a-more-natural-farm .goose {
+  position: absolute;
+  left: 4px; /* This is to match the border width */
+  top: 4px;
+  margin-left: -25px;
+  margin-top: -25px;
+  width: 50px;
+  height: 50px;
+  transition: all cubic-bezier(.5,0,.8,1) 1s;
+}
+#going-to-the-farm .hotspot,
+#a-more-natural-farm .hotspot {
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  border-radius: 35px;
+  border: 3px dotted white;
+}
+#going-to-the-farm .hotspot:hover,
+#a-more-natural-farm .hotspot:hover {
+  background-color: rgba(255, 255, 0, 0.5);
+  cursor: pointer;
+}
+#going-to-the-farm .hotspot[data-hotspot-id="1"],
+#a-more-natural-farm .hotspot[data-hotspot-id="1"] {
+  left: 50px;
+  top: 300px;
+  transform: scale(0.7);
+}
+#going-to-the-farm .hotspot[data-hotspot-id="2"],
+#a-more-natural-farm .hotspot[data-hotspot-id="2"] {
+  left: 425px;
+  top: 375px;
+}
+#going-to-the-farm .hotspot[data-hotspot-id="3"],
+#a-more-natural-farm .hotspot[data-hotspot-id="3"] {
+  left: 20px;
+  top: 440px;
+  transform: scale(1.4);
+}
+#going-to-the-farm .hotspot[data-hotspot-id="4"],
+#a-more-natural-farm .hotspot[data-hotspot-id="4"] {
+  left: 540px;
+  top: 400px;
+  transform: scale(1.1);
+}
+#going-to-the-farm .hotspot[data-hotspot-id="5"],
+#a-more-natural-farm .hotspot[data-hotspot-id="5"] {
+  left: 690px;
+  top: 310px;
+  transform: scale(0.5);
+}
+#going-to-the-farm .caption,
+#a-more-natural-farm .caption {
+  width: 750px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5px;
+  text-align: left;
+  font-size: 15px;
+}
+#going-to-the-farm .caption a,
+#going-to-the-farm .caption a:visited,
+#a-more-natural-farm .caption a,
+#a-more-natural-farm .caption a:visited {
+  color: var(--neutral-1);
+}
+</style>
+<script>
+function setupGooseMover(containerId) {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupStuffs);
+  } else {
+    setupStuffs();
+  }
+
+  function setupStuffs() {
+    const hotspots = document.querySelectorAll(`#${containerId} .hotspot`);
+
+    for (const hotspot of hotspots) {
+      hotspot.addEventListener('click', evt => {
+        const position = parseInt(evt.target.dataset.hotspotId);
+        moveToHotspot(position);
+      });
+    }
+
+    const goose = document.querySelector(`#${containerId} .goose`);
+
+    function moveToHotspot(id) {
+      const hotspot = document.querySelector(
+        `#${containerId} .hotspot[data-hotspot-id="${id}"]`
+      );
+
+      const gCS = getComputedStyle(hotspot);
+      const left = parseFloat(gCS.left);
+      const top = parseFloat(gCS.top);
+      const width = parseFloat(gCS.width);
+      const height = parseFloat(gCS.height);
+
+      const x = left + width / 2;
+      const y = top + height / 2;
+      const scale = parseScale(getComputedStyle(hotspot).transform);
+      goose.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+      goose.style.filter = `brightness(${(scale - 1) * 0.25 + 1})`;
+    }
+
+    function parseScale(transform) {
+      const matches = transform.match(
+        /matrix\(([0-9.]+), 0, 0, ([0-9.]+), 0, 0\)/
+      );
+      if (!matches) {
+        return 1;
+      }
+      return parseFloat(matches[1]);
+    }
+
+    moveToHotspot(1);
+  }
+}
+
+setupGooseMover('going-to-the-farm');
+</script>
+</section>
+
+<section id="css-not-working-group" class=css-not-working-group>
+<h2>CSS ワーキンググループ</h2>
+<img src="img/css-working-group.jpg">
+<div class=caption>
+  写真
+  <a href="https://twitter.com/jensimmons/status/1100912187495735296"
+     target=_blank>Jen Simmons</a>
+</div>
+<div class="speech-container fragment">
+  <div class=speech>
+  早くスピードベースのアニメーション作ってよ！
+  </div>
+</div>
+<style>
+/* Re-usable parts */
+.css-not-working-group img {
+  width: 750px;
+  margin-bottom: 0;
+}
+.css-not-working-group .caption {
+  width: 750px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  font-size: 15px;
+}
+.css-not-working-group .caption a,
+.css-not-working-group .caption a:visited {
+  color: var(--neutral-1);
+}
+.css-not-working-group .speech-container {
+  display: flex;
+  justify-content: end;
+  margin-top: -400px;
+}
+.css-not-working-group .speech {
+  background: white;
+  border: 3px solid var(--neutral-1);
+  border-radius: 40px;
+  box-shadow: 3px 3px 2px hsla(42, 15%, 13%, 30%);
+  font-size: 30px;
+  font-weight: 500;
+  padding: .5em 1em;
+}
+</style>
+</section>
+
+<section id="hacking-transitions">
+<h2><code>Element.getAnimations()</code></h2>
+<pre><code class="hljs js" data-trim data-noescape>
+document.addEventListener(<span class="highlight fragment">'transitionrun'</span>, evt => {
+  <span class="highlight fragment">if (evt.propertyName !== 'transform') {</span>
+    return;
+  }
+
+  const transition = evt.target
+    <span class="highlight fragment">.getAnimations()</span>
+    <span class="highlight fragment">.find(animation =&gt; animation.transitionProperty === 'transform');</span>
+
+  <span class="highlight fragment">const keyframes = transition.effect.getKeyframes();</span>
+  const distance = calculateDistance(
+    keyframes[0].transform,
+    keyframes[1].transform
+  );
+
+  // 700px/秒で動かす
+  const duration = (distance / 700) * 1000;
+  <span class="highlight fragment">transition.effect.updateTiming({ duration });</span>
+  // 参考: `transition.updatePlaybackRate()`も良い
+});
+</code></pre>
+<style>
+#hacking-transitions h2 {
+  font-size: 40px;
+}
+#hacking-transitions pre code {
+  font-size: 19px;
+  max-height: none;
+}
+#hacking-transitions .fragment.highlight {
+  opacity: 1;
+  visibility: visible;
+  background-color: transparent;
+}
+#hacking-transitions .fragment.highlight.current-fragment {
+  background-color: var(--red-9);
+}
+</style>
+</section>
+
+<section id="a-more-natural-farm">
+<div class=background>
+  <div class=hotspot data-hotspot-id=1></div>
+  <div class=hotspot data-hotspot-id=2></div>
+  <div class=hotspot data-hotspot-id=3></div>
+  <div class=hotspot data-hotspot-id=4></div>
+  <div class=hotspot data-hotspot-id=5></div>
+  <svg viewBox="0 0 100 100" class="goose">
+    <defs>
+      <linearGradient id="natural-farm-body-grad" x1="41.1" x2="41.1" y1="56.7" y2="78.6" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#fff"/>
+        <stop offset="1" stop-color="#b5b5b5"/>
+      </linearGradient>
+    </defs>
+    <path d="M39.9 77.9v11.2l8.6 6.1 12.6-9.4H44.9l-.1-7.9z" fill="#ff8b38" id="feet"/>
+    <g id="head">
+      <path d="M82.8 4h9c2.2 0 2.5 2.8 1 3.6l-10 4.8V4z" fill="#ff8b38" id="beak"/>
+      <path d="M63.7 39.8V13.6c0-6 4.6-9.6 9.5-9.6H83v8.3c0 3.7-2.3 5-3.6 5.9-1.3.9-3.5 1.6-3.5 4.9v22.2c0 2.1-.4 4.2-.4 4.2l-11.8-9.7z" fill="white" id="neck"/>
+      <circle cx="76.6" cy="9.6" r="1.5" id="eye"/>
+    </g>
+    <path fill="url(#natural-farm-body-grad)" d="M6.3 48.3c1.9 14.5 16.1 32.5 38.5 30.2s30.6-18.8 31-31.7c-.9-5.4-6.9-8.6-10.6-7.4-3.7 1.2-8.5 9-8.5 9l-50.4-.1z" id="body"/>
+    <path d="M63.8 40H56a29 29 0 00-21.6 9L17.1 66.1c-1.3 1.4-.3 2.8 1.3 2.8h21.4c4.6 0 9-2.3 11.4-4.9l12.7-12.4c4.7-4.7 3.8-10.6.1-11.6" fill="white" id="wing"/>
+  </svg>
+</div>
+<div class=caption>
+<a href="https://www.freepik.com/free-photos-vectors/design" target=_blank>背景 pikisuperstar</a>
+</div>
+<script>
+setupGooseMover('a-more-natural-farm');
+
+document
+  .getElementById('a-more-natural-farm')
+  .addEventListener('transitionrun', evt => {
+    if (evt.propertyName !== 'transform') {
+      return;
+    }
+
+    const transformTransition = evt.target
+      .getAnimations()
+      .find(animation => animation.transitionProperty === 'transform');
+    if (!transformTransition) {
+      return;
+    }
+
+    const keyframes = transformTransition.effect.getKeyframes();
+
+    // 2019-11-07: This is broken in Chrome Canary because it seems to return
+    // keyframes without any properties for transitions.
+    //
+    // 2019-11-09: Also, Safari TP seems to always return
+    //   { ..., transform: 'none' }
+    // for both endpoints of the transition.
+    const start = keyframes[0].transform;
+    const end = keyframes[1].transform;
+
+    // Skip the initial transition where start === 'none'
+    const distance = start === 'none' ? 0 : calculateDistance(start, end);
+
+    // Progress at a rate of 400px per second
+    const targetDuration = (distance / 400) * 1000;
+
+    // Update all the transitions
+    for (const animation of evt.target.getAnimations()) {
+      if (!animation instanceof CSSTransition) {
+        continue;
+      }
+
+      // We could just do:
+      //
+      //  transition.effect.updateTiming({ duration });
+      //
+      // But using updatePlaybackRate will produce a smoother change if the
+      // transition is already in progress.
+      const { duration: currentDuration } = animation.effect.getTiming();
+      const playbackRate = targetDuration
+        ? currentDuration / targetDuration
+        : 1000;
+
+      animation.updatePlaybackRate(playbackRate);
+    }
+  });
+
+function calculateDistance(start, end) {
+  const startPos = getPositionFromTransform(start);
+  const endPos = getPositionFromTransform(end);
+
+  const startScale = getScaleFromTransform(start);
+  const endScale = getScaleFromTransform(end);
+
+  // For the scale, treat each time we double the size as being 200px.
+  const scaleFactor = scale => Math.log(scale) / Math.LN2;
+  const scaleDiff = Math.abs(scaleFactor(startScale) - scaleFactor(endScale));
+  const scaleDist = scaleDiff * 200;
+
+  return Math.sqrt(
+    Math.pow(endPos.x - startPos.x, 2) +
+      Math.pow(endPos.y - startPos.y, 2) +
+      Math.pow(scaleDist, 2)
+  );
+}
+
+function getPositionFromTransform(transform) {
+  const translateRegex = /translate\(([0-9.]+)px, ([0-9.]+)px\)/;
+
+  if (transform === 'none') {
+    return { x: 0, y: 0 };
+  }
+
+  const matches = transform.match(translateRegex);
+  if (!matches) {
+    throw new Error(`Failed to match translation in ${transform}`);
+  }
+
+  return { x: parseFloat(matches[1]), y: parseFloat(matches[2]) };
+}
+
+function getScaleFromTransform(transform) {
+  const scaleRegex = /scale\(([0-9.]+)\)/;
+
+  if (transform === 'none') {
+    return 1;
+  }
+
+  const matches = transform.match(scaleRegex);
+  if (!matches) {
+    throw new Error(`Failed to match scale in ${transform}`);
+  }
+
+  return parseFloat(matches[1]);
+}
+</script>
+</section>
+
+<section id="get-animations-coming-up">
+<h2><code>Element.getAnimations</code></h2>
+<ul class="logo-list">
+  <li class=exp-support><img class="logo" src="img/nightly-logo.svg"><span>Nightly</span>
+  <li class=exp-support><img class="logo" src="img/canary-logo.svg"><span>Canary</span>
+  <li class=exp-support><img class="logo" src="img/technology-preview.png"><span>Tech Preview</span>
+  <li class=no-support><img class="logo" src="img/edge-logo.svg"><span class=batsu>x</span>
+  <li class=exp-support><img class="logo" src="img/edgium-canary.png"><span>Canary</span>
+</ul>
+<style>
+#get-animations-coming-up .logo-list {
+  margin-top: 50px;
+}
+</style>
+</section>
+<!-- TODO: The kerning on the monospace font used on Windows for the heading
+  here is terrible. Provide a suitable Web font for monospace (and remove the
+  unused fonts from both the repo and the CSS) -->
+
+<section id="no-midpoints-for-you">
+<h2>⑥ CSS Transitionに中間点は加えられない</h2>
+</section>
+
+<section id=colors-gone-wrong>
+<div class="color-transition fragment">
+  <div class=red>
+    <div class=sample></div><span class=label>rgb(255, 0, 0)</span>
+  </div>
+  <div class=arrow>→</div>
+  <div class=midpoint>
+    <div class="sample hide"></div>
+    <div class="sample reveal"></div>
+    <span class="label hide">rgb(?, ?, ?)</span>
+    <span class="label reveal">rgb(128, 64, 0)</span>
+  </div>
+  <div class=arrow>→</div>
+  <div class=green>
+    <div class=sample></div><span class=label>rgb(0, 128, 0)</span>
+  </div>
+</div>
+<div class="transition-demo fragment">
+  <div class=sample></div>
+  <div class=label>😧</div>
+</div>
+<style>
+#colors-gone-wrong .color-transition.fragment {
+  opacity: 1;
+  visibility: visible;
+}
+#colors-gone-wrong .color-transition .midpoint .sample.reveal {
+  background-color: rgb(128, 64, 0);
+}
+#colors-gone-wrong .color-transition .reveal,
+#colors-gone-wrong .color-transition .hide {
+  transition: opacity 0.5s;
+}
+#colors-gone-wrong .color-transition .sample.reveal {
+  opacity: 0;
+  margin-top: -110px;
+}
+#colors-gone-wrong .color-transition .label.reveal {
+  opacity: 0;
+  margin-top: -40px;
+}
+#colors-gone-wrong .color-transition.visible .reveal {
+  opacity: 1;
+}
+#colors-gone-wrong .color-transition.visible .hide {
+  opacity: 0;
+}
+#colors-gone-wrong .transition-demo {
+  margin-top: 50px;
+}
+#colors-gone-wrong .transition-demo .sample {
+  animation-name: colors-gone-wrong;
+}
+@keyframes colors-gone-wrong {
+  from { background-color: rgb(255, 0, 0); }
+  10% { background-color: rgb(255, 0, 0); }
+  90% { background-color: rgb(0, 128, 0); }
+  to { background-color: rgb(0, 128, 0); }
+}
+
+/* Re-usable parts */
+.reveal .color-transition {
+  display: flex;
+  justify-content: center;
+}
+.reveal .color-transition .sample {
+  width: 100px;
+  height: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 5px solid var(--neutral-1);
+  border-radius: 100px;
+}
+.reveal .color-transition .red .sample {
+  background-color: rgb(255, 0, 0);
+}
+.reveal .color-transition .green .sample {
+  background-color: rgb(0, 128, 0);
+}
+.reveal .color-transition .label {
+  display: block;
+  margin-top: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+.reveal .color-transition .arrow {
+  font-size: 80px;
+  font-weight: bold;
+}
+
+.reveal .transition-demo .sample {
+  width: 150px;
+  height: 150px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 10px solid var(--neutral-1);
+  border-radius: 200px;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+.reveal .transition-demo .label {
+  margin-top: 20px;
+  font-size: 40px;
+  text-align: center;
+}
+</style>
+</section>
+
+<section id=colors-with-yellow>
+<div class=color-transition>
+  <div class=red>
+    <div class=sample></div><span class=label>rgb(255, 0, 0)</span>
+  </div>
+  <div class=arrow>→</div>
+  <div class=yellow>
+    <div class=sample></div><span class=label>rgb(255, 255, 0)</span>
+  </div>
+  <div class=arrow>→</div>
+  <div class=green>
+    <div class=sample></div><span class=label>rgb(0, 128, 0)</span>
+  </div>
+</div>
+<div class="transition-demo fragment">
+  <div class=sample></div>
+  <div class=label>🤔</div>
+</div>
+<style>
+#colors-with-yellow .color-transition .yellow .sample {
+  background-color: rgb(255, 255, 0);
+}
+#colors-with-yellow .transition-demo {
+  margin-top: 50px;
+}
+#colors-with-yellow .transition-demo .sample {
+  animation-name: colors-with-yellow;
+}
+
+@keyframes colors-with-yellow {
+  from { background-color: rgb(255, 0, 0); }
+  10% { background-color: rgb(255, 0, 0); }
+  50% { background-color: rgb(255, 255, 0); }
+  90% { background-color: rgb(0, 128, 0); }
+  to { background-color: rgb(0, 128, 0); }
+}
+</style>
+</section>
+
+<section id=colors-with-hsl>
+<div class=color-transition>
+  <div class=red>
+    <div class=sample></div><span class=label>hsl(0, 100%, 50%)</span>
+  </div>
+  <div class=arrow>→</div>
+  <div class=hslmidpoint>
+    <div class=sample></div><span class=label>hsl(60, 100%, 37.5%)</span>
+  </div>
+  <div class=arrow>→</div>
+  <div class=green>
+    <div class=sample></div><span class=label>hsl(120, 100%, 25%)</span>
+  </div>
+</div>
+<div class="transition-demo fragment">
+  <div class=sample></div>
+  <div class=label>❓</div>
+</div>
+<style>
+#colors-with-hsl .color-transition .hslmidpoint .sample {
+  background-color: hsl(60, 100%, 37.5%);
+}
+#colors-with-hsl .color-transition .label {
+  font-size: 25px;
+}
+#colors-with-hsl .transition-demo {
+  margin-top: 50px;
+}
+#colors-with-hsl .transition-demo .sample {
+  animation-name: colors-with-hsl;
+}
+
+@keyframes colors-with-hsl {
+  from { background-color: hsl(0, 100%, 50%); }
+  10% { background-color: hsl(0, 100%, 50%); }
+  30% { background-color: hsl(30, 100%, 43.75%); }
+  50% { background-color: hsl(60, 100%, 37.5%); }
+  70% { background-color: hsl(90, 100%, 31.25%); }
+  90% { background-color: hsl(120, 100%, 25%); }
+  to { background-color: hsl(120, 100%, 25%); }
+}
+</style>
+</section>
+
+<section id=design-a-duck>
+<div class=goose-container>
+  <svg viewBox="0 0 100 100" class="goose">
+    <defs>
+      <linearGradient id="color-goose-grad" x1="41.1" x2="41.1"
+        y1="56.7" y2="78.6" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+        <stop offset="1" stop-color="#000" stop-opacity="0.29"/>
+      </linearGradient>
+    </defs>
+    <path d="M39.9 77.9v11.2l8.6 6.1 12.6-9.4H44.9l-.1-7.9z"
+      fill="var(--secondary-color)" id="feet"/>
+    <g id="head">
+      <path d="M82.8 4h9c2.2 0 2.5 2.8 1 3.6l-10 4.8V4z"
+        fill="var(--secondary-color)" id="beak"/>
+      <path d="M63.7 39.8V13.6c0-6 4.6-9.6 9.5-9.6H83v8.3
+        c0 3.7-2.3 5-3.6 5.9-1.3.9-3.5 1.6-3.5 4.9v22.2
+        c0 2.1-.4 4.2-.4 4.2l-11.8-9.7z"
+        fill="var(--primary-color)" id="neck"/>
+      <circle cx="76.6" cy="9.6" r="1.5" id="eye" fill="var(--neutral-1)"/>
+    </g>
+    <path fill="var(--primary-color)"
+      d="M6.3 48.3c1.9 14.5 16.1 32.5 38.5 30.2s30.6-18.8 31-31.7
+      c-.9-5.4-6.9-8.6-10.6-7.4-3.7 1.2-8.5 9-8.5 9l-50.4-.1z" id="body"/>
+    <path fill="url(#color-goose-grad)"
+      d="M6.3 48.3c1.9 14.5 16.1 32.5 38.5 30.2s30.6-18.8 31-31.7
+      c-.9-5.4-6.9-8.6-10.6-7.4-3.7 1.2-8.5 9-8.5 9l-50.4-.1z"
+      id="body-shading"/>
+    <path
+      d="M63.8 40H56a29 29 0 00-21.6 9L17.1 66.1c-1.3 1.4-.3 2.8 1.3 2.8
+      h21.4c4.6 0 9-2.3 11.4-4.9l12.7-12.4c4.7-4.7 3.8-10.6.1-11.6"
+      fill="var(--neutral-1)" fill-opacity="0.2" id="wing-shadow"
+      transform="translate(0.5 0.5)" filter="blur(0.5px)"/>
+    <path
+      d="M63.8 40H56a29 29 0 00-21.6 9L17.1 66.1c-1.3 1.4-.3 2.8 1.3 2.8
+      h21.4c4.6 0 9-2.3 11.4-4.9l12.7-12.4c4.7-4.7 3.8-10.6.1-11.6"
+      fill="var(--primary-color)" id="wing"/>
+  </svg>
+</div>
+<div class=color-controls>
+  <div class=color-selector data-group=primary>
+    <span class=label>Color #1:</span>
+    <button class="swatch -selected"></button>
+    <button class=swatch></button>
+    <button class=swatch></button>
+    <button class=swatch></button>
+    <button class=swatch></button>
+  </div>
+  <div class=color-selector data-group=secondary>
+    <span class=label>Color #2:</span>
+    <button class=swatch></button>
+    <button class="swatch -selected"></button>
+    <button class=swatch></button>
+    <button class=swatch></button>
+    <button class=swatch></button>
+  </div>
+</div>
+<style>
+#design-a-duck .goose-container,
+#design-a-duck-fixed .goose-container {
+  --primary-color: white;
+  --secondary-color: #ff8b38;
+}
+#design-a-duck .goose-container .goose,
+#design-a-duck-fixed .goose-container .goose {
+  width: 400px;
+}
+#design-a-duck .goose-container #wing,
+#design-a-duck .goose-container #body,
+#design-a-duck .goose-container #neck,
+#design-a-duck .goose-container #beak,
+#design-a-duck .goose-container #feet,
+#design-a-duck-fixed .goose-container #wing,
+#design-a-duck-fixed .goose-container #body,
+#design-a-duck-fixed .goose-container #neck,
+#design-a-duck-fixed .goose-container #beak,
+#design-a-duck-fixed .goose-container #feet {
+  transition: fill 1s linear;
+}
+#design-a-duck .color-selector,
+#design-a-duck-fixed .color-selector {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#design-a-duck .color-selector .label,
+#design-a-duck, .color-selector .label {
+  font-size: 32px;
+  margin-right: 20px;
+}
+#design-a-duck .color-selector .swatch,
+#design-a-duck-fixed .color-selector .swatch {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 50px;
+  height: 50px;
+  border: 3px solid var(--neutral-1);
+  border-radius: 100px;
+  margin-left: 5px;
+  margin-right: 5px;
+  cursor: pointer;
+  outline: none;
+}
+#design-a-duck .color-selector .swatch.-selected,
+#design-a-duck-fixed .color-selector .swatch.-selected {
+  box-shadow: 0 0 0 6px var(--red-8);
+}
+#design-a-duck .color-selector .swatch:nth-of-type(1),
+#design-a-duck-fixed .color-selector .swatch:nth-of-type(1) {
+  background-color: white;
+}
+#design-a-duck .color-selector .swatch:nth-of-type(2),
+#design-a-duck-fixed .color-selector .swatch:nth-of-type(2) {
+  background-color: #ff8b38;
+}
+#design-a-duck .color-selector .swatch:nth-of-type(3),
+#design-a-duck-fixed .color-selector .swatch:nth-of-type(3) {
+  background-color: purple;
+}
+#design-a-duck .color-selector .swatch:nth-of-type(4),
+#design-a-duck-fixed .color-selector .swatch:nth-of-type(4) {
+  background-color: rgb(0, 128, 0);
+}
+#design-a-duck .color-selector .swatch:nth-of-type(5),
+#design-a-duck-fixed .color-selector .swatch:nth-of-type(5) {
+  background-color: rgb(255, 0, 0);
+}
+</style>
+<script>
+function setupGooseColoring(containerId) {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupStuffs);
+  } else {
+    setupStuffs();
+  }
+
+  function setupStuffs() {
+    const container = document.querySelector(
+      `#${containerId} .goose-container`
+    );
+    const buttons = document.querySelectorAll(
+      `#${containerId} .color-selector .swatch`
+    );
+
+    for (const button of buttons) {
+      button.addEventListener('click', evt => {
+        // Update button state
+        const selected = evt.target.parentElement.querySelector(
+          '.swatch.-selected'
+        );
+        if (selected && selected !== evt.target) {
+          selected.classList.remove('-selected');
+        }
+        evt.target.classList.add('-selected');
+
+        // Get grouping
+        const targetProperty =
+          evt.target.parentElement.dataset.group === 'primary'
+            ? '--primary-color'
+            : '--secondary-color';
+
+        // Set target color
+        const targetColor = getComputedStyle(evt.target).backgroundColor;
+        container.style.setProperty(targetProperty, targetColor);
+      });
+    }
+  }
+}
+
+setupGooseColoring('design-a-duck');
+</script>
+</section>
+
+<section id="css-still-not-working-group" class=css-not-working-group>
+<h2>CSS ワーキンググループ</h2>
+<img src="img/css-working-group.jpg">
+<div class=caption>
+  写真
+  <a href="https://twitter.com/jensimmons/status/1100912187495735296"
+     target=_blank>Jen Simmons</a>
+</div>
+<div class="speech-container fragment">
+  <div class=speech>
+  早く、補間機能を増やしてよ！
+  </div>
+</div>
+</section>
+
+<section id="hacking-colors">
+<h2><code>CSSTransition.setKeyframes()</code></h2>
+<pre><code class="hljs js" data-trim data-noescape>
+document.addEventListener(<span class="highlight fragment">'transitionrun'</span>, evt =&gt; {
+  <span class="highlight fragment">if (evt.propertyName !== 'fill') {</span>
+    return;
+  }
+
+  const transition = evt.target
+    .getAnimations()
+    .find(animation =&gt; animation.transitionProperty === 'fill');
+
+  <span class="highlight fragment">const keyframes = transition.effect.getKeyframes();</span>
+  const hslKeyframes = generateHslKeyframes(
+    keyframes[0].fill,
+    keyframes[1].fill
+  );
+
+  <span class="highlight fragment">transition.effect.setKeyframes(hslKeyframes);</span>
+});
+</code></pre>
+<style>
+#hacking-colors h2 {
+  font-size: 40px;
+}
+#hacking-colors pre code {
+  font-size: 19px;
+  max-height: none;
+}
+#hacking-colors .fragment.highlight {
+  opacity: 1;
+  visibility: visible;
+  background-color: transparent;
+}
+#hacking-colors .fragment.highlight.current-fragment {
+  background-color: var(--red-9);
+}
+</style>
+</section>
+
+<section id=design-a-duck-fixed>
+<div class=goose-container>
+  <svg viewBox="0 0 100 100" class="goose">
+    <defs>
+      <linearGradient id="color-goose-grad" x1="41.1" x2="41.1"
+        y1="56.7" y2="78.6" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+        <stop offset="1" stop-color="#000" stop-opacity="0.29"/>
+      </linearGradient>
+    </defs>
+    <path d="M39.9 77.9v11.2l8.6 6.1 12.6-9.4H44.9l-.1-7.9z"
+      fill="var(--secondary-color)" id="feet"/>
+    <g id="head">
+      <path d="M82.8 4h9c2.2 0 2.5 2.8 1 3.6l-10 4.8V4z"
+        fill="var(--secondary-color)" id="beak"/>
+      <path d="M63.7 39.8V13.6c0-6 4.6-9.6 9.5-9.6H83v8.3
+        c0 3.7-2.3 5-3.6 5.9-1.3.9-3.5 1.6-3.5 4.9v22.2
+        c0 2.1-.4 4.2-.4 4.2l-11.8-9.7z"
+        fill="var(--primary-color)" id="neck"/>
+      <circle cx="76.6" cy="9.6" r="1.5" id="eye" fill="var(--neutral-1)"/>
+    </g>
+    <path fill="var(--primary-color)"
+      d="M6.3 48.3c1.9 14.5 16.1 32.5 38.5 30.2s30.6-18.8 31-31.7
+      c-.9-5.4-6.9-8.6-10.6-7.4-3.7 1.2-8.5 9-8.5 9l-50.4-.1z" id="body"/>
+    <path fill="url(#color-goose-grad)"
+      d="M6.3 48.3c1.9 14.5 16.1 32.5 38.5 30.2s30.6-18.8 31-31.7
+      c-.9-5.4-6.9-8.6-10.6-7.4-3.7 1.2-8.5 9-8.5 9l-50.4-.1z"
+      id="body-shading"/>
+    <path
+      d="M63.8 40H56a29 29 0 00-21.6 9L17.1 66.1c-1.3 1.4-.3 2.8 1.3 2.8
+      h21.4c4.6 0 9-2.3 11.4-4.9l12.7-12.4c4.7-4.7 3.8-10.6.1-11.6"
+      fill="var(--neutral-1)" fill-opacity="0.2" id="wing-shadow"
+      transform="translate(0.5 0.5)" filter="blur(0.5px)"/>
+    <path
+      d="M63.8 40H56a29 29 0 00-21.6 9L17.1 66.1c-1.3 1.4-.3 2.8 1.3 2.8
+      h21.4c4.6 0 9-2.3 11.4-4.9l12.7-12.4c4.7-4.7 3.8-10.6.1-11.6"
+      fill="var(--primary-color)" id="wing"/>
+  </svg>
+</div>
+<div class=color-controls>
+  <div class=color-selector data-group=primary>
+    <span class=label>Color #1:</span>
+    <button class="swatch -selected"></button>
+    <button class=swatch></button>
+    <button class=swatch></button>
+    <button class=swatch></button>
+    <button class=swatch></button>
+  </div>
+  <div class=color-selector data-group=secondary>
+    <span class=label>Color #2:</span>
+    <button class=swatch></button>
+    <button class="swatch -selected"></button>
+    <button class=swatch></button>
+    <button class=swatch></button>
+    <button class=swatch></button>
+  </div>
+</div>
+<script>
+setupGooseColoring('design-a-duck-fixed');
+
+document
+  .getElementById('design-a-duck-fixed')
+  .addEventListener('transitionrun', evt => {
+    if (evt.propertyName !== 'fill') {
+      return;
+    }
+
+    const transition = evt.target
+      .getAnimations()
+      .find(animation => animation.transitionProperty === 'fill');
+    if (!transition) {
+      return;
+    }
+
+    const keyframes = transition.effect.getKeyframes();
+    const start = keyframes[0].fill;
+    const end = keyframes[1].fill;
+
+    // Implementations currently differ with regards to whether the easing goes
+    // on the keyframes or on the effect. Ultimately it should go on the effect
+    // but for now handle the case where it is on the keyframes by moving it
+    // to the effect.
+    if (keyframes[0].easing !== 'linear') {
+      transition.effect.updateTiming({ easing: keyframes[0].easing });
+    }
+
+    const hslKeyframes = generateHslKeyframes(start, end);
+    transition.effect.setKeyframes(hslKeyframes);
+  });
+
+function generateHslKeyframes(start, end) {
+  // From https://css-tricks.com/converting-color-spaces-in-javascript/
+  const toRgba = color => {
+    const sep = color.indexOf(",") > -1 ? "," : " ";
+    return color.substr(4).split(")")[0].split(sep);
+  };
+
+  const toHsl = rgb => {
+    const r = rgb[0] / 255;
+    const g = rgb[1] / 255;
+    const b = rgb[2] / 255;
+
+    const cmin = Math.min(r,g,b);
+    const cmax = Math.max(r,g,b);
+    const delta = cmax - cmin;
+
+    let h;
+
+    if (delta == 0) {
+      h = 0;
+    } else if (cmax == r) {
+      h = ((g - b) / delta) % 6;
+    } else if (cmax == g) {
+      h = (b - r) / delta + 2;
+    } else {
+      h = (r - g) / delta + 4;
+    }
+    h = Math.round(h * 60);
+
+    if (h < 0) {
+      h += 360;
+    }
+
+    let l = (cmax + cmin) / 2;
+    let s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+
+    l = +(l * 100);
+    s = +(s * 100);
+
+    return [h, s, l];
+  };
+
+  const startHsl = toHsl(toRgba(start));
+  const endHsl = toHsl(toRgba(end));
+
+  const numKeyframes = 11;
+  const keyframes = [];
+  for (let i = 0; i < numKeyframes; i++) {
+    const p = i / (numKeyframes - 1);
+    const interpolate = (a, b) => (1 - p) * a + p * b;
+    const h = interpolate(startHsl[0], endHsl[0]);
+    const s = interpolate(startHsl[1], endHsl[1]);
+    const l = interpolate(startHsl[2], endHsl[2]);
+    const fill = `hsl(${h.toFixed(1)}, ${s.toFixed(1)}%, ${l.toFixed(1)}%)`;
+
+    keyframes.push({
+      offset: i / (numKeyframes - 1),
+      fill,
+    });
+  }
+
+  return keyframes;
+}
+</script>
+</section>
+
+<section id=ok-maybe-not-hsv>
+<h2>HSLであまりよくないかも&hellip;</h2>
+<figure>
+  <img src="img/hsl-not-such-a-good-idea.png">
+  <figcaption>Source:
+    <a
+      href="https://howlettstudios.com/articles/2017/5/6/the-problem-with-hsv"
+      target="_blank"
+      >https://howlettstudios.com/articles/2017/5/6/the-problem-with-hsv</a>
+  </figcaption>
+</figure>
+<style>
+#ok-maybe-not-hsv figure img {
+  width: 500px;
+}
+#ok-maybe-not-hsv figure figcaption {
+  font-size: 20px;
+}
+#ok-maybe-not-hsv figure figcaption a,
+#ok-maybe-not-hsv figure figcaption a:visited {
+  color: var(--neutral-1);
+}
+</style>
+</section>
+<!-- TODO: Get permission to use the above image -->
+
+<section id="still-blocked-on-get-animations">
+<h2><code>CSSTransition.setKeyframes (Element.getAnimations)</code></h2>
+<ul class="logo-list">
+  <li class=exp-support><img class="logo" src="img/nightly-logo.svg"><span>Nightly</span>
+  <li class=exp-support><img class="logo" src="img/canary-logo.svg"><span>Canary</span>
+  <li class=exp-support><img class="logo" src="img/technology-preview.png"><span>Tech Preview</span>
+  <li class=no-support><img class="logo" src="img/edge-logo.svg"><span class=batsu>x</span>
+  <li class=exp-support><img class="logo" src="img/edgium-canary.png"><span>Canary</span>
+</ul>
+<style>
+#still-blocked-on-get-animations h2 {
+  font-size: 40px;
+}
+#still-blocked-on-get-animations .logo-list {
+  margin-top: 50px;
+}
+</style>
+</section>
+
+<section id="born-to-fly">
+<svg viewBox="0 0 100 100" class="birds">
+  <path d="M21.8 41l22.8-13.1c1.6-.9 2.2-2.5 1.5-4.1l-.5-1-3.1 1.4a5.3 5.3 0 00-4.2-1.8 5 5 0 00-4.5 3.3l-3.4 1.8-.3-22.3-1.6 1a26.9 26.9 0 00-11.6 13.7L3.1 6l-.4 1.8a29.3 29.3 0 006.8 27.4 7.5 7.5 0 01-5.6 2.1H1.4l1.8 1.8c2.6 2.8 6.3 3.9 10 3.9 3 0 6.1-.7 8.6-2zM74 60.4l22.8-13.1c1.6-.9 2.2-2.5 1.5-4.1l-.5-1-3.1 1.4a5.3 5.3 0 00-4.2-1.8 5 5 0 00-4.5 3.3l-3.4 1.8-.1-22.4-1.6 1a26.9 26.9 0 00-11.6 13.7L55.4 25.3l-.5 1.8a29.3 29.3 0 006.8 27.4 7.5 7.5 0 01-5.6 2.1h-2.5l1.8 1.8c2.6 2.7 6.3 3.9 10.1 3.9 3 .1 6.1-.7 8.5-1.9zM30.2 92.8L53 79.7c1.6-.9 2.2-2.5 1.5-4.1l-.5-1-3.1 1.4a5.3 5.3 0 00-4.2-1.8 5 5 0 00-4.5 3.3l-3.4 1.8-.2-22.3-1.6 1a26.9 26.9 0 00-11.6 13.7L11.6 57.8l-.5 1.8A29.3 29.3 0 0017.9 87a7.5 7.5 0 01-5.6 2.1H9.8l1.8 1.8c2.6 2.7 6.3 3.9 10.1 3.9 3 0 6-.7 8.5-2z"/>
+</svg>
+<div class=container>
+<h2>⑦ 飛び交いたい</h2>
+</div>
+<style>
+#born-to-fly {
+  position: relative;
+  height: 100%;
+}
+#born-to-fly .birds {
+  position: absolute;
+  top: 50px;
+  right: 100px;
+  width: 150px;
+  fill: var(--red-5);
+}
+#born-to-fly .container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>
+</section>
+<!-- TODO: Add a crying goose head to the bottom of the slide -->
+
+<section id="not-flying">
+<video data-autoplay muted loop>
+  <source src="video/not-flying.mp4" type="video/mp4">
+</video>
+<style>
+#not-flying video {
+  width: 700px;
+  border: 4px solid var(--neutral-1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+</style>
+</section>
+
+<section id="it-flies" data-background="var(--blue-5)">
+<div class=airfield>
+  <svg viewBox="0 0 850 600" class=flight-path>
+    <path fill="none" stroke="white" stroke-dasharray="5 5" stroke-linecap="round" d="M235.5 537.5c111.9-1.3 201.5-13.4 312.9 6.8 97.8 17.8 216.6-1.5 246.1-115.8C837.8 260.4 503.4 272 599.1 96.9c38.5-70.4 145.4-68.5 153.7 22.2 7 76.9-96.7 135.9-155.4 163.9-66.9 32-148.2 53-221.7 33.4C322 302 213.2 229 231.8 159c19-71.6 139.4-77.4 131.2 13.8-6.2 69.4-100.1 93.8-185.8 92.8s-105.7-116-74.7-147 87.9 10.3 52 54.1c-53.9 53.9-143-57.1-57-114.1 58-32 113.8 67.6 123.8 127.1 12.1 71.8 1.3 166.5 46.4 228.1 67.1 91.7 144.8 28.6 184.5-49.6 37.6-73.9 60.8-181.1-2-246.7-82-85.5-233-59.1-315.2 11.2C.9 243.4 21.3 540 235.5 537.5z"/>
+</svg>
+  <svg viewBox="0 0 100 100" class="goose">
+    <path d="M92.6 67.3c2-.4 4.4.1 6.1-.3
+    1.2-.3.7-1.6-1.2-1.8-1.2-.1-2.1-.6-3.6-1.4-.1 1.7-.3 2.6-1.3 3.5zM18.1
+    79.5c-2.3 1.4-6.6.5-8.9 1-2 .3-2.6 2.3-1.4 3.2 1.5.6 10.5.7 10.5.7 1.4-.2
+    1-4.4-.2-4.9z" fill="#ff8b38" class="beak-and-feet"/>
+    <linearGradient id="wing-grad" x1="48.7" x2="88.1" y1="41.6" y2="41.6" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#bdbdbd"/>
+      <stop offset=".4" stop-color="#fff"/>
+    </linearGradient>
+    <path fill="url(#wing-grad)" d="M67.1 61.7c-7-2.7 8.9-15.3 14.2-22.1 5.3-6.8 8.5-16.3 5.8-18.2-1.2-.9-1.9 4.6-2.1 2.5-.2-2.1-1.2-2.1-2.1-1.2-.9.9-2 6.1-2 3.8s-1-4-2.2-2.8c-1.3 1.3-1 4.2-2.3 5.8-.2-1.8.2-3.9-1.1-3.5-1.2.3-4.5 5.2-4.5 5.2s1.3-4.1-.1-4c-6 .3-20.4 17.4-22 26.5 2.6 4.6 8.9 9.4 14.1 8.2l4.3-.2z"/>
+    <path fill="#fff" d="M62.8 61.8c-6.1.4-10.3-3-17.1-12-3.7-4.9-31.5-34.9-34.9-34.7-1.3.1-.3 5.4-1 4.9-.6-.4-2.5-5.1-4.6-3.8-1.4.9 2.3 6 2.3 6s-4.1-4-5.2-3.6c-1.2.5 3.8 5.8 3.8 5.8S2 21 .5 22.5C-.6 23.8 6 28.1 6 28.1s-4.7-2.3-5.3-1C.1 28.6 5 31.4 5 31.4s-3.4-1.7-3.3.9c0 .9 7.9 9.9 11.9 13.3 4 3.3 11.8 14.2 14.2 17.5 2.5 3.3 4 7.4 4 7.4s-.4 3.1-3.9 4c-4.8 1.3-6.9 1.8-7.4 2.6-.6 1-.9 2.1-2.7 2.5-.9.8-1.5 4.5.5 4.8s15.4.6 24.7-.5a53.4 53.4 0 0018.6-5.4c3.3-1.8 15.2-9.1 16.8-9.7s6.3 1.4 11.6-.8c.9-.4.5-.2 2.4-.6 1.2-.3 1.6-3.2 1.3-3.4l-1-.6c-1.9-1.8-4.7-3.5-7.4-3.5s-6.1 3-8.1 3.3c-1.9.3-10.2-1.6-10.2-1.6"/>
+    <circle cx="88.2" cy="62.9" r=".8" fill="#211f1c"/>
+  </svg>
+</div>
+<style>
+#it-flies .airfield {
+  position: relative;
+  width: 850px;
+  height: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+#it-flies .flight-path {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+#it-flies .flight-path path {
+  stroke-dasharray: 0 4628 10 10 10 10 10 10 10 4668 10 10 10 10 10 10 10 200;
+  stroke-width: 2px;
+  animation: it-flies-flight-path 10s infinite linear;
+}
+@keyframes it-flies-flight-path {
+  from { stroke-dashoffset: 4738px };
+  to { stroke-dashoffset: 0px };
+}
+#it-flies .goose {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 50px;
+  offset-path: path('M235.5 537.5c111.9-1.3 201.5-13.4 312.9 6.8 97.8 17.8 216.6-1.5 246.1-115.8C837.8 260.4 503.4 272 599.1 96.9c38.5-70.4 145.4-68.5 153.7 22.2 7 76.9-96.7 135.9-155.4 163.9-66.9 32-148.2 53-221.7 33.4C322 302 213.2 229 231.8 159c19-71.6 139.4-77.4 131.2 13.8-6.2 69.4-100.1 93.8-185.8 92.8s-105.7-116-74.7-147 87.9 10.3 52 54.1c-53.9 53.9-143-57.1-57-114.1 58-32 113.8 67.6 123.8 127.1 12.1 71.8 1.3 166.5 46.4 228.1 67.1 91.7 144.8 28.6 184.5-49.6 37.6-73.9 60.8-181.1-2-246.7-82-85.5-233-59.1-315.2 11.2C.9 243.4 21.3 540 235.5 537.5z');
+  offset-anchor: 50% 83%;
+  animation: it-flies 10s infinite linear;
+}
+@keyframes it-flies {
+  to { offset-distance: 100% }
+}
+</style>
+</section>
+
+<section id="flying-explained">
+<h2><code>offset-path</code></h2>
+<pre><code class="hljs css" data-trim data-noescape>
+.goose {
+  offset-path: path('M100 100...');
+  animation: fly 10s linear infinite;
+}
+@keyframes fly {
+  to { offset-distance: 100%; }
+}
+</code></pre>
+<style>
+#flying-explained h2 {
+  font-size: 40px;
+}
+</style>
+</section>
+
+<section id="all-onboard">
+<video data-autoplay muted loop>
+  <source src="video/all-onboard.mp4" type="video/mp4">
+</video>
+<style>
+#all-onboard video {
+  width: 300px;
+  border: 4px solid var(--neutral-1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+</style>
+</section>
+
+<section id="motion-in-motion">
+<h2><code>offset-path</code></h2>
+<ul class="logo-list">
+  <li class=exp-support><img class="logo" src="img/nightly-logo.svg"><span>Nightly</span>
+    <span class=fineprint>(72のリリースに入る? 73?)</span>
+  <li><img class="logo" src="img/chrome-logo.svg"><span>55+</span>
+    <span class=fineprint>(⚠️&nbsp;<code>offset-anchor</code>は設定で無効)</span>
+  <li class=no-support><img class="logo" src="img/safari-logo.svg"><span class=batsu>x</span>
+  <li class=no-support><img class="logo" src="img/edge-logo.svg"><span class=batsu>x</span>
+    <li><img class="logo" src="img/edgium.png"><span class=maru>〇</span>
+    <span class=fineprint>(⚠️&nbsp;<code>offset-anchor</code>は設定で無効)</span>
+</ul>
+<style>
+#motion-in-motion h2 {
+  font-size: 40px;
+}
+#motion-in-motion .logo-list {
+  margin-top: 50px;
+}
+#motion-in-motion .logo-list .fineprint {
+  display: block;
+  margin-top: 10px;
+  font-size: 20px;
+  line-height: 1.2;
+}
+</style>
+</section>
+
+<section id="performance-anxiety">
+<h2>⑧ パフォーマンスは難しい</h2>
+</section>
+
+<section id="transforming-transparency" data-background="var(--blue-5)">
+<h2><code>transform</code> and <code>opacity</code></h2>
+<div class=demo-grid>
+<figure class="fragment move">
+  <svg class=goose><use href="#demo-grid-goose"></svg>
+  <figcaption>移動</figcaption>
+</figure>
+<figure class="fragment grow-anim">
+  <svg class=goose><use href="#demo-grid-goose"></svg>
+  <figcaption>拡大</figcaption>
+</figure>
+<figure class="fragment spin">
+  <svg class=goose><use href="#demo-grid-goose"></svg>
+  <figcaption>回転</figcaption>
+</figure>
+<figure class="fragment three-d">
+  <div class=stack>
+    <svg class=goose-body><use href="#demo-grid-goose-body"></svg>
+    <svg class=goose-wing><use href="#demo-grid-goose-wing"></svg>
+  </div>
+  <figcaption>3D</figcaption>
+</figure>
+<figure class="fragment fade">
+  <div class=stack>
+    <svg class=goose-body><use href="#demo-grid-goose-white-bits"></svg>
+    <svg class=goose-other-bits><use href="#demo-grid-goose-other-bits"></svg>
+  </div>
+  <figcaption>フェードアウト</figcaption>
+</figure>
+<figure class="fragment combo">
+  <svg class=goose><use href="#demo-grid-goose"></svg>
+  <figcaption>組み合わせ</figcaption>
+</figure>
+<figure class="fragment color-change">
+  <div class=stack>
+    <svg class=goose><use href="#demo-grid-goose-base-parts"></svg>
+    <svg class=pink-body><use href="#demo-grid-goose-pink-body"></svg>
+    <svg class=goose-shading><use href="#demo-grid-goose-shading"></svg>
+    <svg class=goose-wing><use href="#demo-grid-goose-wing"></svg>
+    <svg class=pink-wing><use href="#demo-grid-goose-pink-wing"></svg>
+  </div>
+  <figcaption>色変更</figcaption>
+</figure>
+<figure class="fragment shadow-effect">
+  <div class=stack>
+    <svg class=goose><use href="#demo-grid-goose"></svg>
+    <svg class=goose-shadow><use href="#demo-grid-shadow"></svg>
+  </div>
+  <figcaption>影効果</figcaption>
+</figure>
+<figure class="fragment fly">
+  <svg class=goose><use href="#demo-grid-goose"></svg>
+  <figcaption>飛行</figcaption>
+</figure>
+</div>
+<svg width="0" height="0" style="visibility: hidden">
+  <defs>
+    <linearGradient id="demo-grid-body-grad"
+      x1="41.1" x2="41.1" y1="56.7" y2="78.6" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#b5b5b5"/>
+    </linearGradient>
+    <linearGradient id="demo-grid-body-shading-grad"
+      x1="41.1" x2="41.1" y1="56.7" y2="78.6" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.29"/>
+    </linearGradient>
+  </defs>
+  <symbol viewBox="0 0 100 100" id="demo-grid-goose">
+    <path d="M39.9 77.9v11.2l8.6 6.1 12.6-9.4H44.9l-.1-7.9z" fill="#ff8b38" class="feet"/>
+    <g class="body">
+      <g class="head">
+        <path d="M82.8 4h9c2.2 0 2.5 2.8 1 3.6l-10 4.8V4z" fill="#ff8b38" class="beak"/>
+        <path d="M63.7 45V13.6c0-6 4.6-9.6 9.5-9.6H83v8.3c0 3.7-2.3 5-3.6
+        5.9-1.3.9-3.5 1.6-3.5 4.9v22.2c0 2.1-.4 4.2-.4 4.2l-11.8-4.7z"
+          fill="white" class="neck"/>
+        <circle cx="76.6" cy="9.6" r="1.5" class="eye"/>
+      </g>
+      <path fill="url(#demo-grid-body-grad)" d="M6.3 48.3c1.9 14.5 16.1 32.5
+      38.5 30.2s30.6-18.8 31-31.7c-.9-5.4-6.9-8.6-10.6-7.4-3.7 1.2-8.5 9-8.5
+      9l-50.4-.1z" class="torso"/>
+      <path d="M63.8 40H56a29 29 0 00-21.6 9L17.1 66.1c-1.3 1.4-.3 2.8 1.3
+      2.8h21.4c4.6 0 9-2.3 11.4-4.9l12.7-12.4c4.7-4.7 3.8-10.6.1-11.6"
+      fill="white" class="wing"/>
+    </g>
+  </symbol>
+  <symbol viewBox="0 0 100 100" id="demo-grid-goose-body">
+    <path d="M39.9 77.9v11.2l8.6 6.1 12.6-9.4H44.9l-.1-7.9z" fill="#ff8b38" class="feet"/>
+    <g class="body">
+      <g class="head">
+        <path d="M82.8 4h9c2.2 0 2.5 2.8 1 3.6l-10 4.8V4z" fill="#ff8b38" class="beak"/>
+        <path d="M63.7 45V13.6c0-6 4.6-9.6 9.5-9.6H83v8.3c0 3.7-2.3 5-3.6
+        5.9-1.3.9-3.5 1.6-3.5 4.9v22.2c0 2.1-.4 4.2-.4 4.2l-11.8-4.7z"
+          fill="white" class="neck"/>
+        <circle cx="76.6" cy="9.6" r="1.5" class="eye"/>
+      </g>
+      <path fill="url(#demo-grid-body-grad)" d="M6.3 48.3c1.9 14.5 16.1 32.5
+      38.5 30.2s30.6-18.8 31-31.7
+      c-.9-5.4 -6.9-8.6 -10.6-7.4
+      -15.7 1.2 -25.5 7 -25.5 9
+      l-33.4-.1z" class="torso"/>
+    </g>
+  </symbol>
+  <symbol viewBox="0 0 100 100" id="demo-grid-goose-wing">
+      <path d="M63.8 40H56a29 29 0 00-21.6 9L17.1 66.1c-1.3 1.4-.3 2.8 1.3
+      2.8h21.4c4.6 0 9-2.3 11.4-4.9l12.7-12.4c4.7-4.7 3.8-10.6.1-11.6"
+      fill="white" class="wing"/>
+  </symbol>
+  <symbol viewBox="0 0 100 100" id="demo-grid-goose-white-bits">
+    <g class="body">
+      <g class="head">
+        <path d="M63.7 45V13.6c0-6 4.6-9.6 9.5-9.6H83v8.3c0 3.7-2.3 5-3.6
+        5.9-1.3.9-3.5 1.6-3.5 4.9v22.2c0 2.1-.4 4.2-.4 4.2l-11.8-4.7z"
+          fill="white" class="neck"/>
+      </g>
+      <path fill="url(#demo-grid-body-grad)" d="M6.3 48.3c1.9 14.5 16.1 32.5
+      38.5 30.2s30.6-18.8 31-31.7c-.9-5.4-6.9-8.6-10.6-7.4-3.7 1.2-8.5 9-8.5
+      9l-50.4-.1z" class="torso"/>
+      <path d="M63.8 40H56a29 29 0 00-21.6 9L17.1 66.1c-1.3 1.4-.3 2.8 1.3
+      2.8h21.4c4.6 0 9-2.3 11.4-4.9l12.7-12.4c4.7-4.7 3.8-10.6.1-11.6"
+      fill="white" class="wing"/>
+    </g>
+  </symbol>
+  <symbol viewBox="0 0 100 100" id="demo-grid-goose-other-bits">
+    <path d="M39.9 77.9v11.2l8.6 6.1 12.6-9.4H44.9l-.1-7.9z" fill="#ff8b38" class="feet"/>
+    <path d="M82.8 4h9c2.2 0 2.5 2.8 1 3.6l-10 4.8V4z" fill="#ff8b38" class="beak"/>
+    <circle cx="76.6" cy="9.6" r="1.5" class="eye"/>
+  </symbol>
+  <symbol viewBox="0 0 100 100" id="demo-grid-goose-base-parts">
+    <path d="M39.9 77.9v11.2l8.6 6.1 12.6-9.4H44.9l-.1-7.9z" fill="#ff8b38" class="feet"/>
+    <g class="body">
+      <g class="head">
+        <path d="M82.8 4h9c2.2 0 2.5 2.8 1 3.6l-10 4.8V4z" fill="#ff8b38" class="beak"/>
+        <path d="M63.7 45V13.6c0-6 4.6-9.6 9.5-9.6H83v8.3c0 3.7-2.3 5-3.6
+        5.9-1.3.9-3.5 1.6-3.5 4.9v22.2c0 2.1-.4 4.2-.4 4.2l-11.8-4.7z"
+          fill="white" class="neck"/>
+      </g>
+      <path fill="white" d="M6.3 48.3c1.9 14.5 16.1 32.5
+      38.5 30.2s30.6-18.8 31-31.7c-.9-5.4-6.9-8.6-10.6-7.4-3.7 1.2-8.5 9-8.5
+      9l-50.4-.1z" class="torso"/>
+      <path d="M63.8 40H56a29 29 0 00-21.6 9L17.1 66.1c-1.3 1.4-.3 2.8 1.3
+      2.8h21.4c4.6 0 9-2.3 11.4-4.9l12.7-12.4c4.7-4.7 3.8-10.6.1-11.6"
+      fill="white" class="wing"/>
+    </g>
+  </symbol>
+  <symbol viewBox="0 0 100 100" id="demo-grid-goose-pink-body">
+    <g class="body" fill="var(--pink-5)" stroke="var(--pink-5)">
+      <path d="M63.7 45V13.6c0-6 4.6-9.6 9.5-9.6H83v8.3c0 3.7-2.3 5-3.6
+      5.9-1.3.9-3.5 1.6-3.5 4.9v22.2c0 2.1-.4 4.2-.4 4.2l-11.8-4.7z"
+      class="neck"/>
+      <path d="M6.3 48.3c1.9 14.5 16.1 32.5
+      38.5 30.2s30.6-18.8 31-31.7c-.9-5.4-6.9-8.6-10.6-7.4-3.7 1.2-8.5 9-8.5
+      9l-50.4-.1z" class="torso"/>
+    </g>
+  </symbol>
+  <symbol viewBox="0 0 100 100" id="demo-grid-goose-shading">
+    <path fill="url(#demo-grid-body-shading-grad)"
+    d="M6.3 48.3c1.9 14.5 16.1 32.5
+    38.5 30.2s30.6-18.8 31-31.7c-.9-5.4-6.9-8.6-10.6-7.4-3.7 1.2-8.5 9-8.5
+    9l-50.4-.1z" class="torso"/>
+    <circle cx="76.6" cy="9.6" r="1.5" class="eye"/>
+  </symbol>
+  <symbol viewBox="0 0 100 100" id="demo-grid-goose-pink-wing">
+    <g fill="var(--pink-5)" stroke="var(--pink-5)">
+      <path d="M63.8 40H56a29 29 0 00-21.6 9L17.1 66.1c-1.3 1.4-.3 2.8 1.3
+      2.8h21.4c4.6 0 9-2.3 11.4-4.9l12.7-12.4c4.7-4.7 3.8-10.6.1-11.6"
+      class="wing"/>
+    </g>
+  </symbol>
+  <symbol viewBox="0 0 100 100" id="demo-grid-shadow">
+    <ellipse cx="50" cy="95" rx="60" ry="10" fill="var(--blue-1)"/>
+  </symbo>
+</svg>
+<style>
+#transforming-transparency h2 {
+  margin-bottom: 0px;
+  color: white;
+  text-shadow: 1px 3px 2px var(--blue-2);
+}
+#transforming-transparency .demo-grid {
+  display: grid;
+  grid-gap: 10px 30px;
+  justify-content: center;
+  grid-template-columns: repeat(3, 250px);
+}
+#transforming-transparency .demo-grid figure svg {
+  width: 130px;
+  overflow: visible;
+}
+#transforming-transparency .demo-grid figure figcaption {
+  margin-top: -20px;
+  font-size: 25px;
+  color: white;
+}
+
+#transforming-transparency figure.move .goose {
+  animation: demo-move 1.2s -.3s infinite ease-in-out;
+}
+@keyframes demo-move {
+  from { transform: translate(-40px); }
+  50% { transform: translate(40px); }
+  to { transform: translate(-40px); }
+}
+
+#transforming-transparency figure.grow-anim .goose {
+  animation: demo-grow 1.2s -.3s infinite ease-in-out;
+}
+@keyframes demo-grow {
+  from { transform: scale(.5); }
+  50% { transform: scale(1.5); }
+  to { transform: scale(.5); }
+}
+
+#transforming-transparency figure.spin .goose {
+  animation: demo-spin 1.2s infinite ease-in-out;
+}
+@keyframes demo-spin {
+  from { transform: none; }
+  50% { transform: rotate(360deg); }
+  to { transform: none; }
+}
+
+#transforming-transparency figure .stack {
+  display: inline-block;
+  position: relative;
+}
+#transforming-transparency figure .stack :not(:first-child) {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#transforming-transparency figure.three-d .goose-wing {
+  animation: demo-three-d 1.5s infinite ease-in-out;
+  transform-origin: 50% 42%;
+}
+@keyframes demo-three-d {
+  from { transform: none; }
+  50% { transform: rotateX(180deg); }
+  to { transform: none; }
+}
+
+#transforming-transparency figure.fade .goose-body {
+  animation: demo-fade .8s infinite ease alternate;
+}
+@keyframes demo-fade {
+  to { opacity: 0 }
+}
+
+#transforming-transparency figure.combo .goose {
+  animation: demo-combo 2s infinite;
+}
+@keyframes demo-combo {
+  from { opacity: 1; animation-timing-function: ease-out }
+  to { transform: scale(2) rotate(720deg); opacity: 0 }
+}
+
+#transforming-transparency figure.color-change .pink-body,
+#transforming-transparency figure.color-change .pink-wing {
+  opacity: 0;
+  animation: demo-color-change 2.5s infinite ease-in-out;
+}
+@keyframes demo-color-change {
+  50% { opacity: 1; }
+}
+
+#transforming-transparency figure.shadow-effect .goose {
+  animation: demo-shadow-effect-jump 1.5s infinite cubic-bezier(0,.88,.84,1);
+}
+@keyframes demo-shadow-effect-jump {
+  50% {
+    transform: translateY(-50px);
+    animation-timing-function: cubic-bezier(.14,0,1,.2);
+  }
+}
+#transforming-transparency figure.shadow-effect .goose-shadow {
+  filter: blur(6px);
+  z-index: -1;
+  animation: demo-shadow-effect-grow-shadow 1.5s infinite;
+  transform-origin: 50% 80%;
+}
+@keyframes demo-shadow-effect-grow-shadow {
+  0% {
+    transform: scale(.5);
+    opacity: 0.8;
+    animation-timing-function: cubic-bezier(0,.88,.84,1);
+  }
+  50% {
+    transform: scale(.9);
+    opacity: 0.2;
+    animation-timing-function: cubic-bezier(.14,0,1,.2);
+  }
+  100% { transform: scale(.5); opacity: 0.8 }
+}
+
+#transforming-transparency figure.fly .goose {
+  offset-path: path('M65 65c40.4.6 119.9-22.2 119.9-100.3s-56 -125.5 -125.1 -125.5s-138.1 32.6 -138.1 74.3c0 32.6 16.9 40.4 28.7 40.4s43-14.3 43-39.1-11.8-33.9-34-33.9-43 23.1-43 41.3c-3.9 97.9 58.7 141.3 148.6 142.7z');
+  animation: demo-fly 2s infinite linear;
+}
+@keyframes demo-fly {
+  to { offset-distance: 100% }
+}
+</style>
+</section>
+
+<section id="taketori">
+<video data-autoplay>
+  <source src="video/taketori-sped-up.mp4" type="video/mp4">
+</video>
+<div class="url">
+  <a href="https://mozanime.github.io/taketori/">mozanime.github.io/taketori/</a>
+</div>
+<style>
+#taketori video {
+  border: 4px solid #222;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+#taketori .url {
+  background: var(--blue-9);
+  border-radius: 30px;
+  text-align: center;
+}
+#taketori .url a,
+#taketori .url a:visited {
+  color: var(--blue-2);
+  font-weight: 500;
+}
+</style>
+</section>
+
+<section id="perf-inspection-devtools">
+<h2>Firefox Animation DevTools</h2>
+<div class="side-by-side">
+  <img src="img/some-on-compositor.png">
+  <img src="img/synced-animation.png">
+</div>
+<style>
+#perf-inspection-devtools img {
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  padding: .5em;
+  width: 400px;
+  filter: drop-shadow(1px 4px 3px var(--neutral-8));
+}
+#perf-inspection-devtools img:nth-child(2) {
+  width: 500px;
+}
+</style>
+</section>
+
+<section id="sick-of-animation">
+<h2>⑨ アニメーションで頭痛になる</h2>
+</section>
+
+<section id="vestibular-disorders">
+<h2>アニメーション病</h2>
+<img src="img/headache-city-1.jpg">
+<div class=callout>
+  頭痛、目まい、吐き気、てんかんなど
+</div>
+<style>
+#vestibular-disorders h2 {
+  margin-bottom: 0px;
+}
+#vestibular-disorders img {
+  max-height: 400px;
+}
+</style>
+</section>
+
+<section id="motion-settings">
+<div class=side-by-side>
+  <figure>
+    <img src="img/reduce-motion-windows.png">
+    <figcaption>Windows</figcaption>
+  </figure>
+  <figure>
+    <img src="img/reduce-motion-mac.png">
+    <figcaption>Mac</figcaption>
+  </figure>
+</div>
+<style>
+#motion-settings .side-by-side img {
+  margin: 20px;
+}
+</style>
+</section>
+
+<section id="prefers-reduced-motion" data-transition="fade-out">
+<code class=css-prod>prefers-reduced-motion: reduce | no-preference</code>
+<pre><code class="hljs css" data-trim>
+div {
+  animation: ...
+  transition: ...
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-name: none !important;
+    transition-property: none !important;
+
+    /*
+     * 例えばtransitionイベントが必要なら…
+     *  transition-duration: 0.01s !important;
+     *  transition-delay: 0s !important;
+     */
+  }
+}
+</code></pre>
+<style>
+#prefers-reduced-motion pre code {
+  max-height: none;
+}
+#prefers-reduced-motion .css-prod {
+  font-family: "Courier New", monospace;
+  font-weight: bold;
+  font-size: 30px;
+  color: var(--pink);
+
+  display: block;
+  margin-bottom: 1em;
+}
+</style>
+</section>
+
+<section id="prefers-reduced-motion-js">
+<h2>From JS&hellip;</h2>
+<pre><code class="hljs js" data-trim>
+// ブラウザー対応を確認
+if (!('animate' in elem)) {
+  return;
+}
+
+// ユーザー対応を確認
+if (matchMedia('(prefers-reduced-motion)').matches) {
+  return;
+}
+
+// アニメーションしよう～
+</code></pre>
+</section>
+
+<section id="i-prefer-you">
+<h2><code>prefers-reduced-motion</code></h2>
+<ul class="logo-list">
+  <li><img class="logo" src="img/firefox-logo.svg"><span>64+</span>
+  <li><img class="logo" src="img/chrome-logo.svg"><span>74+</span>
+  <li><img class="logo" src="img/safari-logo.svg"><span>10.1+</span>
+  <li class=no-support><img class="logo" src="img/edge-logo.svg"><span class=batsu>x</span>
+  <li><img class="logo" src="img/edgium.png"><span class=maru>〇</span>
+</ul>
+<style>
+#i-prefer-you .logo-list {
+  margin-top: 50px;
+}
+</style>
+</section>
+
+<section id="summary-summary" class="summary-slide" data-transition="fade">
+<h2>アニメーションが嫌い10つの利用</h2>
+<div class=summary-table>
+<ol>
+  <li>フレームベースのアニメーション&hellip; <code><nobr>jump-none</nobr></code>
+  <li>CSS Transitionでバグる&hellip; <code>transitioncancel</code>
+  <li>JSでアニメーションを生成する&hellip; <code>Element.animate</code>
+  <li>アニメーションの<em>全体的</em>なイージング&hellip; <code>Element.animate</code>
+  <li>アニメーションの<em>速度</em>を設定する&hellip; <code>Element.getAnimations</code>
+  <li>CSS Transitionの中間点&hellip; <code>Element.getAnimations</code>
+  <li>飛び交う&hellip; <code><nobr>offset-path</nobr></code>
+  <li>パフォーマンス&hellip; Firefox Animation DevTools
+  <li>頭痛&hellip; <code><nobr>prefers-reduced-motion</nobr></code>
+</ol>
+<ol start=10 class=fragment data-fragment-index=1>
+  <li>&hellip;楽しすぎる！
+</ol>
+</div>
+<style>
+#summary-summary .summary-table {
+  font-size: 25px;
+  padding: 1em;
+  border-radius: 1em;
+  column-count: 2;
+  column-gap: 50px;
+  background: var(--blue-10);
+  color: var(--blue-2);
+}
+#summary-summary .summary-table em {
+  text-emphasis: dot;
+  font-style: normal;
+}
+#summary-summary .summary-table code {
+  color: var(--red-2);
+  background: var(--red-10);
+  border-radius: 10px;
+  padding: 2px 10px;
+}
+#summary-summary .summary-table h3 {
+  font-size: 25px;
+  color: var(--green-dark);
+  margin-bottom: .4em;
+}
+#summary-summary .summary-table ol {
+  /* Revert reveal styles */
+  display: block;
+}
+#summary-summary .summary-table ol li {
+  margin-bottom: .5em;
+  break-inside: avoid;
+}
+</style>
+</section>
+
+<section id="thankyou" data-transition="fade">
+<h2>ご清聴ありがとうございました</h2>
+<div class=slides-link>
+  <a href="https://birtles.github.io/mozdev2019/"
+    target="_blank">birtles.github.io/mozdev2019/</a>
+</div>
+<div class=links>
+  <div class=link>
+    <a href="https://twitter.com/brianskold" target=_blank><img class=logo
+       src="img/twitter-avatar.png"></a>
+    <a href="https://twitter.com/brianskold" target=_blank>@brianskold</a>
+  </div>
+  <div class=link>
+    <a href="https://birchill.co.jp" target=_blank><img class=logo
+       src="img/birchill-logo.svg"></a>
+    <a href="https://birchill.co.jp" target=_blank>birchill.co.jp</a>
+  </div>
+</div>
+<style>
+#thankyou .slides-link,
+#thankyou .links {
+  margin: 1em 0;
+}
+
+#thankyou a,
+#thankyou a:visited {
+  color: var(--blue-2);
+  text-decoration: underline dotted 2px;
+}
+
+#thankyou .links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#thankyou .link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+#thankyou .link img {
+  border: none;
+  box-shadow: none;
+  width: 150px;
+  height: 150px;
+}
+#thankyou .link a {
+  display: block;
+}
+</style>
+</section>
+
+</div> <!-- end slides -->
+</div> <!-- end reveal -->
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+Reveal.initialize({
+  dependencies: [
+    { src: 'plugin/notes/notes.js', async: true },
+    {
+      src: 'plugin/highlight/highlight.js',
+      async: true,
+      callback: function() {
+        hljs.initHighlightingOnLoad();
+      },
+    },
+  ],
+  history: true,
+  transition: 'fade',
+});
+</script>
+</body>
+</html>
