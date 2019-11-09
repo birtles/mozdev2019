@@ -344,6 +344,7 @@ document.getElementsByTagName('head')[0].appendChild(link);
 }
 #ga .beak {
   animation: ga-beak 0.75s alternate steps(1) infinite forwards;
+  /* This seems to be off in Safari somehow... not sure why. */
   transform-origin: 5% 40%;
   transform-box: fill-box;
 }
@@ -1935,6 +1936,10 @@ document
 
     // 2019-11-07: This is broken in Chrome Canary because it seems to return
     // keyframes without any properties for transitions.
+    //
+    // 2019-11-09: Also, Safari TP seems to always return
+    //   { ..., transform: 'none' }
+    // for both endpoints of the transition.
     const start = keyframes[0].transform;
     const end = keyframes[1].transform;
 
@@ -3285,15 +3290,15 @@ if (matchMedia('(prefers-reduced-motion)').matches) {
 <h2>10 things I hate about animations&hellip;</h2>
 <div class=summary-table>
 <ol>
-  <li>Frame-based animations&hellip;<code><nobr>jump-none</nobr></code>
-  <li>Transition bugs&hellip;<code>transitioncancel</code>
-  <li>Creating animations from JS&hellip;<code>Element.animate</code>
-  <li>Easing the <em>whole</em> animation&hellip;<code>Element.animate</code>
-  <li>Defining animation <em>speed</em>&hellip;<code>Element.getAnimations</code>
-  <li>Transition <em>midpoints</em>&hellip;<code>Element.getAnimations</code>
-  <li>Flying&hellip;<code><nobr>offset-path</nobr></code>
+  <li>Frame-based animations&hellip; <code><nobr>jump-none</nobr></code>
+  <li>Transition bugs&hellip; <code>transitioncancel</code>
+  <li>Creating animations from JS&hellip; <code>Element.animate</code>
+  <li>Easing the <em>whole</em> animation&hellip; <code>Element.animate</code>
+  <li>Defining animation <em>speed</em>&hellip; <code>Element.getAnimations</code>
+  <li>Transition <em>midpoints</em>&hellip; <code>Element.getAnimations</code>
+  <li>Flying&hellip; <code><nobr>offset-path</nobr></code>
   <li>Performance&hellip; Firefox Animation DevTools
-  <li>Headaches&hellip;<code><nobr>prefers-reduced-motion</nobr></code>
+  <li>Headaches&hellip; <code><nobr>prefers-reduced-motion</nobr></code>
 </ol>
 <ol start=10 class=fragment data-fragment-index=1>
   <li>&hellip;they are too much fun!
