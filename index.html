@@ -121,7 +121,7 @@ document.getElementsByTagName('head')[0].appendChild(link);
 </style>
 
 <section id="about-me">
-<h2>A few things about me&hellip;</h2>
+<h2>Self-introduction</h2>
 <ul class="grid">
   <li class="fragment fade-in"><img src="img/koala.svg"></li>
   <li class="fragment fade-in"><img src="img/tokyo-tower.svg"></li>
@@ -136,10 +136,9 @@ document.getElementsByTagName('head')[0].appendChild(link);
 </ul>
 <style>
 #about-me ul.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 10px;
-  grid-auto-rows: minmax(160px, auto);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   width: 100%;
   margin: 0;
 }
@@ -149,6 +148,8 @@ document.getElementsByTagName('head')[0].appendChild(link);
   width: 240px;
   height: 240px;
   border-radius: 120px;
+  margin-left: 5px;
+  margin-right: 5px;
 
   display: flex;
   justify-content: center;
