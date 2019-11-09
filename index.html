@@ -1006,17 +1006,32 @@ document.getElementsByTagName('head')[0].appendChild(link);
 <ul class="logo-list">
   <li><img class="logo" src="img/firefox-logo.svg"><span>53+</span>
   <li><img class="logo" src="img/chrome-logo.svg"><span>74+</span>
+    <span class=fineprint>No <code>animationcancel</code></span>
   <li class=exp-support><img class="logo" src="img/technology-preview.png"><span>Tech Preview</span>
   <li class=no-support><img class="logo" src="img/edge-logo.svg"><span class=batsu>x</span>
+    <span class=fineprint>Only <code>transitionstart</code></span>
   <li><img class="logo" src="img/edgium.png"><span class=maru>〇</span>
+    <span class=fineprint>No <code>animationcancel</code></span>
 </ul>
 <style>
 #hows-your-event-game .logo-list {
   margin-top: 50px;
 }
+#hows-your-event-game code {
+  color: var(--red-5);
+  background: var(--red-10);
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+#hows-your-event-game .logo-list .fineprint {
+  display: block;
+  margin-top: 10px;
+  font-size: 20px;
+  line-height: 1.2;
+}
 </style>
 </section>
-<!-- TODO: Check Safari status for the above. -->
 
 <section id="i-like-js">
   <h2>#3: I ❤️ JS</h2>
