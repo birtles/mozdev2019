@@ -1,8 +1,8 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
 <meta charset="utf-8">
-<title>10 things I hate about about animation</title>
+<title>애니메이션이 싫은 이유 10가지</title>
 <meta name="author" content="Brian Birtles">
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -121,7 +121,7 @@ document.getElementsByTagName('head')[0].appendChild(link);
 <!-- TODO: Add a hand-written "And how to fix them" insertion -->
 
 <section id="about-me">
-<h2>Self-introduction</h2>
+<h2>자기 소개</h2>
 <ul class="grid">
   <li class="fragment fade-in"><img src="img/koala.svg"></li>
   <li class="fragment fade-in"><img src="img/tokyo-tower.svg"></li>
@@ -204,12 +204,12 @@ document.getElementsByTagName('head')[0].appendChild(link);
 </section>
 
 <section id="animations-suck" data-background="var(--blue-5)">
-<h2>10 reasons why animations are&hellip;</h2>
+<h2>애니메이션은.&hellip;</h2>
 <ul>
-  <li>Hard
-  <li>Buggy
-  <li>Sluggish
-  <li>Frustrating
+  <li>복잡합니다
+  <li>버그가 많습니다
+  <li>느립니다
+  <li>힘듭니다
 </ul>
 <svg viewBox="0 0 100 100" class="fragment bad-goose">
   <g class="man" fill="white">
@@ -258,7 +258,7 @@ document.getElementsByTagName('head')[0].appendChild(link);
 </section>
 
 <section id="no-frames-for-you">
-  <h2>#1: It's hard to do frame-based animation</h2>
+  <h2>① 프레임 기반 애니메이션은 어렵습니다</h2>
 </section>
 
 <section id="ga" data-background="var(--blue-5)">
@@ -620,7 +620,7 @@ document.getElementsByTagName('head')[0].appendChild(link);
 <section id="a-simple-attempt-explained">
 <pre><code class="hljs css" data-trim data-noescape>
 .filmstrip {
-  /* steps(7) = 7 "changes" including the last one */
+  /* steps(7) = 마지막을 포함해서 '변경'이 7개 */
   animation: slide 1s infinite <span class="highlight">steps(7)</span>;
 }
 @keyframes slide {
@@ -749,7 +749,7 @@ document.getElementsByTagName('head')[0].appendChild(link);
 <!-- TODO: Do something pretter for the "New!" highlight -->
 <pre><code class="hljs css" data-trim data-noescape>
 .filmstrip {
-  /* New! jump-none! */
+  /* 신규! jump-none! */
   animation: slide 1s infinite <span class="highlight">steps(7, jump-none)</span>;
 }
 @keyframes slide {
@@ -879,7 +879,7 @@ document.getElementsByTagName('head')[0].appendChild(link);
 </section>
 
 <section id="transitions-suck">
-  <h2>#2: Transitions are buggy</h2>
+  <h2>② Transitions에는 버그가 많습니다</h2>
 </section>
 
 <section id="lots-of-bugs">
@@ -890,8 +890,8 @@ document.getElementsByTagName('head')[0].appendChild(link);
   <img src="img/bug1075333.png" width="800" height="187">
   <img src="img/bug1059650.png" width="800" height="192">
   <div class=labels>
-    <span>1. Sometimes transitions don't run</span>
-    <span>2. Sometimes transitions don't finish</span>
+    <span>1. 종종 작동하지 않는 transitions</span>
+    <span>2. 종종 완료되지 않는 transitions</span>
   </div>
 </div>
 <style>
@@ -972,20 +972,19 @@ document.getElementsByTagName('head')[0].appendChild(link);
   view -->
 
 <section id="lots-of-events">
-<h2>New events!</h2>
+<h2>새 이벤트!</h2>
 <ul>
   <li><code>transitionrun</code>
-    <p class=explanation>&rarr; a transition was created 🆕
-    <p class=explanation>&rarr; ok to wait for <code>transitionend</code> 🙆‍♂️</p>
+    <p class=explanation>&rarr; transition이 생성됩니다 🆕
+    <p class=explanation>&rarr; 확인하고 <code>transitionend</code>를 기다립니다 🙆‍♂️</p>
   <li class=fragment><code>transitioncancel</code>
-    <p class=explanation>&rarr; element vanished 🗑️
-    <span style="font-size: smaller">(dropped, re-&ldquo;rendered&rdquo;,
-      <code>display:none</code> etc.)</span></p>
-    <p class=explanation>&rarr; don't wait for <code>transitionend</code> ❌</p>
+    <p class=explanation>&rarr; 요소가 사라집니다 🗑️
+    <span style="font-size: smaller">(떨어지거나, 재생성되거나, <code>display:none</code> 되는 등)</span></p>
+    <p class=explanation>&rarr; <code>transitionend</code>를 기다리지 마세요 ❌</p>
   <li class=fragment><code>transitionstart</code>
-    <span class=explanation>(to match <code>animationstart</code>)</span>
+    <span class=explanation>(c.f. <code>animationstart</code>)</span>
   <li class=fragment><code>animationcancel</code>
-    <span class=explanation>(as with <code>transitioncancel</code>)</span>
+    <span class=explanation>(c.f. <code>transitioncancel</code>)</span>
 </ul>
 <style>
 #lots-of-events code {
@@ -1003,7 +1002,7 @@ document.getElementsByTagName('head')[0].appendChild(link);
 </section>
 
 <section id="hows-your-event-game">
-<h2><code>transitioncancel</code> and friends</h2>
+<h2><code>transitioncancel</code>과 친구들</h2>
 <ul class="logo-list">
   <li><img class="logo" src="img/firefox-logo.svg"><span>53+</span>
   <li><img class="logo" src="img/chrome-logo.svg"><span>74+</span>
@@ -1136,7 +1135,7 @@ star.style.animation =
   `${uniqueKeyframesName} ${duration}ms ` +
   `${delay}ms infinite`;
 
-<span class="highlight fragment">// Don't forget to clean up!</span>
+<span class="highlight fragment">// 정리를 잊지 마세요!</span>
 </code></pre>
 <style>
 #keyframes-from-js .fragment.highlight {
@@ -1153,8 +1152,8 @@ star.style.animation =
 <section id="transitions-from-js">
 <h2>CSS transitions from JS</h2>
 <ul>
-  <li><code>transitionrun</code>, <code>transitioncancel</code> etc.
-  <li>Triggering transitions from JS is <em>hard</em>&hellip;
+  <li><code>transitionrun</code>, <code>transitioncancel</code> 등
+  <li>JS에서 transitions를 트리거하기는 어렵습니다
 </ul>
 <div>
   <figure>
@@ -1188,7 +1187,7 @@ star.style.animation =
 </section>
 
 <section id="random-web-animations">
-<h2>&hellip;using <code>Element.animate()</code></h2>
+<h2><code>Element.animate()</code> 사용</h2>
 <pre><code class="hljs js" data-trim data-noescape>
 star.animate(
   [
@@ -1202,7 +1201,7 @@ star.animate(
 </section>
 
 <section id="web-animations-are-finished">
-<h2>&hellip;using <code>Element.animate()</code></h2>
+<h2><code>Element.animate()</code> 사용</h2>
 <pre><code class="hljs js" data-trim data-noescape>
 <span class=highlight>const starAnimation =</span> star.animate(
   [
@@ -1244,7 +1243,7 @@ star.animate(
 </section>
 
 <section id="easing-peasing">
-<h2>#4: Easing the <em>whole</em> animation is hard</h2>
+<h2>④ 애니메이션 전체 이징(Easing)은 어렵습니다</h2>
 <style>
 #easing-peasing h2 em {
   color: var(--blue-5);
@@ -1471,8 +1470,8 @@ star.animate(
 <pre class=code-overlay><code class="hljs js" data-trim data-noescape>
 head.animate(
   {
-    // Implicit 0%/100% keyframes are not yet
-    // shipping in Chrome/Firefox
+    // Chrome/Firefox는 암시적 0%/100%
+    // 키프레임을 지원하지 않습니다
     transform: ['none', 'rotate(60deg)', 'none'],
     offset: [0, 0.6, 1],
   },
@@ -1625,7 +1624,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </section>
 
 <section id="this-is-going-too-far">
-<h2>#5: You can't define animations by <em>speed</em> instead of time</h2>
+<h2>⑤ 애니메이션을 시간이 아닌 속도로 정의할 수 없습니다</h2>
 <style>
 #this-is-going-too-far h2 em {
   color: var(--blue-5);
@@ -1659,7 +1658,7 @@ document.addEventListener('DOMContentLoaded', () => {
   </svg>
 </div>
 <div class=caption>
-<a href="https://www.freepik.com/free-photos-vectors/design" target=_blank>Background by pikisuperstar</a>
+<a href="https://www.freepik.com/free-photos-vectors/design" target=_blank>배경지원: pikisuperstar</a>
 </div>
 <style>
 #going-to-the-farm .background,
@@ -1799,7 +1798,7 @@ setupGooseMover('going-to-the-farm');
 </section>
 
 <section id="css-not-working-group" class=css-not-working-group>
-<h2>CSS &ldquo;Working&rdquo; Group</h2>
+<h2>CSS 워킹 그룹</h2>
 <img src="img/css-working-group.jpg">
 <div class=caption>
   Source:
@@ -1808,7 +1807,7 @@ setupGooseMover('going-to-the-farm');
 </div>
 <div class="speech-container fragment">
   <div class=speech>
-  Hurry up, add speed-based animations!
+  어서 속도 기반 애니메이션을 추가하세요!
   </div>
 </div>
 <style>
@@ -1863,10 +1862,10 @@ document.addEventListener(<span class="highlight fragment">'transitionrun'</span
     keyframes[1].transform
   );
 
-  // Move at 700px per second
+  // 초당 700px로 이동
   const duration = (distance / 700) * 1000;
   <span class="highlight fragment">transition.effect.updateTiming({ duration });</span>
-  // NOTE: `transition.updatePlaybackRate()` would be even better
+  // 주의: transition.updatePlaybackRate()가 더 나았을 겁니다
 });
 </code></pre>
 <style>
@@ -2041,7 +2040,7 @@ function getScaleFromTransform(transform) {
   unused fonts from both the repo and the CSS) -->
 
 <section id="no-midpoints-for-you">
-<h2>#6: You can't define transitions with midpoints</h2>
+<h2>⑥ 중간점을 가진 transitions를 정의할 수 없습니다</h2>
 </section>
 
 <section id=colors-gone-wrong>
@@ -2413,7 +2412,7 @@ setupGooseColoring('design-a-duck');
 </section>
 
 <section id="css-still-not-working-group" class=css-not-working-group>
-<h2>CSS &ldquo;Working&rdquo; Group</h2>
+<h2>CSS 워킹 그룹</h2>
 <img src="img/css-working-group.jpg">
 <div class=caption>
   Source:
@@ -2422,7 +2421,7 @@ setupGooseColoring('design-a-duck');
 </div>
 <div class="speech-container fragment">
   <div class=speech>
-  Hurry up, add more interpolation modes!
+  어서 보간 모드를 더 추가하세요!
   </div>
 </div>
 </section>
@@ -2624,7 +2623,7 @@ function generateHslKeyframes(start, end) {
 </section>
 
 <section id=ok-maybe-not-hsv>
-<h2>Maybe HSL wasn't such a good idea&hellip;</h2>
+<h2>HSL은 좋은 생각이 아니었던 것 같습니다</h2>
 <figure>
   <img src="img/hsl-not-such-a-good-idea.png">
   <figcaption>Source:
@@ -2673,7 +2672,7 @@ function generateHslKeyframes(start, end) {
   <path d="M21.8 41l22.8-13.1c1.6-.9 2.2-2.5 1.5-4.1l-.5-1-3.1 1.4a5.3 5.3 0 00-4.2-1.8 5 5 0 00-4.5 3.3l-3.4 1.8-.3-22.3-1.6 1a26.9 26.9 0 00-11.6 13.7L3.1 6l-.4 1.8a29.3 29.3 0 006.8 27.4 7.5 7.5 0 01-5.6 2.1H1.4l1.8 1.8c2.6 2.8 6.3 3.9 10 3.9 3 0 6.1-.7 8.6-2zM74 60.4l22.8-13.1c1.6-.9 2.2-2.5 1.5-4.1l-.5-1-3.1 1.4a5.3 5.3 0 00-4.2-1.8 5 5 0 00-4.5 3.3l-3.4 1.8-.1-22.4-1.6 1a26.9 26.9 0 00-11.6 13.7L55.4 25.3l-.5 1.8a29.3 29.3 0 006.8 27.4 7.5 7.5 0 01-5.6 2.1h-2.5l1.8 1.8c2.6 2.7 6.3 3.9 10.1 3.9 3 .1 6.1-.7 8.5-1.9zM30.2 92.8L53 79.7c1.6-.9 2.2-2.5 1.5-4.1l-.5-1-3.1 1.4a5.3 5.3 0 00-4.2-1.8 5 5 0 00-4.5 3.3l-3.4 1.8-.2-22.3-1.6 1a26.9 26.9 0 00-11.6 13.7L11.6 57.8l-.5 1.8A29.3 29.3 0 0017.9 87a7.5 7.5 0 01-5.6 2.1H9.8l1.8 1.8c2.6 2.7 6.3 3.9 10.1 3.9 3 0 6-.7 8.5-2z"/>
 </svg>
 <div class=container>
-<h2>#7: I want to fly</h2>
+<h2>⑦ 날고 싶어요</h2>
 </div>
 <style>
 #born-to-fly {
@@ -2801,13 +2800,13 @@ function generateHslKeyframes(start, end) {
 <h2><code>offset-path</code></h2>
 <ul class="logo-list">
   <li class=exp-support><img class="logo" src="img/nightly-logo.svg"><span>Nightly</span>
-    <span class=fineprint>(Release in 72? 73?)</span>
+    <span class=fineprint>(버전 72, 73에서 구현될지 모릅니다)</span>
   <li><img class="logo" src="img/chrome-logo.svg"><span>55+</span>
-    <span class=fineprint>(⚠️&nbsp;<code>offset-anchor</code> preffed off)</span>
+    <span class=fineprint>(⚠️&nbsp;<code>offset-anchor</code> 기본값은 끔)</span>
   <li class=no-support><img class="logo" src="img/safari-logo.svg"><span class=batsu>x</span>
   <li class=no-support><img class="logo" src="img/edge-logo.svg"><span class=batsu>x</span>
     <li><img class="logo" src="img/edgium.png"><span class=maru>〇</span>
-    <span class=fineprint>(⚠️&nbsp;<code>offset-anchor</code> preffed off)</span>
+    <span class=fineprint>(⚠️&nbsp;<code>offset-anchor</code> 기본값은 끔)</span>
 </ul>
 <style>
 #motion-in-motion h2 {
@@ -2826,7 +2825,7 @@ function generateHslKeyframes(start, end) {
 </section>
 
 <section id="performance-anxiety">
-<h2>#8: Performance is painful</h2>
+<h2>⑧ 성능이 떨어집니다</h2>
 </section>
 
 <section id="transforming-transparency" data-background="var(--blue-5)">
@@ -2834,15 +2833,15 @@ function generateHslKeyframes(start, end) {
 <div class=demo-grid>
 <figure class="fragment move">
   <svg class=goose><use href="#demo-grid-goose"></svg>
-  <figcaption>move</figcaption>
+  <figcaption>이동</figcaption>
 </figure>
 <figure class="fragment grow-anim">
   <svg class=goose><use href="#demo-grid-goose"></svg>
-  <figcaption>grow</figcaption>
+  <figcaption>확대</figcaption>
 </figure>
 <figure class="fragment spin">
   <svg class=goose><use href="#demo-grid-goose"></svg>
-  <figcaption>spin</figcaption>
+  <figcaption>돌리기</figcaption>
 </figure>
 <figure class="fragment three-d">
   <div class=stack>
@@ -2856,11 +2855,11 @@ function generateHslKeyframes(start, end) {
     <svg class=goose-body><use href="#demo-grid-goose-white-bits"></svg>
     <svg class=goose-other-bits><use href="#demo-grid-goose-other-bits"></svg>
   </div>
-  <figcaption>fade</figcaption>
+  <figcaption>흐리기</figcaption>
 </figure>
 <figure class="fragment combo">
   <svg class=goose><use href="#demo-grid-goose"></svg>
-  <figcaption>grow + spin + fade</figcaption>
+  <figcaption>조합</figcaption>
 </figure>
 <figure class="fragment color-change">
   <div class=stack>
@@ -2870,18 +2869,18 @@ function generateHslKeyframes(start, end) {
     <svg class=goose-wing><use href="#demo-grid-goose-wing"></svg>
     <svg class=pink-wing><use href="#demo-grid-goose-pink-wing"></svg>
   </div>
-  <figcaption>color change</figcaption>
+  <figcaption>색상 변화</figcaption>
 </figure>
 <figure class="fragment shadow-effect">
   <div class=stack>
     <svg class=goose><use href="#demo-grid-goose"></svg>
     <svg class=goose-shadow><use href="#demo-grid-shadow"></svg>
   </div>
-  <figcaption>shadow effect</figcaption>
+  <figcaption>그림자 효과</figcaption>
 </figure>
 <figure class="fragment fly">
   <svg class=goose><use href="#demo-grid-goose"></svg>
-  <figcaption>fly</figcaption>
+  <figcaption>날기</figcaption>
 </figure>
 </div>
 <svg width="0" height="0" style="visibility: hidden">
@@ -3181,14 +3180,14 @@ function generateHslKeyframes(start, end) {
 </section>
 
 <section id="sick-of-animation">
-<h2>#9: Animations give me a headache</h2>
+<h2>⑨ 애니메이션은 머리가 아픕니다</h2>
 </section>
 
 <section id="vestibular-disorders">
-<h2>Sick of Animation</h2>
+<h2>애니메이션 부작용</h2>
 <img src="img/headache-city-1.jpg">
 <div class=callout>
-  Headaches, dizziness, migraines, epilepsy&hellip;
+  두통, 어지러움, 편두통, 뇌전증&hellip;
 </div>
 <style>
 #vestibular-disorders h2 {
@@ -3231,7 +3230,7 @@ div {
     animation-name: none !important;
     transition-property: none !important;
 
-    /* Or to ensure events still fire, e.g.
+    /* transition 이벤트가 여전히 필요하다면
      *  transition-duration: 0.01s !important;
      *  transition-delay: 0s !important;
      *  ...
@@ -3258,17 +3257,17 @@ div {
 <section id="prefers-reduced-motion-js">
 <h2>From JS&hellip;</h2>
 <pre><code class="hljs js" data-trim>
-// Check for browser support
+// 브라우저 지원을 확인하세요
 if (!('animate' in elem)) {
   return;
 }
 
-// Check for user support
+// 사용자 지원을 확인하세요
 if (matchMedia('(prefers-reduced-motion)').matches) {
   return;
 }
 
-// Animate away...
+// 그냥 애니메이션화하세요...
 </code></pre>
 </section>
 
@@ -3292,18 +3291,18 @@ if (matchMedia('(prefers-reduced-motion)').matches) {
 <h2>10 things I hate about animations&hellip;</h2>
 <div class=summary-table>
 <ol>
-  <li>Frame-based animations&hellip; <code><nobr>jump-none</nobr></code>
-  <li>Transition bugs&hellip; <code>transitioncancel</code>
-  <li>Creating animations from JS&hellip; <code>Element.animate</code>
-  <li>Easing the <em>whole</em> animation&hellip; <code>Element.animate</code>
-  <li>Defining animation <em>speed</em>&hellip; <code>Element.getAnimations</code>
-  <li>Transition <em>midpoints</em>&hellip; <code>Element.getAnimations</code>
-  <li>Flying&hellip; <code><nobr>offset-path</nobr></code>
-  <li>Performance&hellip; Firefox Animation DevTools
-  <li>Headaches&hellip; <code><nobr>prefers-reduced-motion</nobr></code>
+  <li>프레임 기반 애니메이션&hellip; <code><nobr>jump-none</nobr></code>
+  <li>Transition 버그&hellip; <code>transitioncancel</code>
+  <li>JS에서 애니메이션 생성&hellip; <code>Element.animate</code>
+  <li>애니메이션 전체 이징(Easing)&hellip; <code>Element.animate</code>
+  <li>애니메이션 속도 정의&hellip; <code>Element.getAnimations</code>
+  <li>Transition 중간점&hellip; <code>Element.getAnimations</code>
+  <li>날기&hellip; <code><nobr>offset-path</nobr></code>
+  <li>성능&hellip; Firefox Animation DevTools
+  <li>두통&hellip; <code><nobr>prefers-reduced-motion</nobr></code>
 </ol>
 <ol start=10 class=fragment data-fragment-index=1>
-  <li>&hellip;they are too much fun!
+  <li>&hellip;너무 재밌습니다!
 </ol>
 </div>
 <style>
@@ -3339,7 +3338,7 @@ if (matchMedia('(prefers-reduced-motion)').matches) {
 </section>
 
 <section id="thankyou" data-transition="fade">
-<h2>Thank you!</h2>
+<h2>들어주셔서 감사합니다!</h2>
 <div class=slides-link>
   <a href="https://birtles.github.io/mozdev2019/"
     target="_blank">birtles.github.io/mozdev2019/</a>
