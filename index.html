@@ -6,8 +6,7 @@
 <meta name="author" content="Brian Birtles">
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<meta name="viewport"
-  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link rel="stylesheet" href="css/theme/goose.css">
 <style>
@@ -27,27 +26,43 @@ html, body {
 }
 h1 {
   font-family: Catamaran, sans-serif;
-  font-size: 100px;
+  font-size: 50px;
   font-weight: 800;
   color: white;
-  margin: 0 0 20px 0;
+  margin: 0 .2em .4em .2em;
   line-height: 1.2;
   letter-spacing: -1px;
   text-shadow: none;
   word-wrap: break-word;
   text-align: center;
 }
+@media screen and (min-width: 600px) {
+  h1 {
+    font-size: 100px;
+  }
+}
 h1 .highlight {
   color: var(--red-7);
-  font-size: 120px;
+  font-size: 60px;
   text-shadow: var(--blue-2) 0px 3px 3px;
+}
+@media screen and (min-width: 600px) {
+  h1 .highlight {
+    font-size: 120px;
+  }
 }
 ul {
   color: white;
-  font-size: 40px;
+  font-size: 25px;
   font-weight: 600;
   list-style: none;
   margin: 0;
+  padding: 0;
+}
+@media screen and (min-width: 600px) {
+  ul {
+    font-size: 40px;
+  }
 }
 li {
   text-align: center;

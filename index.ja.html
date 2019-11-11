@@ -92,8 +92,8 @@ document.getElementsByTagName('head')[0].appendChild(link);
 </h1>
 <h2>
   Mozilla Roadshow 2019<br>
-  <a href="https://twitter.com/brianskold">Brian Birtles</a>,
-  <a href="https://birchill.co.jp">Birchill, Inc.</a><br>
+  <a href="https://birchill.co.jp">株式会社 Birchill</a>,
+  <a href="https://twitter.com/brianskold">Brian Birtles</a>
 </h2>
 <style>
 #title h1 {
@@ -2163,89 +2163,6 @@ function getScaleFromTransform(transform) {
 </style>
 </section>
 
-<section id=colors-with-yellow>
-<div class=color-transition>
-  <div class=red>
-    <div class=sample></div><span class=label>rgb(255, 0, 0)</span>
-  </div>
-  <div class=arrow>→</div>
-  <div class=yellow>
-    <div class=sample></div><span class=label>rgb(255, 255, 0)</span>
-  </div>
-  <div class=arrow>→</div>
-  <div class=green>
-    <div class=sample></div><span class=label>rgb(0, 128, 0)</span>
-  </div>
-</div>
-<div class="transition-demo fragment">
-  <div class=sample></div>
-  <div class=label>🤔</div>
-</div>
-<style>
-#colors-with-yellow .color-transition .yellow .sample {
-  background-color: rgb(255, 255, 0);
-}
-#colors-with-yellow .transition-demo {
-  margin-top: 50px;
-}
-#colors-with-yellow .transition-demo .sample {
-  animation-name: colors-with-yellow;
-}
-
-@keyframes colors-with-yellow {
-  from { background-color: rgb(255, 0, 0); }
-  10% { background-color: rgb(255, 0, 0); }
-  50% { background-color: rgb(255, 255, 0); }
-  90% { background-color: rgb(0, 128, 0); }
-  to { background-color: rgb(0, 128, 0); }
-}
-</style>
-</section>
-
-<section id=colors-with-hsl>
-<div class=color-transition>
-  <div class=red>
-    <div class=sample></div><span class=label>hsl(0, 100%, 50%)</span>
-  </div>
-  <div class=arrow>→</div>
-  <div class=hslmidpoint>
-    <div class=sample></div><span class=label>hsl(60, 100%, 37.5%)</span>
-  </div>
-  <div class=arrow>→</div>
-  <div class=green>
-    <div class=sample></div><span class=label>hsl(120, 100%, 25%)</span>
-  </div>
-</div>
-<div class="transition-demo fragment">
-  <div class=sample></div>
-  <div class=label>❓</div>
-</div>
-<style>
-#colors-with-hsl .color-transition .hslmidpoint .sample {
-  background-color: hsl(60, 100%, 37.5%);
-}
-#colors-with-hsl .color-transition .label {
-  font-size: 25px;
-}
-#colors-with-hsl .transition-demo {
-  margin-top: 50px;
-}
-#colors-with-hsl .transition-demo .sample {
-  animation-name: colors-with-hsl;
-}
-
-@keyframes colors-with-hsl {
-  from { background-color: hsl(0, 100%, 50%); }
-  10% { background-color: hsl(0, 100%, 50%); }
-  30% { background-color: hsl(30, 100%, 43.75%); }
-  50% { background-color: hsl(60, 100%, 37.5%); }
-  70% { background-color: hsl(90, 100%, 31.25%); }
-  90% { background-color: hsl(120, 100%, 25%); }
-  to { background-color: hsl(120, 100%, 25%); }
-}
-</style>
-</section>
-
 <section id=design-a-duck>
 <div class=goose-container>
   <svg viewBox="0 0 100 100" class="goose">
@@ -2419,6 +2336,89 @@ function setupGooseColoring(containerId) {
 
 setupGooseColoring('design-a-duck');
 </script>
+</section>
+
+<section id=colors-with-yellow>
+<div class=color-transition>
+  <div class=red>
+    <div class=sample></div><span class=label>rgb(255, 0, 0)</span>
+  </div>
+  <div class=arrow>→</div>
+  <div class=yellow>
+    <div class=sample></div><span class=label>rgb(255, 255, 0)</span>
+  </div>
+  <div class=arrow>→</div>
+  <div class=green>
+    <div class=sample></div><span class=label>rgb(0, 128, 0)</span>
+  </div>
+</div>
+<div class="transition-demo fragment">
+  <div class=sample></div>
+  <div class=label>🤔</div>
+</div>
+<style>
+#colors-with-yellow .color-transition .yellow .sample {
+  background-color: rgb(255, 255, 0);
+}
+#colors-with-yellow .transition-demo {
+  margin-top: 50px;
+}
+#colors-with-yellow .transition-demo .sample {
+  animation-name: colors-with-yellow;
+}
+
+@keyframes colors-with-yellow {
+  from { background-color: rgb(255, 0, 0); }
+  10% { background-color: rgb(255, 0, 0); }
+  50% { background-color: rgb(255, 255, 0); }
+  90% { background-color: rgb(0, 128, 0); }
+  to { background-color: rgb(0, 128, 0); }
+}
+</style>
+</section>
+
+<section id=colors-with-hsl>
+<div class=color-transition>
+  <div class=red>
+    <div class=sample></div><span class=label>hsl(0, 100%, 50%)</span>
+  </div>
+  <div class=arrow>→</div>
+  <div class=hslmidpoint>
+    <div class=sample></div><span class=label>hsl(60, 100%, 37.5%)</span>
+  </div>
+  <div class=arrow>→</div>
+  <div class=green>
+    <div class=sample></div><span class=label>hsl(120, 100%, 25%)</span>
+  </div>
+</div>
+<div class="transition-demo fragment">
+  <div class=sample></div>
+  <div class=label>❓</div>
+</div>
+<style>
+#colors-with-hsl .color-transition .hslmidpoint .sample {
+  background-color: hsl(60, 100%, 37.5%);
+}
+#colors-with-hsl .color-transition .label {
+  font-size: 25px;
+}
+#colors-with-hsl .transition-demo {
+  margin-top: 50px;
+}
+#colors-with-hsl .transition-demo .sample {
+  animation-name: colors-with-hsl;
+}
+
+@keyframes colors-with-hsl {
+  from { background-color: hsl(0, 100%, 50%); }
+  10% { background-color: hsl(0, 100%, 50%); }
+  30% { background-color: hsl(30, 100%, 43.75%); }
+  50% { background-color: hsl(60, 100%, 37.5%); }
+  70% { background-color: hsl(90, 100%, 31.25%); }
+  90% { background-color: hsl(120, 100%, 25%); }
+  to { background-color: hsl(120, 100%, 25%); }
+}
+</style>
 </section>
 
 <section id="css-still-not-working-group" class=css-not-working-group>
