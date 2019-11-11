@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<title>アニメーションについて10つ嫌いなこと</title>
+<title>アニメーションについて嫌いな10個</title>
 <meta name="author" content="Brian Birtles">
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -258,7 +258,7 @@ document.getElementsByTagName('head')[0].appendChild(link);
 </section>
 
 <section id="no-frames-for-you">
-  <h2>① フレームベースのアニメーションが難しい</h2>
+  <h2>① コマ撮りアニメーションが難しい</h2>
 </section>
 
 <section id="ga" data-background="var(--blue-5)">
@@ -620,7 +620,7 @@ document.getElementsByTagName('head')[0].appendChild(link);
 <section id="a-simple-attempt-explained">
 <pre><code class="hljs css" data-trim data-noescape>
 .filmstrip {
-  /* steps(7) = 7つの<span class=cheat-em>変更</span>。最後の変更も含む。 */
+  /* steps(7) = 7つの<span class=cheat-em>変化</span>。最後の変化も含む。 */
   animation: slide 1s infinite <span class="highlight">steps(7)</span>;
 }
 @keyframes slide {
@@ -1633,7 +1633,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </section>
 
 <section id="this-is-going-too-far">
-<h2>⑤ 時間はなく<em>速度</em>でアニメーションの定義ができない</h2>
+<h2>⑤ 時間ではなく<em>速度</em>でアニメーションの定義ができない</h2>
 <style>
 #this-is-going-too-far h2 em {
   color: var(--blue-5);
@@ -1817,7 +1817,7 @@ setupGooseMover('going-to-the-farm');
 </div>
 <div class="speech-container fragment">
   <div class=speech>
-  早くスピードベースのアニメーション作ってよ！
+  早く、スピードベースのアニメーション作ってよ！
   </div>
 </div>
 <style>
@@ -2031,7 +2031,7 @@ function getScaleFromTransform(transform) {
 </section>
 
 <section id="get-animations-coming-up">
-<h2><code>Element.getAnimations</code></h2>
+<h2><code>Element.getAnimations()</code></h2>
 <ul class="logo-list">
   <li class=exp-support><img class="logo" src="img/nightly-logo.svg"><span>Nightly</span>
   <li class=exp-support><img class="logo" src="img/canary-logo.svg"><span>Canary</span>
@@ -2659,7 +2659,7 @@ function generateHslKeyframes(start, end) {
 <!-- TODO: Get permission to use the above image -->
 
 <section id="still-blocked-on-get-animations">
-<h2><code>CSSTransition.setKeyframes (Element.getAnimations)</code></h2>
+<h2><code>CSSTransition.setKeyframes() (Element.getAnimations)</code></h2>
 <ul class="logo-list">
   <li class=exp-support><img class="logo" src="img/nightly-logo.svg"><span>Nightly</span>
   <li class=exp-support><img class="logo" src="img/canary-logo.svg"><span>Canary</span>
@@ -3298,10 +3298,10 @@ if (matchMedia('(prefers-reduced-motion)').matches) {
 </section>
 
 <section id="summary-summary" class="summary-slide" data-transition="fade">
-<h2>アニメーションについて10つ嫌いなこと</h2>
+<h2>アニメーションについて嫌いな10個</h2>
 <div class=summary-table>
 <ol>
-  <li>フレームベースのアニメーション&hellip; <code><nobr>jump-none</nobr></code>
+  <li>コマ撮りアニメーション&hellip; <code><nobr>jump-none</nobr></code>
   <li>CSS Transitionでバグる&hellip; <code>transitioncancel</code>
   <li>JSでアニメーションを生成する&hellip; <code>Element.animate</code>
   <li>アニメーションの<em>全体的</em>なイージング&hellip; <code>Element.animate</code>
