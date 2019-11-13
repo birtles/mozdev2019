@@ -620,7 +620,7 @@ document.getElementsByTagName('head')[0].appendChild(link);
 <section id="a-simple-attempt-explained">
 <pre><code class="hljs css" data-trim data-noescape>
 .filmstrip {
-  /* steps(7) = 마지막을 포함해서 '변경'이 7개 */
+  /* steps(7) = 마지막을 포함하여 7번의 '변경' */
   animation: slide 1s infinite <span class="highlight">steps(7)</span>;
 }
 @keyframes slide {
@@ -976,10 +976,9 @@ document.getElementsByTagName('head')[0].appendChild(link);
 <ul>
   <li><code>transitionrun</code>
     <p class=explanation>&rarr; transition이 생성됩니다 🆕
-    <p class=explanation>&rarr; 확인하고 <code>transitionend</code>를 기다립니다 🙆‍♂️</p>
+    <p class=explanation>&rarr; <code>transitionend</code>를 기다려도 괜찮습니다 🙆‍♂️</p>
   <li class=fragment><code>transitioncancel</code>
-    <p class=explanation>&rarr; 요소가 사라집니다 🗑️
-    <span style="font-size: smaller">(떨어지거나, 재생성되거나, <code>display:none</code> 되는 등)</span></p>
+    <p class=explanation>&rarr; 요소가 사라집니다 🗑️ <span style="font-size: smaller">(제거되거나, 재생성되거나, <code>display:none</code> 되는 등)</span></p>
     <p class=explanation>&rarr; <code>transitionend</code>를 기다리지 마세요 ❌</p>
   <li class=fragment><code>transitionstart</code>
     <span class=explanation>(c.f. <code>animationstart</code>)</span>
@@ -1153,7 +1152,7 @@ star.style.animation =
 <h2>CSS transitions from JS</h2>
 <ul>
   <li><code>transitionrun</code>, <code>transitioncancel</code> 등
-  <li>JS에서 transitions를 트리거하기는 어렵습니다
+  <li>JS로 transitions를 트리거하기는 어렵습니다
 </ul>
 <div>
   <figure>
@@ -1243,7 +1242,7 @@ star.animate(
 </section>
 
 <section id="easing-peasing">
-<h2>④ 애니메이션 전체 이징(Easing)은 어렵습니다</h2>
+<h2>④ 전체 애니메이션을 이징(Easing)하는 것은 어렵습니다</h2>
 <style>
 #easing-peasing h2 em {
   color: var(--blue-5);
@@ -1470,7 +1469,7 @@ star.animate(
 <pre class=code-overlay><code class="hljs js" data-trim data-noescape>
 head.animate(
   {
-    // Chrome/Firefox는 암시적 0%/100%
+    // Chrome/Firefox는 아직 암시적 0%/100%
     // 키프레임을 지원하지 않습니다
     transform: ['none', 'rotate(60deg)', 'none'],
     offset: [0, 0.6, 1],
@@ -1658,7 +1657,7 @@ document.addEventListener('DOMContentLoaded', () => {
   </svg>
 </div>
 <div class=caption>
-<a href="https://www.freepik.com/free-photos-vectors/design" target=_blank>배경지원: pikisuperstar</a>
+<a href="https://www.freepik.com/free-photos-vectors/design" target=_blank>배경출처: pikisuperstar</a>
 </div>
 <style>
 #going-to-the-farm .background,
@@ -1865,7 +1864,7 @@ document.addEventListener(<span class="highlight fragment">'transitionrun'</span
   // 초당 700px로 이동
   const duration = (distance / 700) * 1000;
   <span class="highlight fragment">transition.effect.updateTiming({ duration });</span>
-  // 주의: transition.updatePlaybackRate()가 더 나았을 겁니다
+  // 참고: transition.updatePlaybackRate()가 더 좋습니다
 });
 </code></pre>
 <style>
@@ -1912,7 +1911,7 @@ document.addEventListener(<span class="highlight fragment">'transitionrun'</span
   </svg>
 </div>
 <div class=caption>
-<a href="https://www.freepik.com/free-photos-vectors/design" target=_blank>Background by pikisuperstar</a>
+<a href="https://www.freepik.com/free-photos-vectors/design" target=_blank>배경출처: pikisuperstar</a>
 </div>
 <script>
 setupGooseMover('a-more-natural-farm');
@@ -2802,11 +2801,11 @@ function generateHslKeyframes(start, end) {
   <li class=exp-support><img class="logo" src="img/nightly-logo.svg"><span>Nightly</span>
     <span class=fineprint>(버전 72, 73에서 구현될지 모릅니다)</span>
   <li><img class="logo" src="img/chrome-logo.svg"><span>55+</span>
-    <span class=fineprint>(⚠️&nbsp;<code>offset-anchor</code> 기본값은 끔)</span>
+    <span class=fineprint>(⚠️&nbsp;<code>offset-anchor</code>은 구현 진행 중)</span>
   <li class=no-support><img class="logo" src="img/safari-logo.svg"><span class=batsu>x</span>
   <li class=no-support><img class="logo" src="img/edge-logo.svg"><span class=batsu>x</span>
     <li><img class="logo" src="img/edgium.png"><span class=maru>〇</span>
-    <span class=fineprint>(⚠️&nbsp;<code>offset-anchor</code> 기본값은 끔)</span>
+    <span class=fineprint>(⚠️&nbsp;<code>offset-anchor</code>은 구현 진행 중)</span>
 </ul>
 <style>
 #motion-in-motion h2 {
@@ -2829,7 +2828,7 @@ function generateHslKeyframes(start, end) {
 </section>
 
 <section id="transforming-transparency" data-background="var(--blue-5)">
-<h2><code>transform</code> and <code>opacity</code></h2>
+<h2><code>transform</code> 과 <code>opacity</code></h2>
 <div class=demo-grid>
 <figure class="fragment move">
   <svg class=goose><use href="#demo-grid-goose"></svg>
@@ -2841,7 +2840,7 @@ function generateHslKeyframes(start, end) {
 </figure>
 <figure class="fragment spin">
   <svg class=goose><use href="#demo-grid-goose"></svg>
-  <figcaption>돌리기</figcaption>
+  <figcaption>회전</figcaption>
 </figure>
 <figure class="fragment three-d">
   <div class=stack>
@@ -3267,7 +3266,7 @@ if (matchMedia('(prefers-reduced-motion)').matches) {
   return;
 }
 
-// 그냥 애니메이션화하세요...
+// 애니메이션을 작성하세요
 </code></pre>
 </section>
 
@@ -3293,8 +3292,8 @@ if (matchMedia('(prefers-reduced-motion)').matches) {
 <ol>
   <li>프레임 기반 애니메이션&hellip; <code><nobr>jump-none</nobr></code>
   <li>Transition 버그&hellip; <code>transitioncancel</code>
-  <li>JS에서 애니메이션 생성&hellip; <code>Element.animate</code>
-  <li>애니메이션 전체 이징(Easing)&hellip; <code>Element.animate</code>
+  <li>JS으로 애니메이션 생성&hellip; <code>Element.animate</code>
+  <li>전체 애니메이션 이징(Easing)&hellip; <code>Element.animate</code>
   <li>애니메이션 속도 정의&hellip; <code>Element.getAnimations</code>
   <li>Transition 중간점&hellip; <code>Element.getAnimations</code>
   <li>날기&hellip; <code><nobr>offset-path</nobr></code>
