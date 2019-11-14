@@ -5,37 +5,6 @@
 /*********************************************
  * FONTS
  *********************************************/
-@font-face {
-  font-family: "Baloo Chettan";
-  src: local("Baloo Chettan Regular"),
-       url(../../fonts/Baloo_Chettan/BalooChettan-Regular.ttf);
-  font-weight: 800;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Sniglet";
-  src: local("Sniglet Regular"),
-       url(../../fonts/Sniglet/Sniglet-Regular.ttf);
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Sniglet";
-  src: local("Sniglet ExtraBold"),
-       url(../../fonts/Sniglet/Sniglet-ExtraBold.ttf);
-  font-weight: 800;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Varela Round";
-  src: local("Varela Round Regular"),
-       url(../../fonts/Varela_Round/VarelaRound-Regular.ttf);
-  font-weight: 400;
-  font-style: normal;
-}
 
 @font-face {
   font-family: Rubik;
