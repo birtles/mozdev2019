@@ -89,6 +89,7 @@ document.getElementsByTagName('head')[0].appendChild(link);
 <h1>
   <span class="highlight">10 things</span>
   I hate about animation
+  <div class=parenthetical>(and how to fix them)</div>
 </h1>
 <h2>
   Mozilla Roadshow 2019<br>
@@ -100,13 +101,20 @@ document.getElementsByTagName('head')[0].appendChild(link);
   font-size: 100px;
   font-weight: 800;
   color: white;
+  line-height: 1.1;
 }
 #title h1 .highlight {
   color: var(--red-7);
   font-size: 120px;
   text-shadow: var(--blue-2) 0px 3px 3px;
 }
+#title h1 .parenthetical {
+  font-family: 'Nanum Pen Script';
+  font-size: 0.5em;
+  font-weight: 400;
+}
 #title h2 {
+  margin-top: 2.5em;
   color: white;
   font-size: 40px;
   font-weight: 600;
