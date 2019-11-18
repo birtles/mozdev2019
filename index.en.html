@@ -1976,7 +1976,7 @@ document.addEventListener(<span class="highlight fragment">'transitionrun'</span
 </div>
 <div class="compat-note transitionEndpoints" style="display: none">
   This slide requires <code>Element.getAnimations</code> to return
-  transition endpoints.
+  transform transition endpoints.
 </div>
 <script>
 setupGooseMover('a-more-natural-farm');
@@ -1986,7 +1986,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector(
       '#a-more-natural-farm .compat-note.getAnimations'
     ).style.display = 'none';
-    if (!supportsTransitionEndpoints()) {
+    if (!supportsTransformTransitionEndpoints()) {
       document.querySelector(
         '#a-more-natural-farm .compat-note.transitionEndpoints'
       ).style.display = 'block';
@@ -1994,32 +1994,30 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Make this re-useable
-let transitionEndpointSupportStatus = undefined;
-function supportsTransitionEndpoints() {
-  if (transitionEndpointSupportStatus === undefined) {
-    transitionEndpointSupportStatus = false;
-    try {
-      if ('getAnimations' in document.body) {
-        const testElem = document.createElement('div');
-        document.body.append(testElem);
-        testElem.style.transition = 'opacity 1s';
-        testElem.style.opacity = '0';
-        getComputedStyle(testElem).opacity;
-        testElem.style.opacity = '1';
-        const animations = testElem.getAnimations();
-        transitionEndpointSupportStatus =
-          animations.length === 1 &&
-          animations[0].transitionProperty === 'opacity' &&
-          animations[0].effect.getKeyframes().length === 2 &&
-          animations[0].effect.getKeyframes()[0].opacity === '0';
-        testElem.remove();
-      }
-    } catch (e) {
-      /* Something failed, leave status as false */
-    }
+function supportsTransformTransitionEndpoints() {
+  if (!'getAnimations' in document.body) {
+    return false;
   }
-  return transitionEndpointSupportStatus;
+
+  try {
+    const testElem = document.createElement('div');
+    document.body.append(testElem);
+    testElem.style.transition = 'transform 1s';
+    testElem.style.transform = 'scale(0)';
+    getComputedStyle(testElem).opacity;
+    testElem.style.transform = 'scale(1)';
+    const animations = testElem.getAnimations();
+    const result =
+      animations.length === 1 &&
+      animations[0].transitionProperty === 'transform' &&
+      animations[0].effect.getKeyframes().length === 2 &&
+      animations[0].effect.getKeyframes()[0].transform &&
+      animations[0].effect.getKeyframes()[0].transform !== 'none'
+    testElem.remove();
+    return result;
+  } catch (e) {
+    return false;
+  }
 }
 
 document
@@ -2643,7 +2641,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector(
       '#design-a-duck-fixed .compat-note.getAnimations'
     ).style.display = 'none';
-    if (!supportsTransitionEndpoints()) {
+    if (!supportsTransformTransitionEndpoints()) {
       document.querySelector(
         '#design-a-duck-fixed .compat-note.transitionEndpoints'
       ).style.display = 'block';
