@@ -2004,7 +2004,7 @@ function supportsTransformTransitionEndpoints() {
     document.body.append(testElem);
     testElem.style.transition = 'transform 1s';
     testElem.style.transform = 'scale(0)';
-    getComputedStyle(testElem).opacity;
+    getComputedStyle(testElem).transform;
     testElem.style.transform = 'scale(1)';
     const animations = testElem.getAnimations();
     const result =
@@ -2630,7 +2630,8 @@ document.addEventListener(<span class="highlight fragment">'transitionrun'</span
   This slide requires support for <code>Element.getAnimations</code>.
 </div>
 <div class="compat-note setKeyframes" style="display: none">
-  This slide requires support using <code>setKeyframes</code> on transitions.
+  This slide requires support for using <code>setKeyframes</code> on
+  transitions.
 </div>
 <script>
 setupGooseColoring('design-a-duck-fixed');
