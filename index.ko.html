@@ -78,6 +78,21 @@ document.getElementsByTagName('head')[0].appendChild(link);
   border: 0;
   margin: 0;
 }
+
+/*********************************************
+ * COMPATIBILITY NOTES
+ *********************************************/
+.reveal .compat-note {
+  position: absolute;
+  display: inline-block;
+  top: 1em;
+  right: 1em;
+  left: 1em;
+  z-index: 100;
+  padding: 1em;
+  background: hsl(48, 100%, 88%);
+  box-shadow: 5px 10px 5px hsla(42, 15%, 13%, 0.3);
+}
 </style>
 </head>
 
@@ -1055,7 +1070,18 @@ document.getElementsByTagName('head')[0].appendChild(link);
   <use href="#goose-upper-beak"/>
   <use href="#goose-eye"/>
 </svg>
+<div class=compat-note>
+  This slide requires support for <code>Element.animate</code>.
+</div>
 <script>
+document.addEventListener('DOMContentLoaded', () => {
+  if ('animate' in document.body) {
+    document.querySelector(
+      '#geese-are-made-of-stars .compat-note'
+    ).style.display = 'none';
+  }
+});
+
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.querySelector('#geese-are-made-of-stars .hoshis');
   const numStars = 25;
@@ -1492,6 +1518,9 @@ head.animate(
   }
 );
 </code></pre>
+<div class=compat-note>
+  This slide requires support for <code>Element.animate</code>.
+</div>
 <style>
 #nailed-it {
   width: 100%;
@@ -1525,6 +1554,12 @@ head.animate(
 }
 </style>
 <script>
+document.addEventListener('DOMContentLoaded', () => {
+  if ('animate' in document.body) {
+    document.querySelector('#nailed-it .compat-note').style.display = 'none';
+  }
+});
+
 document.addEventListener('DOMContentLoaded', () => {
   const body = document.querySelector('#nailed-it .body');
   const head = document.querySelector('#nailed-it .head');
@@ -1582,6 +1617,9 @@ head.animate(
   }
 );
 </code></pre>
+<div class=compat-note>
+  This slide requires support for <code>Element.animate</code>.
+</div>
 <style>
 #nailed-it-twice {
   width: 100%;
@@ -1615,6 +1653,13 @@ head.animate(
 }
 </style>
 <script>
+document.addEventListener('DOMContentLoaded', () => {
+  if ('animate' in document.body) {
+    document.querySelector('#nailed-it-twice .compat-note').style.display =
+      'none';
+  }
+});
+
 document.addEventListener('DOMContentLoaded', () => {
   const body = document.querySelector('#nailed-it-twice .body');
   const head = document.querySelector('#nailed-it-twice .head');
@@ -1924,8 +1969,56 @@ document.addEventListener(<span class="highlight fragment">'transitionrun'</span
 <div class=caption>
 <a href="https://www.freepik.com/free-photos-vectors/design" target=_blank>배경출처: pikisuperstar</a>
 </div>
+<div class="compat-note getAnimations">
+  This slide requires support for <code>Element.getAnimations</code>.
+</div>
+<div class="compat-note transitionEndpoints" style="display: none">
+  This slide requires <code>Element.getAnimations</code> to return
+  transition endpoints.
+</div>
 <script>
 setupGooseMover('a-more-natural-farm');
+
+document.addEventListener('DOMContentLoaded', () => {
+  if ('getAnimations' in document.body) {
+    document.querySelector(
+      '#a-more-natural-farm .compat-note.getAnimations'
+    ).style.display = 'none';
+    if (!supportsTransitionEndpoints()) {
+      document.querySelector(
+        '#a-more-natural-farm .compat-note.transitionEndpoints'
+      ).style.display = 'block';
+    }
+  }
+});
+
+// Make this re-useable
+let transitionEndpointSupportStatus = undefined;
+function supportsTransitionEndpoints() {
+  if (transitionEndpointSupportStatus === undefined) {
+    transitionEndpointSupportStatus = false;
+    try {
+      if ('getAnimations' in document.body) {
+        const testElem = document.createElement('div');
+        document.body.append(testElem);
+        testElem.style.transition = 'opacity 1s';
+        testElem.style.opacity = '0';
+        getComputedStyle(testElem).opacity;
+        testElem.style.opacity = '1';
+        const animations = testElem.getAnimations();
+        transitionEndpointSupportStatus =
+          animations.length === 1 &&
+          animations[0].transitionProperty === 'opacity' &&
+          animations[0].effect.getKeyframes().length === 2 &&
+          animations[0].effect.getKeyframes()[0].opacity === '0';
+        testElem.remove();
+      }
+    } catch (e) {
+      /* Something failed, leave status as false */
+    }
+  }
+  return transitionEndpointSupportStatus;
+}
 
 document
   .getElementById('a-more-natural-farm')
@@ -2533,8 +2626,28 @@ document.addEventListener(<span class="highlight fragment">'transitionrun'</span
     <button class=swatch></button>
   </div>
 </div>
+<div class="compat-note getAnimations">
+  This slide requires support for <code>Element.getAnimations</code>.
+</div>
+<div class="compat-note transitionEndpoints" style="display: none">
+  This slide requires <code>Element.getAnimations</code> to return
+  transition endpoints.
+</div>
 <script>
 setupGooseColoring('design-a-duck-fixed');
+
+document.addEventListener('DOMContentLoaded', () => {
+  if ('getAnimations' in document.body) {
+    document.querySelector(
+      '#design-a-duck-fixed .compat-note.getAnimations'
+    ).style.display = 'none';
+    if (!supportsTransitionEndpoints()) {
+      document.querySelector(
+        '#design-a-duck-fixed .compat-note.transitionEndpoints'
+      ).style.display = 'block';
+    }
+  }
+});
 
 document
   .getElementById('design-a-duck-fixed')
@@ -2712,6 +2825,9 @@ function generateHslKeyframes(start, end) {
     <circle cx="88.2" cy="62.9" r=".8" fill="#211f1c"/>
   </svg>
 </div>
+<div class="compat-note">
+  This slide requires support for <code>offset-path</code>.
+</div>
 <style>
 #it-flies .airfield {
   position: relative;
@@ -2745,6 +2861,12 @@ function generateHslKeyframes(start, end) {
 }
 @keyframes it-flies {
   to { offset-distance: 100% }
+}
+
+@supports (offset-path: path('M100 100h100')) {
+  #it-flies .compat-note {
+    display: none;
+  }
 }
 </style>
 </section>
@@ -2984,6 +3106,9 @@ function generateHslKeyframes(start, end) {
     <ellipse cx="50" cy="95" rx="60" ry="10" fill="var(--blue-1)"/>
   </symbo>
 </svg>
+<div class="compat-note">
+  This slide requires support for <code>offset-path</code>.
+</div>
 <style>
 #transforming-transparency h2 {
   margin-bottom: 0px;
@@ -3112,6 +3237,12 @@ function generateHslKeyframes(start, end) {
 }
 @keyframes demo-fly {
   to { offset-distance: 100% }
+}
+
+@supports (offset-path: path('M100 100h100')) {
+  #transforming-transparency .compat-note {
+    display: none;
+  }
 }
 </style>
 </section>
