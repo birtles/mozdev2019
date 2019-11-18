@@ -2638,9 +2638,8 @@ document.addEventListener(<span class="highlight fragment">'transitionrun'</span
 <div class="compat-note getAnimations">
   This slide requires support for <code>Element.getAnimations</code>.
 </div>
-<div class="compat-note transitionEndpoints" style="display: none">
-  This slide requires <code>Element.getAnimations</code> to return
-  transition endpoints.
+<div class="compat-note setKeyframes" style="display: none">
+  This slide requires support using <code>setKeyframes</code> on transitions.
 </div>
 <script>
 setupGooseColoring('design-a-duck-fixed');
@@ -2650,13 +2649,55 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector(
       '#design-a-duck-fixed .compat-note.getAnimations'
     ).style.display = 'none';
-    if (!supportsTransformTransitionEndpoints()) {
+    if (!supportsSetKeyframes()) {
       document.querySelector(
-        '#design-a-duck-fixed .compat-note.transitionEndpoints'
+        '#design-a-duck-fixed .compat-note.setKeyframes'
       ).style.display = 'block';
     }
   }
 });
+
+function supportsSetKeyframes() {
+  if (!'getAnimations' in document.body) {
+    return false;
+  }
+
+  try {
+    const testElem = document.createElement('div');
+    document.body.append(testElem);
+    testElem.style.transition = 'fill 1s';
+    testElem.style.fill = 'red';
+    getComputedStyle(testElem).fill;
+    testElem.style.fill = 'green';
+    const animations = testElem.getAnimations();
+    if (animations.length !== 1) {
+      testElem.remove();
+      return false;
+    }
+    const transition = animations[0];
+    transition.effect.setKeyframes([
+      {
+        offset: 0,
+        fill: 'green',
+      },
+      {
+        offset: 0.5,
+        fill: 'yellow',
+      },
+      {
+        offset: 1,
+        fill: 'red',
+      },
+    ]);
+    const result =
+      transition.effect.getKeyframes().length === 3 &&
+      transition.effect.getKeyframes()[1].fill === 'yellow';
+    testElem.remove();
+    return result;
+  } catch (e) {
+    return false;
+  }
+}
 
 document
   .getElementById('design-a-duck-fixed')
