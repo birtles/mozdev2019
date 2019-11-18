@@ -272,7 +272,14 @@ document.getElementsByTagName('head')[0].appendChild(link);
 <section id="ga" data-background="var(--blue-5)">
 <svg width="500" viewBox="0 0 100 100" class="goose">
   <path id="goose-feathers" fill="#fff" d="M11.8 28C-5.9 47.3 16 73.6 19.6 79.7s6.4 10.6 7 15.2c.6 4.6.8 8.9.8 8.9l55.8.2s2-8.5-1.8-14.9c-2-3.5-4.1-9.5-14.8-16.1s-17.4-9.7-21.9-12.3-7.8-8-5.3-11.5 5.6-3.6 8.1-3 12.8.5 15.5-10 1.6-15.1-1.5-18.4C51.7 7.2 29.4 8.7 11.8 28z"/>
-  <path id="goose-lower-beak" class="beak" fill="#d1722e" d="M58.8 41.3c-2.6 1-3.8.6-3.9 2.2.8 1.4 3.2 2.4 4.4 3 1.2.6 3.8 1.1 5.8 2.2s7.7 4.4 10.1 5.5c2.4 1.1 4.4 1.7 5.8 2 1.5.3 5.7.4 6.9.2s3.3.2 4.2-.2c.9-.5 2.1-.7 2.6-2.2.5-1.5.6-3 0-3.5s-9.3-4.9-12.3-6.3c-3-1.4-8.6-4.3-11.7-5.2-1.8-.5-5-1.6-7.9-2.3-1.6 2.2-2.9 4.2-4 4.6z"/>
+  <!-- We should be able to use transform-origin: 5% 40% but Safari is broken
+       somehow so we're back to using the old translate to origin, rotate,
+       then translate back again trick. -->
+  <g transform="translate(58.8 44.3)">
+    <g class="beak">
+      <path id="goose-lower-beak" transform="translate(-58.8 -44.3)" fill="#d1722e" d="M58.8 41.3c-2.6 1-3.8.6-3.9 2.2.8 1.4 3.2 2.4 4.4 3 1.2.6 3.8 1.1 5.8 2.2s7.7 4.4 10.1 5.5c2.4 1.1 4.4 1.7 5.8 2 1.5.3 5.7.4 6.9.2s3.3.2 4.2-.2c.9-.5 2.1-.7 2.6-2.2.5-1.5.6-3 0-3.5s-9.3-4.9-12.3-6.3c-3-1.4-8.6-4.3-11.7-5.2-1.8-.5-5-1.6-7.9-2.3-1.6 2.2-2.9 4.2-4 4.6z"/>
+    </g>
+  </g>
   <path id="goose-upper-beak" fill="#ff8b38" d="M64.8 26.3c-1.5 0-3.7.4-5 2.7-2 3.6-1 7.1-1.7 8.9-.7 1.8-1.7 3-2.9 4.7 1.9.5 2.4.4 4.2 1.2 4.2 1.8 11 6.1 14.7 7.3 3.7 1.1 7.6 3.3 12.3 3.2s9-1.9 9.3-3c.3-1.1-.2-2.6-2-4.2-2.5-2.1-3.3-1.3-5.3-2.5a282 282 0 01-23.6-18.3z"/>
   <circle id="goose-eye" cx="40.5" cy="26" r="2.9"/>
 </svg>
@@ -352,9 +359,6 @@ document.getElementsByTagName('head')[0].appendChild(link);
 }
 #ga .beak {
   animation: ga-beak 0.75s alternate steps(1) infinite forwards;
-  /* This seems to be off in Safari somehow... not sure why. */
-  transform-origin: 5% 40%;
-  transform-box: fill-box;
 }
 @keyframes ga-beak {
   20% { transform: rotate(15deg); }
