@@ -401,10 +401,10 @@ document.getElementsByTagName('head')[0].appendChild(link);
       apply the `transform` but not the `transform-origin` or `transform-box`
       but... unless we touch the element in DevTools, at which point it starts
       working correctly. Yep, <use> in Chrome is just completely broken. -->
+    <!-- And actually we can't use transform-origin anyway because Safari is
+      broken. -->
     <path
-      style="transform-origin: 5% 40%;
-              transform-box: fill-box;
-              transform: rotate(15deg)"
+      transform="rotate(15 58.8 44.3)"
       fill="#d1722e" d="M58.8 41.3c-2.6 1-3.8.6-3.9 2.2.8 1.4 3.2 2.4 4.4 3 1.2.6 3.8 1.1 5.8 2.2s7.7 4.4 10.1 5.5c2.4 1.1 4.4 1.7 5.8 2 1.5.3 5.7.4 6.9.2s3.3.2 4.2-.2c.9-.5 2.1-.7 2.6-2.2.5-1.5.6-3 0-3.5s-9.3-4.9-12.3-6.3c-3-1.4-8.6-4.3-11.7-5.2-1.8-.5-5-1.6-7.9-2.3-1.6 2.2-2.9 4.2-4 4.6z"/>
     <use href="#goose-upper-beak"/>
     <use href="#goose-eye"/>
